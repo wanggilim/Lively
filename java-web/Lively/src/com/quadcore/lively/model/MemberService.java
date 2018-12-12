@@ -8,7 +8,7 @@ public class MemberService {
 	
 	
 	//로그인 ID PWD 확인 로직
-	public int getUserAuth(String userId, String userPass) {
+	public MemberVO getUserAuth(String userId, String userPass) {
 		
 		return MemberDAO.getUserAuth(userId,userPass);
 	}

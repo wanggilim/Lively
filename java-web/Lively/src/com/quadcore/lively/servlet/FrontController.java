@@ -2,6 +2,8 @@ package com.quadcore.lively.servlet;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,97 +14,122 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.quadcore.lively.controller.MemberController;
+import com.quadcore.lively.model.MemberVO;
 
 //.do로 맵핑
+
+// WAS가 실행될 때,프론트 컨트롤러는 한 번만 실행됨
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
-	//필요한 변수 위에서 설정 완료
+	// 필요한 변수 위에서 설정 완료
 	private static final long serialVersionUID = 1L;
-    private String path = "";
-    private String realpath = "";
-    private String uri = "";
-    private String url = "";
-    private String action = ""; // uri에서 .do가 빠진, 실질적 액션
-    private Map<String, Object> data;
+
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String path = "";
+		String realpath = "";
+		String uri = "";
+		String url = "";
+		String action = ""; // uri에서 .do가 빠진, 실질적 액션
+
+		System.out.println("Test");
 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		path = request.getContextPath();	
+		// 각각의 사용자들이 변수를 사용 -> 새로운 사람이 로그인하면 -> 다른 사용자의
+		Map<String, Object> data;
+
+		path = request.getContextPath();
 		realpath = request.getServletPath();
-		uri = request.getRequestURI();	
-		url = request.getRequestURL().toString();	
-		action = uri.substring(path.length(), uri.length()-3);
-		
+		uri = request.getRequestURI();
+		url = request.getRequestURL().toString();
+		action = uri.substring(path.length(), uri.length() - 3);
 		System.out.println("====================");
-		System.out.println("action:" + action);
+		System.out.println("action: " + action);
 		System.out.println("====================");
-		
-		// 1. 로그인 (로그인 페이지 진입)
-		if (action.equals("/member/signin")) {
-			RequestDispatcher rd = request.getRequestDispatcher("/member/login.html");
-			System.out.println("로그인 페이지 진입");
-			//forward로 "입력값" 갖고 오기
-			rd.forward(request, response);
-			System.out.println("값을 @signin으로 보내기");
+
+		HttpSession session = request.getSession();
+		Object sessionObj = session.getAttribute("member");
+		if (!action.equals("/member/login") && sessionObj == null) {
+			response.sendRedirect(path + "/member/login.do");
+
+			return;
 		}
-		// 2. 로그아웃
-		if (action.equals("/member/signout")) {
+
+		String method = request.getMethod().toLowerCase();
+		
+		switch (action) {
+
+		case "/member/logout":
+			// 2. 로그아웃
 			System.out.println("로그 아웃!!");
-			HttpSession session = request.getSession();
-			//session.invalidate(); 현재 생성된 session을 무효화 시킴
+			// session.invalidate(); 현재 생성된 session을 무효화 시킴
 			session.invalidate();
-			//값 초기화, index.html로 페이지 전환
-			response.sendRedirect(path+"/index.html");
-		}
-		
-		//
-		
-	}//doGet끝
+			// 값 초기화, index.jsp로 페이지 전환
+			response.sendRedirect(path + "/index.jsp");
+			break;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		path = request.getContextPath();		
-		realpath = request.getServletPath();
-		uri = request.getRequestURI();		
-		url = request.getRequestURL().toString();		
-		action = uri.substring(path.length(), uri.length()-3);	
+		case "/member/login":
+			System.out.println("/member/login!!!!!!");
+			if (method.equals("post")) {
 
-		
-		//1. 회원 로그인 (입력 후, 로그인 인증)
-		if (action.equals("/member/login")) {
-			System.out.println("action 실행");
-			//입력된 id, pass 가져오기
-			MemberController user = new MemberController();
-			
-			String userMail = request.getParameter("userMail");
-			System.out.println(userMail);
-			String userPass = request.getParameter("userPass");
-			int authUser = 1;
-			
-			System.out.println(userPass);
-			//사용자가 Id값을 입력했을 때 
-			if(userMail!=null) {
-				System.out.println("입력값 받음1");
-				authUser = user.getUserAuth(userMail,userPass);
-				System.out.println("입력값 받음2");
-			}
-			//인증 완료
-			if (authUser == 1) { //ID와 PWD 모두 맞을 때 1이 나옴
-				HttpSession session = request.getSession();
+				System.out.println("action login 실행");
+				// 입력된 id, pass 가져오기
+				MemberController user = new MemberController();
+
+				String userMail = request.getParameter("userMail");
+				String userPass = request.getParameter("userPass");
+
+				System.out.println("userMail: " + userMail);
+				System.out.println("userPass: " + userPass);
+
+
+//---------------수정해야함----------------------				
+				MemberVO member = new MemberVO(); 
 				
-				session.setAttribute("userMail", userMail);
-				System.out.println("userMail:" + userMail + "/ userPass:" + userPass);
+//				request.getAttribute(member);
+
 				
-				//welcome page 전송
-				response.sendRedirect(path + "/index.html");
+				// 1.사용자가 Id값 pwd값을 입력했을 때
+
+				System.out.println("입력값 받음 //다른 사항 확인 전...");
+
+				// 1.1 ID에 email형식으로 들어왔는지 확인
+
+				// 1.1.1 ID PWD 인증 성공일 경우
+				if (member != null) { // ID와 PWD 모두 맞을 때 1이 나옴
+					session.setAttribute("member", member);
+
+					session.setAttribute("userMail", userMail);
+					System.out.println("userMail:" + userMail + ".......   userPass:" + userPass);
+
+					// welcome page 전송
+
+					response.sendRedirect(path + "/index.jsp");
+					return;
+
+					// 1.1.2 ID PWD 인증 실패일 경우
+				} else {
+					System.out.println("인증이 안 됐을 때");
+					session.setAttribute("member", member);
+					session.setAttribute("signMessage", "ID 또는 PASSWORD가  틀립니다");
+					response.sendRedirect("login.do");
+					return;
+				}
+
+			} else {
+				System.out.println("get!!!!!");
+				// 1. 로그인 (로그인 페이지 진입)
+
+				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+				System.out.println("Get 로그인 페이지 진입!!!!!");
+				// forward로 "입력값" 보내기
+				rd.forward(request, response);
+				System.out.println("값을 @login으로 보내기");
+
 			}
-		}else {
-			System.out.println("값을 못 받았을 때");
+			break;
 		}
-		// null일 수도 있어서 String 안됨!! Object로 받아야함
-		Object result = data.get("loginResult"); // 로그인일 경우, 기타
-		// 로그인이 아닌 기타의 경우,
-
-
-	}//doPost() 끝
-
+	}
 }
+
+// 1. 회원 로그인 (입력 후, 로그인 인증)

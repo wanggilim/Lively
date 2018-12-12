@@ -19,14 +19,15 @@ public class MemberDAO {
 
 
 	//로그인 ID PWD 확인 로직
-	public static int getUserAuth(String userId, String userPass) {
+	public static MemberVO getUserAuth(String email, String userPass) {
 		
-		int count = 0;
-		
-		String sql = "select count(*) from member"
-				+ " where usermail = '" + userId + "'"
+		//int count = 0;
+		MemberVO member = null;
+		String sql = "select * from member"
+				+ " where usermail = '" + email + "'"
 				+ " and userpass = '" + userPass + "'";
 		
+		System.out.println("Member DAO로 입력값 들어 옴");
 		Connection conn = OracleDBUtil.dbConnect();
 		
 		try {
@@ -34,7 +35,8 @@ public class MemberDAO {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()) {
-				count = rs.getInt(1); 
+				MemberVO mem = new MemberVO(rs.getInt("userNo"), email, userPass, 
+						rs.getInt("userLevel"), rs.getString("gender"), rs.getDate("birthday")) ;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -45,7 +47,7 @@ public class MemberDAO {
 			OracleDBUtil.dbDisconnect(rs, st, conn);
 		}
 		*/
-		return count;
+		return member;
 	}
 	
 	
