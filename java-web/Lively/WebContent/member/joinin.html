@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script>
+
+	function emailcheck()
+	{
+		var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+		var usermail = document.getElementById('userMail').value;
+		var userpass = document.getElementById('userPass').value;
+		alert(usermail);
+		
+		//입력을 안했으면
+		if(usermail.length == 0)
+		{
+			return false;
+		}
+		
+		//이메일 형식에 맞지않으면
+		else if (!usermail.match(regExp))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+
+
+   /* function validate() {
+       var re = '/^[a-zA-Z0-9]{4,12}$/'; // 아이디와 패스워드가 적합한지 검사할 정규식
+       var re2 = '/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i';
+       // 이메일이 적합한지 검사할 정규식
+
+ 
+       var pw = document.getElementById("userPass");
+       var email = document.getElementById("userMail");
+
+
+       // ------------ 이메일 까지 -----------
+
+
+       if(!check(re,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+           return false;
+       }
+
+       if(join.pw.value != join.checkpw.value) {
+           alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+           join.checkpw.value = "";
+           join.checkpw.focus();
+           return false;
+       }
+
+       if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+           return false;
+       }
+   }
+    
+   function check(re, what, message) {
+       if(re.test(what.value)) {
+           return true;
+       }
+       alert(message);
+       what.value = "";
+       what.focus();
+       //return false;
+   }*/
+</script>
+
+</head>
+<body>
+<h1>회원가입</h1>
+<form name="join" action="register.do" method ="post" onsubmit="emailcheck()">
+usermail : <input type = "text" name ="userMail" id="userMail"  placeholder="***@****.***" ><br>
+userpass : <input type = "password" name ="userPass" id="userPass" ><br>
+최소 8문자, 최대 15문자까지 입력이 가능, 특수문자는 !, @, #, .(dot)으로 제한
+<br>
+gender : <input type = "radio" name="gender" value="M">남자 <input type = "radio" name="gender" value="F">여자<br>
+birthday : <input type = "date" name="birthday"><br>
+<input type = "reset" value="취소"><!-- .? : 한자가 있거나 없거나 아무거나   \. : 반드시 점 .:아무문자나  *영개 이상  /i: 대소문자  관계없다 /g: 대소문자 구분 3  @?:올려면 한 개만 없거나    +:한 개 이상 -:범위[]:선택-->
+<input type = "submit" value ="가입">
+</form>
+</body>
+</html>
+<!-- [a-z]+[a-z0-9]*\.?[a-z0-9]*@[a-z0-9]+\.[a-z0-9]*/i 
+  [a-z]+[a-z0-9]*\.?[a-z0-9]*@[a-z0-9]+\.[a-z0-9]*/i-->
