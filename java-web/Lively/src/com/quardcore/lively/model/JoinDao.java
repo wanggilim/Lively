@@ -28,20 +28,20 @@ public class JoinDao{
 		
 		String sql = "insert into member(userNo, userMail, userPass, gender, birthday) values(userNo.nextval,?,?,?,?)";
 		PreparedStatement st = null;
-		int result=0;
+		int result =0;
 		
 		try {
 			Connection conn = OracleDButil.dbConnect();
 			st = conn.prepareStatement(sql);
-			
 		
 			st.setString(1, m.getUserMail());
 			st.setString(2, m.getUserPass());
 			st.setString(3, m.getGender());
 			st.setDate(4, m.getBirthday());
+	
 			
 			result=st.executeUpdate();
-			System.out.println(result);
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -113,8 +113,28 @@ public class JoinDao{
 			e.printStackTrace();
 		}
 		}
-	
-	//user 승인을 위해 존재 확인
+	//user 가입을 위해 기존 가입한 userMail 존재 확인
+		public int getUserMail(String userMail) {
+			int count = 0;
+			
+			String sql = "SELECT count(*) FROM member"
+					+ " WHERE userMail = '" + userMail + "'";
+			try {
+				Connection conn = OracleDButil.dbConnect();
+				Statement st = conn.createStatement();
+				
+				ResultSet rs = st.executeQuery(sql);
+				while (rs.next()) {
+					count = rs.getInt(1); // 0번은 count(*)
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return count;
+		}
+	//user 로그인 승인을 위해 존재 확인
 	public int getUserAuth(String userMail, String userPass) {
 		int count = 0;
 		

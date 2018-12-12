@@ -17,6 +17,7 @@ import com.quardcore.lively.controller.JoinControl;
 import com.quardcore.lively.model.MemberVO;
 import com.quardcore.lively.service.JoinService;
 import com.quardcore.lively.util.DateUtil;
+import com.quardcore.lively.model.JoinDao;
 /**
  * Servlet implementation class AppServlet
  */
@@ -107,7 +108,7 @@ public class AppServlet extends HttpServlet {
 		
     	if (action.equals("/member/register")) {
     	
-    		
+    		System.out.println("가입하로 왔니");
     		JoinControl control = new JoinControl();
     		JoinService service = new JoinService();
     		/*String suserNo = request.getParameter("userNo");
@@ -121,6 +122,13 @@ public class AppServlet extends HttpServlet {
     		Date birthday = DateUtil.stringToDate(sbirthday);
     		int authUser = 0;
     		int userLevel= 0;
+    		int count=0;
+    		
+    		//user 가입을 위해 기존 가입한 userMail 존재 확인
+    		count = control.getUserMail(userMail);
+    		if(count!=0) {
+    			response.sendRedirect("/webprogramming/member/joinin.html");
+    		}
     		
     		MemberVO m = new MemberVO(userMail, userPass, gender, birthday);
     		//DB에 회원 등록
@@ -136,6 +144,7 @@ public class AppServlet extends HttpServlet {
     			HttpSession session = request.getSession();
     			session.setAttribute("userMail", userMail);
     			// welcome page 전송
+    			System.out.println("session을 가지고 왔니");
     			response.sendRedirect("/webprogramming/member/login.html");
 			}
     		

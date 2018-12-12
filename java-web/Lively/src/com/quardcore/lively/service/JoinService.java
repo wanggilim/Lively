@@ -42,6 +42,11 @@ public class JoinService{
 		return dao.getUserAuth(userMail, userPass);
 	}
 
+	public int getUserMail(String userMail) {
+		// TODO Auto-generated method stub
+		return dao.getUserMail(userMail);
+	}
+
 
 
 }
