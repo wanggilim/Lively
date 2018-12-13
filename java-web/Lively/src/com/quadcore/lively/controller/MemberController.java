@@ -1,6 +1,6 @@
 package com.quadcore.lively.controller;
 
-import com.quadcore.lively.model.MemberService;
+import com.quadcore.lively.services.MemberService;
 
 public class MemberController {
 	private MemberService service;
@@ -9,9 +9,13 @@ public class MemberController {
 		service = new MemberService();
 	}
 	
-	public int getUserAuth(String userId, String userPass) {	
+	public int getUserAuth(String userMail, String userPass) {
 		
-		return service.getUserAuth(userId,userPass);
+		
+		System.out.println("Controller userMail : " + userMail);
+		System.out.println("Controller userPass : " + userPass);
+		
+		return service.getUserAuth(userMail, userPass);
 	}
 
 }
