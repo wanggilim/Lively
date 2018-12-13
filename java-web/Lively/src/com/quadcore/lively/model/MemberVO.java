@@ -1,4 +1,4 @@
-package com.quardcore.lively.model;
+package com.quadcore.lively.model;
 
 import java.sql.Date;
 

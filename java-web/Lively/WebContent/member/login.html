@@ -3,17 +3,60 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script>
+/* 화면이 띄워질 때 적용
+href의 ""에 경로 입력 */
+window.onload = function(){
+	var url = window.location.href;
+	var spath = url.substring(21, 28);
+	document.getElementById("path").href = spath+"/member/joinin.html";	
+}
+
+
+
+
+//메일과 비밀번호에 대한 유효성 확인
+function validateEmail() {
+	
+	
+	var userMail = document.getElementById("userMail").value;
+	var userPass = document.getElementById("userPass").value;
+	var patternM =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	var patternP = /^[A-Za-z0-9.+!@#]{8,15}$/;
+	
+
+	if( patternM.test(userMail) ) {
+		//alert("메일 주소가 올바르게 입력되었습니다.");
+	} else {
+		alert("메일 주소가 유효하지 않습니다.");
+		document.getElementById("userMail").focus();//입력이 잘못된 곳에 커서 위치
+		//response.sendRedirect("/member/joinin.html");
+		return false; // submit이 가지 않고 머물도록 지정
+	}
+	if( patternP.test(userPass) ) {
+		//alert("비밀번호가 올바르게 입력되었습니다.");
+		//response.sendRedirect("/member/login.html");
+	} else {
+		alert("비밀번호가 유효하지 않습니다.");
+		document.getElementById("userPass").focus();
+		//response.sendRedirect("/member/joinin.html");
+		return false;
+	}
+}
+
+
+</script>
 </head>
 <body>
 <h1>login</h1>
-<form action ="login.do" method="post">
+<form action ="login.do" method="post" onsubmit="return validateEmail();">
 
-usermail : <input type ="text" name ="userMail"><br>
-userpass : <input type = "password" name = "userPass"><br>
+usermail : <input type ="text" name ="userMail" id = "userMail"><br>
+userpass : <input type = "password" name = "userPass" id = "userPass"><br>
 <input type = "submit" value = "로그인">
 
 
 </form>
-<a href = "/webprogramming/member/joinin.html">회원가입</a>
+<a href = "" id="path">회원가입</a>
 </body>
 </html>	

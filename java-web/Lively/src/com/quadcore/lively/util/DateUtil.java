@@ -1,4 +1,4 @@
-package com.quardcore.lively.util;
+package com.quadcore.lively.util;
 
 import java.sql.Date;
 import java.text.ParseException;

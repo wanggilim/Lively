@@ -1,7 +1,7 @@
-package com.quardcore.lively.controller;
+package com.quadcore.lively.controller;
 
-import com.quardcore.lively.model.MemberVO;
-import com.quardcore.lively.service.JoinService;
+import com.quadcore.lively.model.MemberVO;
+import com.quadcore.lively.service.JoinService;
 
 
 

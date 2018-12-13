@@ -1,4 +1,4 @@
-package com.quardcore.lively.servlet;
+package com.quadcore.lively.servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.quardcore.lively.controller.JoinControl;
-import com.quardcore.lively.model.MemberVO;
-import com.quardcore.lively.service.JoinService;
-import com.quardcore.lively.util.DateUtil;
-import com.quardcore.lively.model.JoinDao;
+import com.quadcore.lively.controller.JoinControl;
+import com.quadcore.lively.model.JoinDao;
+import com.quadcore.lively.model.MemberVO;
+import com.quadcore.lively.service.JoinService;
+import com.quadcore.lively.util.DateUtil;
 /**
  * Servlet implementation class AppServlet
  */
@@ -127,7 +127,7 @@ public class AppServlet extends HttpServlet {
     		//user 가입을 위해 기존 가입한 userMail 존재 확인
     		count = control.getUserMail(userMail);
     		if(count!=0) {
-    			response.sendRedirect("/webprogramming/member/joinin.html");
+    			response.sendRedirect("/Lively/member/joinin.html");
     		}
     		
     		MemberVO m = new MemberVO(userMail, userPass, gender, birthday);
@@ -145,7 +145,7 @@ public class AppServlet extends HttpServlet {
     			session.setAttribute("userMail", userMail);
     			// welcome page 전송
     			System.out.println("session을 가지고 왔니");
-    			response.sendRedirect("/webprogramming/member/login.html");
+    			response.sendRedirect("/Lively/member/login.html");
 			}
     		
     		
@@ -173,7 +173,7 @@ public class AppServlet extends HttpServlet {
     			session.setAttribute("userLevel", m.getUserLevel());
     			
     			// welcome page 전송
-    			response.sendRedirect("/webprogramming/index.jsp");
+    			response.sendRedirect("/Lively/index.jsp");
 			}
     		
     		
@@ -196,7 +196,7 @@ public class AppServlet extends HttpServlet {
     			HttpSession session = request.getSession();
     			session.setAttribute("userMail", userMail);
     			
-    			response.sendRedirect("/webprogramming/member/login.html");
+    			response.sendRedirect("/Lively/member/login.html");
 			}
     		
     		

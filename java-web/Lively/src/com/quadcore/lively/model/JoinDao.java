@@ -1,4 +1,4 @@
-package com.quardcore.lively.model;
+package com.quadcore.lively.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.quardcore.lively.util.OracleDButil;
+import com.quadcore.lively.util.OracleDButil;
 
 
 

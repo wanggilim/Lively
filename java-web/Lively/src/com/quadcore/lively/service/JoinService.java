@@ -1,8 +1,8 @@
-package com.quardcore.lively.service;
+package com.quadcore.lively.service;
 
 
-import com.quardcore.lively.model.JoinDao;
-import com.quardcore.lively.model.MemberVO;
+import com.quadcore.lively.model.JoinDao;
+import com.quadcore.lively.model.MemberVO;
 
 public class JoinService{
 	
