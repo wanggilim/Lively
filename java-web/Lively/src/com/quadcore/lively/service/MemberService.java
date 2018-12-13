@@ -1,22 +1,23 @@
 package com.quadcore.lively.service;
 
 
-import com.quadcore.lively.model.JoinDao;
+
+import com.quadcore.lively.model.MemberDao;
 import com.quadcore.lively.model.MemberVO;
 
-public class JoinService{
+public class MemberService{
 	
-	private JoinDao dao;
+	private MemberDao dao;
 	
-	public JoinService() {
-		dao = new JoinDao();
+	public MemberService() {
+		dao = new MemberDao();
 		
 	}
 
 	//멤버추가
-	public void join(MemberVO m) {
+	public void signUp(MemberVO member) {
 		// TODO Auto-generated method stub
-		dao.insert(m);
+		dao.insert(member);
 	}
 
 	//멤버검색
@@ -45,6 +46,24 @@ public class JoinService{
 	public int getUserMail(String userMail) {
 		// TODO Auto-generated method stub
 		return dao.getUserMail(userMail);
+	}
+	
+	public MemberVO getUserLevel(String userMail) {
+		return dao.getUserLevel(userMail);
+	}
+
+	public Object deleteUserFromUserMail(String userMail) {
+		String sql ="delete from member where usermail="+userMail;
+		return dao.st_execute(sql);
+	}
+
+	public Object updateUserFromUserMail(String userMail) {
+		return dao.st_execute("");
+	}
+
+	public Object searchUserFromUserMail(String userMail) {
+		String sql ="select * from member where usermail="+userMail;
+		return dao.st_execute(sql);
 	}
 
 

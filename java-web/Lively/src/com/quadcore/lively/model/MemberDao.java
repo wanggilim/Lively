@@ -17,13 +17,13 @@ import com.quadcore.lively.util.OracleDButil;
 
 
 
-public class JoinDao{
+public class MemberDao{
 	
 	
 	
 
 	//멤버 추가
-	public void insert(MemberVO m) {
+	public void insert(MemberVO member) {
 		// TODO Auto-generated method stub
 		
 		String sql = "insert into member(userNo, userMail, userPass, gender, birthday) values(userNo.nextval,?,?,?,?)";
@@ -34,10 +34,10 @@ public class JoinDao{
 			Connection conn = OracleDButil.dbConnect();
 			st = conn.prepareStatement(sql);
 		
-			st.setString(1, m.getUserMail());
-			st.setString(2, m.getUserPass());
-			st.setString(3, m.getGender());
-			st.setDate(4, m.getBirthday());
+			st.setString(1, member.getUserMail());
+			st.setString(2, member.getUserPass());
+			st.setString(3, member.getGender());
+			st.setDate(4, member.getBirthday());
 	
 			
 			result=st.executeUpdate();
@@ -74,7 +74,7 @@ public class JoinDao{
 		return null;
 	}
 	//멤버 수정
-	public void update(MemberVO m) {
+	public void update(MemberVO member) {
 		// TODO Auto-generated method stub
 		
 		String sql = "update member set userNo=?, userPass=?,userLevel=?, gender=?, birthday=sysdate where userMail=?";
@@ -83,12 +83,12 @@ public class JoinDao{
 		try {
 			Connection conn = OracleDButil.dbConnect();
 			st=conn.prepareStatement(sql);
-			st.setInt(1, m.getUserNo() );
-			st.setString(6, m.getUserMail());
-			st.setString(2, m.getUserPass());
-			st.setInt(3, m.getUserLevel());
-			st.setString(4, m.getGender());
-			st.setDate(5, m.getBirthday());
+			st.setInt(1, member.getUserNo() );
+			st.setString(6, member.getUserMail());
+			st.setString(2, member.getUserPass());
+			st.setInt(3, member.getUserLevel());
+			st.setString(4, member.getGender());
+			st.setDate(5, member.getBirthday());
 			
 			st.executeUpdate();
 					
