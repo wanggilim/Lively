@@ -35,10 +35,10 @@ public class AppServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+   
+		
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		path = request.getContextPath();	// /webprogramming
     	realPath = request.getServletContext().getRealPath(".");
@@ -98,14 +98,14 @@ public class AppServlet extends HttpServlet {
     	uri = request.getRequestURI();
     	url = request.getRequestURL().toString();
     	action = uri.substring(path.length(), uri.length()-3);
-    	
     	request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-
-System.out.println(action);
-    	//메일 중복 확인
+		
+		System.out.println(action);
+		
 		int result=0;
+    	//메일 중복 확인
     			if(action.equals("/member/userMailDuplication")) {
     				MemberController control = new MemberController();
     				//ajax로 중복 확인
@@ -114,10 +114,10 @@ System.out.println(action);
     				System.out.println(result);
     				response.setContentType("text/html;charset=utf-8");
     				response.getWriter().print(result==1?"사용할 수 없는 이메일입니다.":"사용할 수 있는 이메일입니다.");
-System.out.println(result);
     				return;
     			}
-    	
+		
+    			 
     	//1. 회원가입
 		
     	if (action.equals("/member/signUp")) {
@@ -137,7 +137,7 @@ System.out.println(result);
     		int authUser = 0;
     		int userLevel= 0;
     		int count=0;
-    		
+    	
     		//user 가입을 위해 기존 가입한 userMail 존재 확인
     		count = control.getUserMail(userMail);
     		if(count!=0) {
@@ -148,19 +148,8 @@ System.out.println(result);
     		//DB에 회원 등록
     		service.signUp(member);
     		
-    		if (userMail != null) {
-    			authUser = control.getUserAuth(userMail, userPass);
-			}
-    		
-    		// 인증
-    		if (authUser == 1) { // 아이디 비밀번호가 맞다면 1이 나와야함.
-
-    			HttpSession session = request.getSession();
-    			session.setAttribute("userMail", userMail);
-    			// welcome page 전송
-    			System.out.println("session을 가지고 왔니");
-    			response.sendRedirect(path+"/member/signIn.html");
-			}
+    		//회원가입 후 인덱스로 이동
+			response.sendRedirect(path+"/index.jsp");
     		
     		
 		}
@@ -211,7 +200,7 @@ System.out.println(result);
     		String userMail = request.getParameter("userMail");
     		String userPass = request.getParameter("userPass");
     		int authUser = 0;
-System.out.println("여기에는 오나요");
+
     		if (userMail != null) {
     			authUser = user.getUserAuth(userMail, userPass);
 			}
@@ -233,4 +222,7 @@ System.out.println("여기에는 오나요");
   
 
 }
+
 }
+
+
