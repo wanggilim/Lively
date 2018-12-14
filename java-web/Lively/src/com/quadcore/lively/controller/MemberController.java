@@ -44,6 +44,10 @@ public class MemberController {
 			return service.searchUserFromUserMail(userMail);
 			
 		}
+		public int registerCheck(String userMail) {
+			// TODO Auto-generated method stub
+			return service.registerCheck(userMail);
+		}
 
 	
 
