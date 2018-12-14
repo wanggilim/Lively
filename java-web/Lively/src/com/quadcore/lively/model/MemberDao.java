@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.quadcore.lively.util.OracleDButil;
+import com.quadcore.lively.util.OracleDBUtil;
 
 
 
@@ -31,7 +31,7 @@ public class MemberDao{
 		int result =0;
 		
 		try {
-			Connection conn = OracleDButil.dbConnect();
+			Connection conn = OracleDBUtil.dbConnect();
 			st = conn.prepareStatement(sql);
 		
 			st.setString(1, member.getUserMail());
@@ -59,7 +59,7 @@ public class MemberDao{
 		PreparedStatement st = null;
 		
 		try {
-			Connection conn = OracleDButil.dbConnect();
+			Connection conn = OracleDBUtil.dbConnect();
 			st = conn.prepareStatement(sql);
 			st.setString(1, userMail);
 			rs= st.executeQuery();
@@ -81,7 +81,7 @@ public class MemberDao{
 		PreparedStatement st = null;
 		
 		try {
-			Connection conn = OracleDButil.dbConnect();
+			Connection conn = OracleDBUtil.dbConnect();
 			st=conn.prepareStatement(sql);
 			st.setInt(1, member.getUserNo() );
 			st.setString(6, member.getUserMail());
@@ -104,7 +104,7 @@ public class MemberDao{
 		String sql = "delete member where userMail=?";
 		PreparedStatement st = null;
 		try {
-			Connection conn = OracleDButil.dbConnect();
+			Connection conn = OracleDBUtil.dbConnect();
 			st = conn.prepareStatement(sql);
 			st.setString(1, userMail);
 			st.executeUpdate();
@@ -120,7 +120,7 @@ public class MemberDao{
 			String sql = "SELECT count(*) FROM member"
 					+ " WHERE userMail = '" + userMail + "'";
 			try {
-				Connection conn = OracleDButil.dbConnect();
+				Connection conn = OracleDBUtil.dbConnect();
 				Statement st = conn.createStatement();
 				
 				ResultSet rs = st.executeQuery(sql);
@@ -142,7 +142,7 @@ public class MemberDao{
 				+ " WHERE userMail = '" + userMail + "'" // 18
 				+ " AND userPass = '" + userPass + "'"; // 160
 		try {
-			Connection conn = OracleDButil.dbConnect();
+			Connection conn = OracleDBUtil.dbConnect();
 			Statement st = conn.createStatement();
 			
 			ResultSet rs = st.executeQuery(sql);
@@ -167,7 +167,7 @@ public class MemberDao{
 
 
 		
-		conn = OracleDButil.dbConnect();
+		conn = OracleDBUtil.dbConnect();
 		System.out.println("오라클 접속");
 		System.out.println(sql);
 		try {
@@ -177,7 +177,7 @@ public class MemberDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			OracleDButil.dbDisconnect(rs, st, conn);
+			OracleDBUtil.dbDisconnect(rs, st, conn);
 		}
 				
 		return result;
@@ -192,7 +192,7 @@ public class MemberDao{
 		PreparedStatement st = null;
 		
 		try {
-			Connection conn = OracleDButil.dbConnect();
+			Connection conn = OracleDBUtil.dbConnect();
 			st = conn.prepareStatement(sql);
 			st.setString(1, userMail);
 			rs= st.executeQuery();

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class OracleDButil {
+public class OracleDBUtil {
 	//반복되는 업무에 대한 유틸을 제작
 	//util 패키지를 별도로 만듦
 	//DB연결
