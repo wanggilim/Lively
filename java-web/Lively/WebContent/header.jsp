@@ -4,10 +4,11 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 
-<c:if test="${userMail==null }">
+<!-- MemberVO 타입으로 넘어옴. -->
+<c:if test="${member==null }">
 	<a href="${path}/member/signIn.do">로그인</a>
 </c:if>
-<c:if test="${userMail!=null }">
-	<strong>${sessionScope.userMail}</strong>
+<c:if test="${member!=null }">
+	<strong>${sessionScope.member.getUserMail()}</strong>
 	<a href="${path}/member/signOut.do"> 로그아웃</a>
 </c:if>

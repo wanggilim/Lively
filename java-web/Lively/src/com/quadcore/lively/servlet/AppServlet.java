@@ -168,14 +168,22 @@ public class AppServlet extends HttpServlet {
 				MemberController controller = new MemberController();
 				HttpSession session = request.getSession();
 
-				int userLevel = controller.getUserLevel(userMail);
-				// session에 저장 : userMail , userLevel을
-				session.setAttribute("userMail", userMail);
-				session.setAttribute("userLevel", userLevel);
-
-				System.out.println("userMail: " + (String) session.getAttribute("userMail"));
-				System.out.println("userLevel: " + (int) session.getAttribute("userLevel"));
-
+				/**
+				 * session에 저장 : MemberVO 
+				 * @Date 2018.12.14
+				 * @author wgl
+				 * 
+				 * (이하 원본)
+				 * \ // session에 저장 : userMail , userLevel을
+				 * int userLevel = controller.getUserLevel(userMail);
+				 * session.setAttribute("userMail", userMail);
+				 * session.setAttribute("userLevel", userLevel);
+				 * System.out.println("userMail: " + (String) session.getAttribute("userMail"));
+				 * System.out.println("userLevel: " + (int) session.getAttribute("userLevel"));
+				 */
+				MemberVO member = controller.getMember(userMail);
+				session.setAttribute("member", member);
+				
 				// welcome page 전송
 				response.sendRedirect(path + "/dashboard.jsp");
 			}

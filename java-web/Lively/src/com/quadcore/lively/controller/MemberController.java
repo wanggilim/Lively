@@ -25,6 +25,16 @@ public class MemberController {
 			return service.getUserMail(userMail);
 		}
 		
+		/**
+		 * 사용자의 메일주소만을 입력하여 MemberVO 객체를 반환함.
+		 * @author wgl
+		 * @Date 2018.12.14
+		 * @param userMail
+		 * @return MemberVO
+		 */
+		public MemberVO getMember(String userMail) {
+			return service.getMember(userMail);
+		}
 
 		public int getUserLevel(String userMail) {
 			// TODO Auto-generated method stub
