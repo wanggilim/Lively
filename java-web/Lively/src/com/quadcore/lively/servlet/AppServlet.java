@@ -102,7 +102,8 @@ public class AppServlet extends HttpServlet {
     	request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+
+System.out.println(action);
     	//메일 중복 확인
 		int result=0;
     			if(action.equals("/member/userMailDuplication")) {
@@ -113,6 +114,7 @@ public class AppServlet extends HttpServlet {
     				System.out.println(result);
     				response.setContentType("text/html;charset=utf-8");
     				response.getWriter().print(result==1?"사용할 수 없는 이메일입니다.":"사용할 수 있는 이메일입니다.");
+System.out.println(result);
     				return;
     			}
     	
