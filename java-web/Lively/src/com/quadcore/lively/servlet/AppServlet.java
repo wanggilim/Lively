@@ -102,19 +102,20 @@ public class AppServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
 		
-		System.out.println(action);
-		
 		int result=0;
     	//메일 중복 확인
-    			if(action.equals("/member/userMailDuplication")) {
-    				MemberController control = new MemberController();
-    				//ajax로 중복 확인
-    				String userMail = request.getParameter("userMail");
-    				result= control.registerCheck(userMail);
-    				System.out.println(result);
-    				response.setContentType("text/html;charset=utf-8");
-    				response.getWriter().print(result==1?"사용할 수 없는 이메일입니다.":"사용할 수 있는 이메일입니다.");
-    				return;
+		System.out.println(result);
+        if (action.equals("/member/userMailDuplication")) {
+			MemberController control = new MemberController();
+			//ajax로 중복 확인
+			String userMail = request.getParameter("userMail");
+			System.out.println(userMail);
+			result= control.registerCheck(userMail);
+			System.out.println(result);
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().print(result==1?"사용할 수 없는 이메일입니다.":"사용할 수 있는 이메일입니다.");
+			return;
+			
     			}
 		
     			 

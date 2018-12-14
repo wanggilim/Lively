@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- //jquery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 //메일과 비밀번호에 대한 유효성 확인
 function validateEmail() {
@@ -47,14 +49,18 @@ function registerCheckFunction(){
 		document.getElementById("userMail").focus();//입력이 잘못된 곳에 커서 위치
 		//response.sendRedirect("/member/joinin.html");
 		return false; // submit이 가지 않고 머물도록 지정
-	}	
-		$.ajax({
-			type:'POST',
-			url:'userMailDuplication.do',	
-			data: {"userMail":userMail},
-			success: function(result){
-				alert(result);	
-			}
+	}
+	
+	$.ajax({
+		type:'POST',
+		url:'userMailDuplication.do',	
+		data: {"userMail":userMail},
+		success: function(result){
+			alert(result);	
+		}
+		error: function() { 
+            alert("why"); 
+        }       
 			
 	});
 }
