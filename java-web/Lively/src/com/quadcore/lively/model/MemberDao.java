@@ -12,7 +12,7 @@ import java.util.Map;
 
 import com.quadcore.lively.util.OracleDBUtil;
 
-public class MemberDao{
+public class MemberDAO{
 	
 	//멤버 추가
 	public void insert(MemberVO member) {

@@ -2,15 +2,15 @@ package com.quadcore.lively.service;
 
 
 
-import com.quadcore.lively.model.MemberDao;
+import com.quadcore.lively.model.MemberDAO;
 import com.quadcore.lively.model.MemberVO;
 
 public class MemberService{
 	
-	private MemberDao dao;
+	private MemberDAO dao;
 	
 	public MemberService() {
-		dao = new MemberDao();
+		dao = new MemberDAO();
 		
 	}
 
