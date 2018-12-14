@@ -65,10 +65,7 @@ public class MemberService{
 		String sql ="select * from member where usermail="+userMail;
 		return dao.st_execute(sql);
 	}
-	public int registerCheck(String userMail) {
-		// TODO Auto-generated method stub
-		return dao.getUserMail(userMail);
-	}
+
 
 
 }
