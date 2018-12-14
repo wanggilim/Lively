@@ -32,13 +32,45 @@ function validateEmail() {
 		return false;
 	}
 }
+//중복 체크 Ajax
+
+function registerCheckFunction(){
+	
+	var userMail = document.getElementById("userMail").value;
+	var patternM =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
+
+	if( patternM.test(userMail) ) {
+		//alert("메일 주소가 올바르게 입력되었습니다.");
+	} else {
+		alert("메일 주소가 유효하지 않습니다.");
+		document.getElementById("userMail").focus();//입력이 잘못된 곳에 커서 위치
+		//response.sendRedirect("/member/joinin.html");
+		return false; // submit이 가지 않고 머물도록 지정
+	}	
+		$.ajax({
+			type:'POST',
+			url:'userMailDuplication.do',	
+			data: {"userMail":userMail},
+			success: function(result){
+				
+				if(result==0){
+					alert("사용할 수 있는 이메일입니다.");
+				} else {
+					alert("사용할 수 없는 이메일입니다.");
+				}
+			}
+			
+	});
+}
 </script> 
 
 </head>
 <body>
 <h1>회원가입</h1>
 <form name="join" action="signUp.do" method ="post" onsubmit="return validateEmail();">
-usermail : <input type = "text" name ="userMail" id="userMail"  placeholder="***@****.***"><br>
+usermail : <input type = "text" name ="userMail" id="userMail"  placeholder="***@****.***">
+<button onclick="registerCheckFunction();" type="button">중복체크</button><br>
 userpass : <input type = "password" name ="userPass" id="userPass"><br>
 최소 8문자, 최대 15문자까지 입력이 가능, 특수문자는 !, @, #, .(dot)으로 제한
 <br>

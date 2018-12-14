@@ -102,7 +102,15 @@ public class AppServlet extends HttpServlet {
     	request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-    	
+		
+		//가입 시 메일 중복 확인
+		if(action.equals("/member/userMailDuplication")) {
+			MemberController control = new MemberController();
+			//ajax로 중복 확인
+			String userMail = request.getParameter("userMail");
+    		response.getWriter().write(control.registerCheck(userMail)+"");
+					
+				}
     	//1. 회원가입
 		
     	if (action.equals("/member/signUp")) {
