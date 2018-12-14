@@ -15,6 +15,7 @@ public class MemberController {
 			service = new  MemberService();
 		}
 		// TODO Auto-generated method stub
+		
 		//로그인 승인
 		public int getUserAuth(String userMail, String userPass) {
 			return service.getUserAuth(userMail, userPass);
@@ -25,7 +26,7 @@ public class MemberController {
 		}
 		
 
-		public MemberVO getUserLevel(String userMail) {
+		public int getUserLevel(String userMail) {
 			// TODO Auto-generated method stub
 			return service.getUserLevel(userMail);
 		}

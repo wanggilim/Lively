@@ -10,17 +10,10 @@
 <body>
 
 <jsp:include page="/header.jsp"></jsp:include><br>
-
-<c:if test="${sessionScope.userMail==null}">
-로그인 전 <br>
-로그인 후 동작이 됩니다.
-</c:if>
-
-<c:if test="${sessionScope.userMail!=null}">
-로그인 후<br>
-</c:if>
-
-<h1>메인 페이지</h1>
-
+<h1> ##### 인덱스 파일 ##### </h1><br>
+로그인 전
+<button onclick="call('/member/signUp.do')">회원가입</button>
+<input type="button" onclick="" id="signIn" name="signIn" value="로그인">
+<input type="button" id="signUp" name="signUp" value="회원가입">
 </body>
 </html>
