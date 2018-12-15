@@ -54,16 +54,26 @@ public class AppServlet extends HttpServlet {
 
 		// 1. 로그인 (로그인 사이트 진입) (jinju)
 		if (action.equals("/member/signIn")) {
-			RequestDispatcher rd = request.getRequestDispatcher("/member/signIn.html");
-			rd.forward(request, response);
+			
+			// 로그인 (또는 세션) 유무에 따라 진입 차단과 허용을 구분지음 (wgl/2018.12.15 수정)
+			HttpSession session = request.getSession();
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			
+			// 로그인 상태라면
+			if (member != null) {
+				response.sendRedirect(path + "/dashboard.jsp");
+			} else {
+			// 로그인 상태가 아니라면 (= 로그인을 해야한다면)
+				response.sendRedirect("/member/signIn.html");
+			}
 		}
 
 		// 2. 로그아웃 (jinju)
 		if (action.equals("/member/signOut")) {
-			//세션 끊기 filter에서 진행할 예정
+			//세션 끊기 filter에서 진행할 예정 -> 반영완료 (wgl)
 			HttpSession session = request.getSession();
 			session.invalidate();
-			response.sendRedirect(path + "/member/signIn.html");
+			response.sendRedirect(path + "/index.jsp"); // Lively Welcome page 이동하도록 재조정 (wgl)
 		}
 		// 1. 회원 삭제
 		if (action.equals("/member/userDelete")) {
@@ -90,7 +100,7 @@ public class AppServlet extends HttpServlet {
 			control.searchUserFromUserMail(userMail);
 		}
 
-	}
+	} // end of doGet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -109,6 +119,23 @@ public class AppServlet extends HttpServlet {
 		// 1. 회원가입
 
 		if (action.equals("/member/signUp")) {
+			/**
+			 *  code merge 할 때,
+			 *  반드시 정표님과 협의 필요한 부분입니다.
+			 *  1. member2 라는 변수명
+			 *  2. 이어서 오는 로그인 유무에 따른 진입 차단과 허용 구분 로직
+			 *  @author wgl
+			 *  @Date 2018.12.15
+			 */
+			// 로그인 (또는 세션) 유무에 따라 진입 차단과 허용을 구분지음 (wgl/2018.12.15 수정)
+			HttpSession session2 = request.getSession();
+			MemberVO member2 = (MemberVO) session2.getAttribute("member");
+			// 로그인 상태라면
+			if (member2 != null) {
+				response.sendRedirect(path + "/dashboard.jsp");
+			}
+			// 여기까지////////////////////////////////////////////////////////
+			
 
 			System.out.println("가입하로 왔니");
 			MemberController control = new MemberController();
@@ -183,6 +210,7 @@ public class AppServlet extends HttpServlet {
 				 */
 				MemberVO member = controller.getMember(userMail);
 				session.setAttribute("member", member);
+				System.out.println(member.toString());
 				
 				// welcome page 전송
 				response.sendRedirect(path + "/dashboard.jsp");
@@ -194,6 +222,5 @@ public class AppServlet extends HttpServlet {
 			}
 
 		}
-
-	}
+	} // end of doPost
 }
