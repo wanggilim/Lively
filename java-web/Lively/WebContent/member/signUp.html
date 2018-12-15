@@ -4,74 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- //jquery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-//메일과 비밀번호에 대한 유효성 확인
-function validateEmail() {
-	
-	
-	var userMail = document.getElementById("userMail").value;
-	var userPass = document.getElementById("userPass").value;
-	var patternM =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	var patternP = /^[A-Za-z0-9.+!@#]{8,15}$/;
-	
-
-	if( patternM.test(userMail) ) {
-		//alert("메일 주소가 올바르게 입력되었습니다.");
-	} else {
-		alert("메일 주소가 유효하지 않습니다.");
-		document.getElementById("userMail").focus();//입력이 잘못된 곳에 커서 위치
-		//response.sendRedirect("/member/joinin.html");
-		return false; // submit이 가지 않고 머물도록 지정
-	}
-	if( patternP.test(userPass) ) {
-		//alert("비밀번호가 올바르게 입력되었습니다.");
-		//response.sendRedirect("/member/login.html");
-	} else {
-		alert("비밀번호가 유효하지 않습니다.");
-		document.getElementById("userPass").focus();
-		//response.sendRedirect("/member/joinin.html");
-		return false;
-	}
-}
-//중복 체크 Ajax
-
-function registerCheckFunction(){
-	
-	var userMail = document.getElementById("userMail").value;
-	var patternM =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	
-
-	if( patternM.test(userMail) ) {
-		//alert("메일 주소가 올바르게 입력되었습니다.");
-	} else {
-		alert("메일 주소가 유효하지 않습니다.");
-		document.getElementById("userMail").focus();//입력이 잘못된 곳에 커서 위치
-		//response.sendRedirect("/member/joinin.html");
-		return false; // submit이 가지 않고 머물도록 지정
-	}
-	
-	$.ajax({
-		type:'POST',
-		url:'userMailDuplication.do',	
-		data: {"userMail":userMail},
-		success: function(result){
-			alert(result);	
-		}
-		error: function() { 
-            alert("why"); 
-        }       
-			
-	});
-}
-</script> 
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="js/signUp.js"></script> 
 
 </head>
 <body>
 <h1>회원가입</h1>
-<form name="join" action="signUp.do" method ="post" onsubmit="return validateEmail();">
+<form name="join" action="signUp.do" method ="post" onsubmit="return registerCheckFunction();">
 usermail : <input type = "text" name ="userMail" id="userMail"  placeholder="***@****.***">
-<button onclick="registerCheckFunction();" type="button">중복체크</button><br>
+<button onclick="validateEmail();">중복체크</button><br>
 userpass : <input type = "password" name ="userPass" id="userPass"><br>
 최소 8문자, 최대 15문자까지 입력이 가능, 특수문자는 !, @, #, .(dot)으로 제한
 <br>
@@ -79,6 +20,7 @@ gender : <input type = "radio" name="gender" value="M">남자 <input type = "rad
 birthday : <input type = "date" name="birthday"><br>
 <input type = "reset" value="취소"><!-- .? : 한자가 있거나 없거나 아무거나   \. : 반드시 점 .:아무문자나  *영개 이상  /i: 대소문자  관계없다 /g: 대소문자 구분 3  @?:올려면 한 개만 없거나    +:한 개 이상 -:범위[]:선택-->
 <input type = "submit" value ="가입">
+
 
 </form>
 

@@ -48,6 +48,17 @@ public class MemberController {
 			// TODO Auto-generated method stub
 			return service.registerCheck(userMail);
 		}
+		
+		/**
+		 * 회원 가입
+		 * @Date 2018.12.15
+		 * @author wgl
+		 * @param member::MemberVO 가입한 멤버의 정보
+		 */
+		public void signUp(MemberVO member) {
+			service.signUp(member);
+			
+		}
 
 	
 

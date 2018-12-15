@@ -15,10 +15,17 @@ import com.quadcore.lively.util.OracleDBUtil;
 public class MemberDAO{
 	
 	//멤버 추가
+	/**
+	 * 변경사항
+	 * 1. SQL 문장
+	 * 
+	 * @Date 2018.12.15
+	 * @author wgl
+	 */
 	public void insert(MemberVO member) {
 		// TODO Auto-generated method stub
 		
-		String sql = "insert into member(userNo, userMail, userPass, gender, birthday) values(userNo.nextval,?,?,?,?)";
+		String sql = "insert into member(userno, usermail, userpass, gender, birthday) values(userno.nextval,?,?,?,?)";
 		PreparedStatement st = null;
 		Connection conn = null;
 		ResultSet rs = null;
