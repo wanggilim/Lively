@@ -36,6 +36,7 @@ public class MemberDAO{
 			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
 		
+			System.out.println(member);
 			st.setString(1, member.getUserMail());
 			st.setString(2, member.getUserPass());
 			st.setString(3, member.getGender());
@@ -239,15 +240,13 @@ public class MemberDAO{
 		ResultSet rs = null;
 		try {			
 			conn = OracleDBUtil.dbConnect();
-			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
 			st.setString(1, userMail);
-			rs = st.executeQuery(sql);
+			rs = st.executeQuery();
 			
 			if(rs.next()) {
 				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
 			}
-			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

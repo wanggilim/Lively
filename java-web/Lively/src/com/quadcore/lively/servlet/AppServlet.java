@@ -56,6 +56,7 @@ public class AppServlet extends HttpServlet {
 		if (action.equals("/member/signOut")) {
 			HttpSession session = request.getSession();
 			session.invalidate();
+			System.out.println("session이 끊겼습니다.");
 			response.sendRedirect(path + "/member/signIn.html");
 		}
 		// 1. 회원 삭제
@@ -94,14 +95,12 @@ public class AppServlet extends HttpServlet {
 		uri = request.getRequestURI();
 		url = request.getRequestURL().toString();
 		action = uri.substring(path.length(), uri.length() - 3);
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		response.setCharacterEncoding("utf-8");
 
 		int result = 0;
 		// 메일 중복 확인
 		System.out.println(result);
 		if (action.equals("/member/userMailDuplication")) {
+			System.out.println("/member/userMailDuplication");
 			MemberController control = new MemberController();
 			// ajax로 중복 확인
 			String userMail = request.getParameter("userMail");
@@ -134,7 +133,6 @@ public class AppServlet extends HttpServlet {
 		 * @author wgl
 		 */
 		if (action.equals("/member/signUp")) {
-
 			System.out.println("가입하로 왔니");
 			MemberController control = new MemberController();
 			/*
@@ -152,12 +150,11 @@ public class AppServlet extends HttpServlet {
 				birthday = DateUtil.stringToDate(sbirthday);
 			}
 			MemberVO member = new MemberVO(userMail, userPass, gender, birthday);
+			System.out.println("/member/signUp > \n" + member);
 			// DB에 회원 등록
 			control.signUp(member);
-
-			// 회원가입 후 인덱스로 이동
-			// (이 주석은 확인 후 삭제) 추후에 index.jsp 로 넘어가거나 dashboard 화면으로 넘어갈지 결정해야함.
-			response.sendRedirect(path + "/index.jsp");
+			
+			response.sendRedirect(path + "/index.html");
 		}
 
 		// 1. 회원 로그인 (입력 후, 로그인 인증)

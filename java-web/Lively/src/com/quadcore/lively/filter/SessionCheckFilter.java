@@ -81,12 +81,12 @@ public class SessionCheckFilter implements Filter {
 				//session에 (MemberVO)member가 없다면 - index.html로 보내기
 				if (member == null) {
 					HttpServletResponse res = (HttpServletResponse) response;
-					res.sendRedirect("/");
+					res.sendRedirect("/Lively/index.html");
 					return;
 				}//session에 (MemberVO)member가 있다면 - 기존 페이지 유지
 			}
 			
-		}
+		}//whiteList(session 미연결 페이지) 리스트가 아니라면 = 세션에 member가 있다면  ex) dashboard.html 끝
 
 		else {//whiteList(session 미연결 페이지) 리스트라면
 			MemberVO member = (MemberVO) session.getAttribute("member");

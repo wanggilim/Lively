@@ -12,7 +12,7 @@
 	$(document).ready(function() {
 
 		$(".logo").click(function() {
-			location.href = "/";
+			location.href = "../";
 		});
 
 		$(".signup").click(function() {
@@ -47,8 +47,8 @@
 				<!-- 메뉴2. 로그인 -->
 				<div class="login-form">
 					<form action="signIn.do" method="post">
-						<input type="email" id="userMail" name="userMail" placeholder="이메일" maxlength="40" required><br>
-						<input type="password" id="userPass" name="userPass" placeholder="비밀번호" maxlength="15" required><br>
+						<input type="email" id="userMail" name="userMail" placeholder="이메일" maxlength="40" required class="input-login"><br>
+						<input type="password" id="userPass" name="userPass" placeholder="비밀번호" maxlength="15" required class="input-login"><br>
 						<input type="submit" value="로그인" class="btn">
 						<br> <span><a href="">이메일/비밀번호 찾기</a></span>
 					</form>
