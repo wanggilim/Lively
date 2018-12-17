@@ -10,17 +10,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.text.html.HTMLEditorKit.Parser;
-
 import com.quadcore.lively.util.OracleDBUtil;
 
 public class MemberDAO{
 	
 	//멤버 추가
+	/**
+	 * 변경사항
+	 * 1. SQL 문장
+	 * 
+	 * @Date 2018.12.15
+	 * @author wgl
+	 */
 	public void insert(MemberVO member) {
 		// TODO Auto-generated method stub
 		
-		String sql = "insert into member(userNo, userMail, userPass, gender, birthday) values(userNo.nextval,?,?,?,?)";
+		String sql = "insert into member(userno, usermail, userpass, gender, birthday) values(userno.nextval,?,?,?,?)";
 		PreparedStatement st = null;
 		Connection conn = null;
 		ResultSet rs = null;
@@ -161,24 +166,31 @@ public class MemberDAO{
 	}
 		
 		
-	//user 로그인 승인을 위해 존재 확인(jinju)
+	//user 로그인 승인을 위해 존재 확인
 	public int getUserAuth(String userMail, String userPass) {
 		int count = 0;
 		
 		String sql = "SELECT count(*) FROM member"
-				+ " WHERE userMail = '" + userMail + "'" // aa@gmail.com
-				+ " AND userPass = '" + userPass + "'"; // 12345678
+				+ " WHERE userMail = '" + userMail + "'" // 18
+				+ " AND userPass = '" + userPass + "'"; // 160
+		
+		System.out.println("sql: "+ sql);
+		
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
 		try {			
 			conn = OracleDBUtil.dbConnect();
+			conn.setAutoCommit(false);
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
 		
 				count = rs.getInt(1); // 0번은 count(*)
+				
+				System.out.println("count: " + count);
 			}
+			conn.commit();
 			
 		} catch (SQLException e) {
 			if(conn!=null) 
@@ -217,31 +229,32 @@ public class MemberDAO{
 		return result;
 	}
 	
-	//userLevel 조회(jinju)
-	public int getUserLevel(String userMail) {
+	//userMail로 (MemberVO)member 조회
+	public MemberVO getUserLevel(String userMail) {
+		MemberVO member = null;
 		
-		String sql = "select userLevel from member where usermail = ?";	
+		String sql = "select * from member where usermail =?";	
 		PreparedStatement st = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		int userLevel = 0;
-		try {						
-			conn = OracleDBUtil.dbConnect();		 
+		try {			
+			conn = OracleDBUtil.dbConnect();
+			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
 			st.setString(1, userMail);
-			rs = st.executeQuery();
+			rs = st.executeQuery(sql);
 			
 			if(rs.next()) {
-				userLevel = rs.getInt(1);
+				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
 			}
-			 
+			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			OracleDBUtil.dbDisconnect(rs, st, conn);
 		}
 			
-		return userLevel;
+		return member;
 	}
 	
 }

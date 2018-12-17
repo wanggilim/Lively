@@ -1,52 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>회원가입 • Lively</title>
+<link rel="stylesheet" href="../css/styles.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/signUp.js"></script> 
 <script>
-//메일과 비밀번호에 대한 유효성 확인
-function validateEmail() {
-	
-	
-	var userMail = document.getElementById("userMail").value;
-	var userPass = document.getElementById("userPass").value;
-	var patternM =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	var patternP = /^[A-Za-z0-9.+!@#]{8,15}$/;
-	
+	$(document).ready(function() {
+		
+		$(".logo").click(function() {
+			location.href="../";
+		});
 
-	if( patternM.test(userMail) ) {
-		//alert("메일 주소가 올바르게 입력되었습니다.");
-	} else {
-		alert("메일 주소가 유효하지 않습니다.");
-		document.getElementById("userMail").focus();//입력이 잘못된 곳에 커서 위치
-		//response.sendRedirect("/member/joinin.html");
-		return false; // submit이 가지 않고 머물도록 지정
-	}
-	if( patternP.test(userPass) ) {
-		//alert("비밀번호가 올바르게 입력되었습니다.");
-		//response.sendRedirect("/member/login.html");
-	} else {
-		alert("비밀번호가 유효하지 않습니다.");
-		document.getElementById("userPass").focus();
-		//response.sendRedirect("/member/joinin.html");
-		return false;
-	}
+		//회원가입 페이지 빼고 가린다(hide)
+ 		$(".login-form").hide();
+		$(".login").css("background", "none");
+/*  	$(".signup-form").hide();
+		$(".signup").css("background", "none"); */
+
+		$(".login").click(function() {
+			location.href="signIn.html";
+		});
+
+		$(".signup").click(function() {
+			$(".signup-form").show();
+			$(".login-form").hide();
+			$(".signup").css("background", "#fff");
+			$(".login").css("background", "none");
+		});
+
+		$(".btn").click(function() {
+			$(".input").val("");
+		});
+
+	});
+</script>
+
+<style>
+#view-source {
+	position: fixed;
+	display: block;
+	right: 0;
+	bottom: 0;
+	margin-right: 40px;
+	margin-bottom: 40px;
+	z-index: 900;
 }
-</script> 
-
+</style>
 </head>
 <body>
-<h1>회원가입</h1>
-<form name="join" action="signUp.do" method ="post" onsubmit="return validateEmail();">
-usermail : <input type = "text" name ="userMail" id="userMail"  placeholder="***@****.***"><br>
-userpass : <input type = "password" name ="userPass" id="userPass"><br>
-최소 8문자, 최대 15문자까지 입력이 가능, 특수문자는 !, @, #, .(dot)으로 제한
-<br>
-gender : <input type = "radio" name="gender" value="M">남자 <input type = "radio" name="gender" value="F">여자<br>
-birthday : <input type = "date" name="birthday"><br>
-<input type = "reset" value="취소"><!-- .? : 한자가 있거나 없거나 아무거나   \. : 반드시 점 .:아무문자나  *영개 이상  /i: 대소문자  관계없다 /g: 대소문자 구분 3  @?:올려면 한 개만 없거나    +:한 개 이상 -:범위[]:선택-->
-<input type = "submit" value ="가입">
 
-</form>
+	<div align="center">
+		<h1 class="logo">Lively</h1>
+
+			<!-- index 메뉴 버튼 -->
+			<div class="container">
+				<div class="signup">회원가입</div>
+				<div class="login">로그인</div>
+
+				<!-- 메뉴1. 회원가입 -->
+				<div class="signup-form">
+					<form name="join" action="signUp.do" method="post"
+						onsubmit="return validateEmail();">
+						<input type="text" name="userMail" id="userMail" placeholder="이메일" class="input"><br>
+						<button onclick="validateEmail();" class="btn">중복체크</button><br> 
+						<input type="password" name="userPass" id="userPass" placeholder="비밀번호" class="input"><br> 
+						<input type="radio" name="gender" value="M">남자 
+						<input type="radio" name="gender" value="F">여자<br> 
+						<input type="date" name="birthday" placeholder="생년월일" class="input"><br>
+						<input type="reset" value="취소" class="btn">
+						<input type="submit" value="가입" class="btn">
+						<br>
+					</form>
+				</div>
+				
+			</div><!-- class="container" 끝 -->
+	</div>
+
 </body>
 </html>

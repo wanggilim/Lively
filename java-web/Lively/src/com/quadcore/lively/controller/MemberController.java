@@ -15,7 +15,6 @@ public class MemberController {
 			service = new  MemberService();
 		}
 		// TODO Auto-generated method stub
-		
 		//로그인 승인
 		public int getUserAuth(String userMail, String userPass) {
 			return service.getUserAuth(userMail, userPass);
@@ -25,22 +24,12 @@ public class MemberController {
 			return service.getUserMail(userMail);
 		}
 		
-		/**
-		 * 사용자의 메일주소만을 입력하여 MemberVO 객체를 반환함.
-		 * @author wgl
-		 * @Date 2018.12.14
-		 * @param userMail
-		 * @return MemberVO
-		 */
-		public MemberVO getMember(String userMail) {
-			return service.getMember(userMail);
-		}
-
-		public int getUserLevel(String userMail) {
+		//level만 받는 건 필요 없음-> getUserInfo()로 대체
+/*		public MemberVO getUserLevel(String userMail) {
 			// TODO Auto-generated method stub
 			return service.getUserLevel(userMail);
 		}
-
+*/
 		public Object deleteUserFromUserMail(String userMail) {
 			return service.deleteUserFromUserMail(userMail);
 			
@@ -54,6 +43,25 @@ public class MemberController {
 		public Object searchUserFromUserMail(String userMail) {
 			return service.searchUserFromUserMail(userMail);
 			
+		}
+		public int registerCheck(String userMail) {
+			// TODO Auto-generated method stub
+			return service.registerCheck(userMail);
+		}
+		
+		/**
+		 * 회원 가입
+		 * @Date 2018.12.15
+		 * @author wgl
+		 * @param member::MemberVO 가입한 멤버의 정보
+		 */
+		public void signUp(MemberVO member) {
+			service.signUp(member);
+			
+		}
+		public MemberVO getUserInfo(String userMail) {
+			// TODO Auto-generated method stub
+			return service.getUserInfo(userMail);
 		}
 
 	

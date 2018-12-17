@@ -8,7 +8,7 @@ public class DateUtil {
 
 	
 	public static Date stringToDate(String df) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date d1 = null;
 		Date d2 = null;
 		

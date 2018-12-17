@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index • Lively</title>
+<link rel="stylesheet" href="css/styles.css">
+<script
+	src="js/jquery-3.2.1.min.js"></script>
+
+<script>
+
+/* 	function getAllUrlParams(url) {
+	var queryString = url.su
+	} */
+
+	$(document).ready(function() {
+		//1. 로고 클릭 (index.html로 이동)
+		$(".logo").click(function() {
+			location.href="./";
+		});
+		//2. 로그인 클릭 (signIn.html로 이동)
+		$(".login").click(function() {
+			location.href="member/signIn.html";
+		});
+		//3. 회원가입 클릭 (signUp.html로 이동)
+		$(".signup").click(function() {
+			location.href="member/signUp.html";
+		});
+
+		$(".btn").click(function() {
+			$(".input").val("");
+		});
+
+	});
+</script>
+
+
+<style>
+#view-source {
+	position: fixed;
+	display: block;
+	right: 0;
+	bottom: 0;
+	margin-right: 40px;
+	margin-bottom: 40px;
+	z-index: 900;
+}
+</style>
+</head>
+<body>
+
+	<div align="center">
+		<!-- 로고 -->
+		<h1 class="logo">Lively</h1>
+
+		<!-- index 메뉴 버튼 -->
+		<div class="container">
+			<div class="signup">회원가입</div>
+			<div class="login">로그인</div>
+
+			<!-- 메뉴0. 데모 이미지 -->
+			<div class="demo-form">
+				<!-- 임시 이미지 -->
+				<img alt="demo" src="images/demo.jpg"><br>							
+			</div>						
+		</div><!-- class="container" 끝 -->
+	</div>
+
+
+</body>
+</html>

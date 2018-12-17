@@ -48,9 +48,10 @@ public class MemberService{
 		return dao.getUserMail(userMail);
 	}
 	
-	public int getUserLevel(String userMail) {
+	//level만 받는 건 필요 없음-> getUserInfo()로 대체
+/*	public MemberVO getUserLevel(String userMail) {
 		return dao.getUserLevel(userMail);
-	}
+	}*/
 
 	public Object deleteUserFromUserMail(String userMail) {
 		String sql ="delete from member where usermail="+userMail;
@@ -64,6 +65,15 @@ public class MemberService{
 	public Object searchUserFromUserMail(String userMail) {
 		String sql ="select * from member where usermail="+userMail;
 		return dao.st_execute(sql);
+	}
+	public int registerCheck(String userMail) {
+		// TODO Auto-generated method stub
+		return dao.getUserMail(userMail);
+	}
+
+	public MemberVO getUserInfo(String userMail) {
+		// TODO Auto-generated method stub
+		return dao.getUserLevel(userMail);
 	}
 
 
