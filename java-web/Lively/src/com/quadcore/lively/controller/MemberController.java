@@ -59,17 +59,12 @@ public class MemberController {
 			service.signUp(member);
 			
 		}
-<<<<<<< HEAD
-=======
+		
+		// 세션에 저장할 MemberVO 객체
 		public MemberVO getUserInfo(String userMail) {
 			// TODO Auto-generated method stub
 			return service.getUserInfo(userMail);
 		}
->>>>>>> java-web-login
-
-	
-
-	
 	
 
 }

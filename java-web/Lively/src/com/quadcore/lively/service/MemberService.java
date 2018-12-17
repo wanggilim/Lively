@@ -70,14 +70,11 @@ public class MemberService{
 		// TODO Auto-generated method stub
 		return dao.getUserMail(userMail);
 	}
-<<<<<<< HEAD
-=======
 
 	public MemberVO getUserInfo(String userMail) {
 		// TODO Auto-generated method stub
 		return dao.getUserLevel(userMail);
 	}
->>>>>>> java-web-login
 
 
 
