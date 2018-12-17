@@ -173,6 +173,9 @@ public class MemberDAO{
 		String sql = "SELECT count(*) FROM member"
 				+ " WHERE userMail = '" + userMail + "'" // 18
 				+ " AND userPass = '" + userPass + "'"; // 160
+		
+		System.out.println("sql: "+ sql);
+		
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -184,6 +187,8 @@ public class MemberDAO{
 			while (rs.next()) {
 		
 				count = rs.getInt(1); // 0번은 count(*)
+				
+				System.out.println("count: " + count);
 			}
 			conn.commit();
 			
@@ -224,7 +229,7 @@ public class MemberDAO{
 		return result;
 	}
 	
-	//userLevel 조회
+	//userMail로 (MemberVO)member 조회
 	public MemberVO getUserLevel(String userMail) {
 		MemberVO member = null;
 		

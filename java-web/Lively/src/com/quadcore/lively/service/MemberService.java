@@ -48,9 +48,10 @@ public class MemberService{
 		return dao.getUserMail(userMail);
 	}
 	
-	public MemberVO getUserLevel(String userMail) {
+	//level만 받는 건 필요 없음-> getUserInfo()로 대체
+/*	public MemberVO getUserLevel(String userMail) {
 		return dao.getUserLevel(userMail);
-	}
+	}*/
 
 	public Object deleteUserFromUserMail(String userMail) {
 		String sql ="delete from member where usermail="+userMail;
@@ -69,6 +70,14 @@ public class MemberService{
 		// TODO Auto-generated method stub
 		return dao.getUserMail(userMail);
 	}
+<<<<<<< HEAD
+=======
+
+	public MemberVO getUserInfo(String userMail) {
+		// TODO Auto-generated method stub
+		return dao.getUserLevel(userMail);
+	}
+>>>>>>> java-web-login
 
 
 

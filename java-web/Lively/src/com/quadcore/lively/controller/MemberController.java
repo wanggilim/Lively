@@ -24,12 +24,12 @@ public class MemberController {
 			return service.getUserMail(userMail);
 		}
 		
-
-		public MemberVO getUserLevel(String userMail) {
+		//level만 받는 건 필요 없음-> getUserInfo()로 대체
+/*		public MemberVO getUserLevel(String userMail) {
 			// TODO Auto-generated method stub
 			return service.getUserLevel(userMail);
 		}
-
+*/
 		public Object deleteUserFromUserMail(String userMail) {
 			return service.deleteUserFromUserMail(userMail);
 			
@@ -59,6 +59,13 @@ public class MemberController {
 			service.signUp(member);
 			
 		}
+<<<<<<< HEAD
+=======
+		public MemberVO getUserInfo(String userMail) {
+			// TODO Auto-generated method stub
+			return service.getUserInfo(userMail);
+		}
+>>>>>>> java-web-login
 
 	
 

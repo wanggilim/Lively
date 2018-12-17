@@ -2,20 +2,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Lively</title>
+<title>로그인•Lively</title>
+<link rel="stylesheet" href="../css/styles.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		$(".logo").click(function() {
+			location.href = "../";
+		});
+
+		$(".signup").click(function() {
+			location.href = "signUp.html";
+		});
+
+		$("form").click(function() {
+			$(".input").val("");
+		});
+
+	});
+</script>
+
+<style>
+#view-source {
+	position: fixed;
+	display: block;
+	right: 0;
+	bottom: 0;
+	margin-right: 40px;
+	margin-bottom: 40px;
+	z-index: 900;
+}
+</style>
 </head>
 <body>
 
-	<form action="signIn.do" method="post">
-		<h1>로그인</h1>
-		아이디 <input type="email" id="userMail" name="userMail" maxlength="40" required><br>
-		비밀번호 <input type="password" id="userPass" name="userPass" maxlength="15" required><br>		
-		<input type="submit" value="로그인">
-	</form>
+	<div align="center">
+		<h1 class="logo">Lively</h1>
 
-	<h4><span style="color:red">아이디 또는 비밀번호가 틀립니다.</span></h4>
+			<!-- index 메뉴 버튼 -->
+			<div class="container">
+				<div class="signup">회원가입</div>
+				<div class="login">로그인</div>
 
+				<!-- 메뉴2. 로그인 -->
+				<div class="login-form">
+					<form action="signIn.do" method="post">
+					<p class="error">이메일 또는 비밀번호가 틀립니다.</p>
+						<input type="email" id="userMail" name="userMail" placeholder="이메일" maxlength="40" required><br>
+						<input type="password" id="userPass" name="userPass" placeholder="비밀번호" maxlength="15" required><br>
+						<input type="submit" value="로그인" class="btn">
+						<br> <span><a href="">이메일/비밀번호 찾기</a></span>
+					</form>
+				</div>
 
+			</div><!-- class="container" 끝 -->
+	</div>
 
 </body>
 </html>
