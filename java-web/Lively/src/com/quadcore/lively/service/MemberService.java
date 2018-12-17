@@ -69,6 +69,13 @@ public class MemberService{
 		// TODO Auto-generated method stub
 		return dao.getUserMail(userMail);
 	}
+	//멤버레벌 얻기
+
+	public MemberVO selectByUserLevel(int userNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

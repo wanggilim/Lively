@@ -24,22 +24,22 @@ public class MemberController {
 			return service.getUserMail(userMail);
 		}
 		
-
-		public MemberVO getUserLevel(String userMail) {
+		//멤버 레벨 얻기
+		public MemberVO selectByUserLevel(int userNo) {
 			// TODO Auto-generated method stub
-			return service.getUserLevel(userMail);
+			return service.selectByUserLevel(userNo);
 		}
-
+		//멤버 삭제
 		public Object deleteUserFromUserMail(String userMail) {
 			return service.deleteUserFromUserMail(userMail);
 			
 		}
-
+		//멤버 수정
 		public Object updateUserFromUserMail(String userMail) {
 			return service.updateUserFromUserMail(userMail);
 			
 		}
-
+		//멤버 조회
 		public Object searchUserFromUserMail(String userMail) {
 			return service.searchUserFromUserMail(userMail);
 			

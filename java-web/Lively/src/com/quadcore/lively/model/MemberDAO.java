@@ -251,6 +251,9 @@ public class MemberDAO{
 			
 		return member;
 	}
+	//멤버레벨얻기
+	
+	
 	
 }
 

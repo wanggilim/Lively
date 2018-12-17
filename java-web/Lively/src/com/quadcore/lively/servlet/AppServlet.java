@@ -62,7 +62,7 @@ public class AppServlet extends HttpServlet {
 			response.sendRedirect(path + "/member/signIn.html");
 		}
     	// 1. 회원 삭제
-    	if (action.equals("/member/userDelete")) {
+    	if (action.equals("/admin/userDelete")) {
     		MemberController control = new MemberController();
     		String userMail = request.getParameter("userMail");
     		String userPass = request.getParameter("userPass");
@@ -72,14 +72,14 @@ public class AppServlet extends HttpServlet {
     	
     
     	// 2. 회원 수정
-    	if (action.equals("/member/userUpdate")) {
+    	if (action.equals("/admin/userUpdate")) {
 			MemberController control = new MemberController();
 			String userMail = request.getParameter("userMail");
     		control.updateUserFromUserMail(userMail);
 		}
     	
     	// 3. 회원 검색
-    	if (action.equals("/signIn/userInfo")) {
+    	if (action.equals("/admin/userInfo")) {
     		MemberController control = new MemberController();
     		
     		String userMail = request.getParameter("userMail");
