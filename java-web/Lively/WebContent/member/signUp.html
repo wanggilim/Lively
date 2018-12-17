@@ -6,13 +6,13 @@
 <!-- //jquery library -->
 <script src="../js/jquery-3.3.1.min.js"></script>
 <script src="js/signUp.js"></script> 
-
 </head>
 <body>
 <h1>회원가입</h1>
 <form name="join" action="signUp.do" method ="post" onsubmit="return registerCheckFunction();">
 usermail : <input type = "text" name ="userMail" id="userMail"  placeholder="***@****.***">
-<button onclick="validateEmail();">중복체크</button><br>
+<!-- 간단 button 태트-> 일반 input type="button"으로 변경 후 정상 작동 확인 -->
+<input type="button" onclick="validateEmail();" value="중복체크"/><br>
 userpass : <input type = "password" name ="userPass" id="userPass"><br>
 최소 8문자, 최대 15문자까지 입력이 가능, 특수문자는 !, @, #, .(dot)으로 제한
 <br>
