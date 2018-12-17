@@ -23,6 +23,7 @@ function validateEmail(){
 			type:'POST',
 			url:'./userMailDuplication.do',	
 			data: {"userMail":userMail},
+			async: false,
 			success: function(data){
 				// jquery ajax 처리(중복 체크) 에 대한 결과
 				if (data >= 1) {
@@ -38,6 +39,7 @@ function validateEmail(){
 				return false;
 			}
 		});
+
 		
 	} else {
 		alert("메일 주소가 유효하지 않습니다.");
@@ -65,7 +67,6 @@ function registerCheckFunction() {
 		document.getElementById("userPass").focus();
 		return false;
 	}
-	
-	return true;
+
 	
 }

@@ -36,7 +36,6 @@ public class MemberDAO{
 			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
 		
-			System.out.println(member);
 			st.setString(1, member.getUserMail());
 			st.setString(2, member.getUserPass());
 			st.setString(3, member.getGender());
