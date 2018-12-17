@@ -39,9 +39,9 @@ public class SessionCheckFilter implements Filter {
 		whiteList.add("/Lively/member/signIn2.do");
 		whiteList.add("/Lively/member/signUp.do");
 
-		// 다른 폴더("/resource/")(경로)에 있는 파일을 갖다쓸 경우 ex.이미지 파일 (현재 : 미사용)
+		// 다른 폴더("/resource/")(경로)에 있는 파일을 갖다쓸 경우 ex.이미지 파일
 		staticResourceList = new ArrayList<String>();
-		staticResourceList.add("/resource/");
+		staticResourceList.add("/resources/");
 	}
 
 	public void destroy() {
@@ -56,18 +56,36 @@ public class SessionCheckFilter implements Filter {
 		HttpSession session = req.getSession();
 
 		String uri = req.getRequestURI();
+		System.out.println(uri);
 		//whiteList(session 미연결 페이지) 리스트가 아니라면  ex) dashboard.html
 		if (!whiteList.contains(uri)) {
-			//세션 갖고 오기
-			session = req.getSession();
+			System.out.println("-> " + uri);
+			
+			// 리소스 파일 접근
+			boolean isURIResourceFile = false;
+			
+			for (String staticResource : staticResourceList) {
+				if (uri.startsWith(staticResource)) {
+					isURIResourceFile = true;
+					break;
+				}
+				
+			}
 
-			MemberVO member = (MemberVO) session.getAttribute("member");
-			//session에 (MemberVO)member가 없다면 - index.html로 보내기
-			if (member == null) {
-				HttpServletResponse res = (HttpServletResponse) response;
-				res.sendRedirect("/Lively/index.html");
-				return;
-			}//session에 (MemberVO)member가 있다면 - 기존 페이지 유지
+			
+			if (isURIResourceFile == true) {
+				//세션 갖고 오기
+				session = req.getSession();
+				
+				MemberVO member = (MemberVO) session.getAttribute("member");
+				//session에 (MemberVO)member가 없다면 - index.html로 보내기
+				if (member == null) {
+					HttpServletResponse res = (HttpServletResponse) response;
+					res.sendRedirect("/");
+					return;
+				}//session에 (MemberVO)member가 있다면 - 기존 페이지 유지
+			}
+			
 		}
 
 		else {//whiteList(session 미연결 페이지) 리스트라면
@@ -80,6 +98,7 @@ public class SessionCheckFilter implements Filter {
 				return;
 			}//session에 (MemberVO) 없다면 - 기존 페이지 유지
 		}
+		
 
 		chain.doFilter(request, response);
 	}
