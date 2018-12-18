@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.quadcore.lively.controller.DashboardController;
 import com.quadcore.lively.controller.MemberController;
 import com.quadcore.lively.model.MemberVO;
 import com.quadcore.lively.service.MemberService;
@@ -82,6 +83,31 @@ public class AppServlet extends HttpServlet {
 			String userMail = request.getParameter("userMail");
 
 			control.searchUserFromUserMail(userMail);
+		}
+		
+		
+		/**
+		 * 대쉬보드
+		 * 
+		 * @author wgl
+		 * @Date 2018.12.18
+		 */
+		if (action.equals("/dashboard")) {
+			DashboardController controller = new DashboardController();
+			String word = request.getParameter("word");
+			
+			// 대쉬보드 접속
+			if (word == null) {
+				System.out.println("word 가 null 입니다.");
+			}
+			
+			// 대쉬보드 내에서 검색
+			else {
+				System.out.println(word);
+				RequestDispatcher rd = request.getRequestDispatcher("dashboard_result.jsp");
+				request.setAttribute("word", word); // dashboard.js 에서 넘어옴.
+				rd.forward(request, response);
+			}
 		}
 
 	}
@@ -184,7 +210,7 @@ public class AppServlet extends HttpServlet {
 				session.setAttribute("member", member);
 
 				// welcome page 전송
-				response.sendRedirect(path + "/dashboard.html");
+				response.sendRedirect(path + "/dashboard.do");
 			} else {
 				// 일치하지 않을 경우 경고창을 띄우고 로그인2화면(error message포함)으로 보냄
 				// 크롬에서 지원하지 않음.

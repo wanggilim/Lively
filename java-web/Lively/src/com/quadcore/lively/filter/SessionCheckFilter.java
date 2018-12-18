@@ -38,6 +38,9 @@ public class SessionCheckFilter implements Filter {
 		whiteList.add("/Lively/member/signIn.do");
 		whiteList.add("/Lively/member/signIn2.do");
 		whiteList.add("/Lively/member/signUp.do");
+		whiteList.add("/Lively/dashboard.jsp");
+		whiteList.add("/Lively/dashboard_result.jsp");
+		whiteList.add("/Lively/dashboard.do");
 
 		// 다른 폴더("/resource/")(경로)에 있는 파일을 갖다쓸 경우 ex.이미지 파일
 		staticResourceList = new ArrayList<String>();
