@@ -61,7 +61,7 @@ public class SessionCheckFilter implements Filter {
 		HttpSession session = req.getSession();
 
 		String uri = req.getRequestURI();
-		System.out.println(uri);
+		// System.out.println(uri);
 		// !whiteList (session O 페이지 라면) ex) dashboard.html, 단어장, detail.html
 		if (!whiteList.contains(uri)) {
 			System.out.println("!whiteList-> " + uri);
@@ -82,58 +82,38 @@ public class SessionCheckFilter implements Filter {
 				session = req.getSession();
 
 				MemberVO member = (MemberVO) session.getAttribute("member");
-				// session에 (MemberVO)member가 없다면 - index.html로 보내기
+				// !whiteList && member X - index.html로 보내기
 				if (member == null) {
-					System.out.println("!whiteList&& member=null");
-
-//					if (uri.startsWith("/Lively/index")) {
-//						System.out.println("index 들어 왔어");
-//						return;
-//					} else {
-//						HttpServletResponse res = (HttpServletResponse) response;
-//						res.sendRedirect("/Lively/index.html");
-//						System.out.println("세션에 member 정보가 없어, 강제로 index.html 이동");
-//						return;
-//					}
-				}
-				// session에 (MemberVO)member가 있고 && dashboard라면
-				else  {
-					System.out.println("!whiteList&& member!=null");
-					if (uri.startsWith("/Lively/")) {
-						System.out.println("dashboard 들어 왔어");
-						res.sendRedirect("/Lively/dashboard.html");
+//					if (!uri.startsWith("/Lively/index")) {
+						res = (HttpServletResponse) response;
+						res.sendRedirect("/Lively/index.html");
+						System.out.println("세션에 member 정보가 없어, 강제로 index.html 이동");
 						return;
-					}
+//					}
 				}
 
 				// session에 (MemberVO)member가 있고 && dashboard가 아니면 - 기존 페이지 유지
 			}
 
 		}
-		
+
 		else {// whiteList(session X 페이지) 리스트라면
-			System.out.println("whiteList->"+uri);
+			System.out.println("whiteList->" + uri);
 			MemberVO member = (MemberVO) session.getAttribute("member");
-			// session에 (MemberVO)member 있다면 - dashboard.html로 보내기
 
-			if (uri.startsWith("/Lively/index")) {
-				return;
-			} else if (member != null) {
-
-				if (uri.startsWith("/Lively/dashboard")) {
-					return;
-				} else {
+			// whiteList O && member X - dashboard.html로 보내기
+			if (member != null) {
+//				if (!uri.startsWith("/Lively/dashboard")) {
 					res.sendRedirect("/Lively/dashboard.html");
 					System.out.println("세션에 member 정보가 있어, 강제로 dashboard.html 이동");
-				}
-				return;
-			}
-			// session에 (MemberVO) 있고 + index.html이라면, dashboard.html로 보내기
+//				}
 
-			// session에 (MemberVO) 없다면 - 기존 페이지 유지
-		} // whiteList리스트가 아니라면(session 0 member 0면) ex) dashboard.html 끝
-		
+			}
+
+		} // !whiteList (session 0 member 0면) ex) dashboard.html 끝
+
 		chain.doFilter(request, response);
+
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

@@ -57,7 +57,7 @@ public class AppServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.invalidate();
 			System.out.println("session이 끊겼습니다.");
-			response.sendRedirect(path + "/member/signIn.html");
+			response.sendRedirect(path + "/");
 		}
 		// 1. 회원 삭제
 		if (action.equals("/member/userDelete")) {

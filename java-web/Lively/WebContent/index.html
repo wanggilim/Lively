@@ -13,7 +13,12 @@
 	$(document).ready(function() {
 		//1. 로고 클릭 (index.html로 이동)
 		$(".logo").click(function() {
-			location.href="dashboard.html";
+/* 			var member = "<%= Session["member"]%>";
+			if (member==null){
+				location.href="index.html";
+			}else { */
+				location.href="dashboard.html";
+			/* } */
 		});
 		//2. 로그인 클릭 (signIn.html로 이동)
 		$(".login").click(function() {
@@ -22,10 +27,6 @@
 		//3. 회원가입 클릭 (signUp.html로 이동)
 		$(".signup").click(function() {
 			location.href="member/signUp.html";
-		});
-
-		$(".btn").click(function() {
-			$(".input").val("");
 		});
 
 	});
@@ -81,7 +82,7 @@
 					<!-- index 메뉴 버튼 -->
 					<div class="container">
 			<!--안정화 임시 로직 // 시작 //로그아웃	-->
-			<a href="member/signOut.do"> 로그아웃</a>
+			<a href="member/signOut.do"> 로그아웃</a><br>
 			<!--안정화 임시 로직 // 끝-->
 						<div class="signup">회원가입</div>
 						<div class="login">로그인</div>
