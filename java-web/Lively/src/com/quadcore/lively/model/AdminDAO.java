@@ -13,14 +13,14 @@ import com.quadcore.lively.util.OracleDBUtil;
 
 public class AdminDAO {
 	
-	//테이블조회
-	public Object selectAll(String tableName) {
+	//�뀒�씠釉붿“�쉶
+	public Object selectAll(String tableName, String sql) {
 		// TODO Auto-generated method stub
 		
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
-		String sql = "select * from user_tables where Table_name = '"+ tableName +"'";
+	 
 		MemberVO member = null;
 		AdminVO admin = null;
 		List<MemberVO> memberList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class AdminDAO {
 			
 	}
 	
-	//admin조회
+	//admin議고쉶
 		public AdminVO select(String adminMail) {
 			// TODO Auto-generated method stub
 		
@@ -86,11 +86,10 @@ public class AdminDAO {
 			return admin;
 		}
 		
-		//admin 수정
-		public void update(AdminVO admin) {
+		//admin �닔�젙
+		public Object updateAdmin(String sql) {
 			// TODO Auto-generated method stub
-			
-			String sql = "update admin set adminNo=?, adminEmail=?, adminPass=?, adminLevel=?";
+		
 			PreparedStatement st = null;
 			Connection conn = null;
 			ResultSet rs = null;
@@ -98,12 +97,7 @@ public class AdminDAO {
 			try {
 				conn = OracleDBUtil.dbConnect();
 				conn.setAutoCommit(false);
-				st=conn.prepareStatement(sql);
-				st.setInt(1, admin.getAdminNo() );
-				st.setString(2, admin.getAdminMail());
-				st.setString(3, admin.getAdminPass());
-				st.setInt(4, admin.getAdminLevel());
-				
+				st=conn.prepareStatement(sql);				
 				st.executeUpdate();
 				conn.commit();
 						
@@ -112,13 +106,14 @@ public class AdminDAO {
 			}finally {
 				OracleDBUtil.dbDisconnect(rs, st, conn);
 			}
+			return null;
 		}
 
-		//admin삭제
+		//admin�궘�젣
 		public void delete(String adminMail) {
 			// TODO Auto-generated method stub
 			
-			String sql = "delete member where adminMail=?";
+			String sql = "delete from member where adminNo=?";
 			PreparedStatement st = null;
 			Connection conn = null;
 			ResultSet rs = null;
@@ -138,10 +133,10 @@ public class AdminDAO {
 			
 		}
 		
-		//admin생성
+		//admin�깮�꽦
 		private AdminVO makeAdmin(ResultSet rs) throws SQLException {
 			int adminNo = rs.getInt("adminNO");
-			String adminMail = rs.getString("adminMail");
+			String adminMail = rs.getString("adminEMail");
 			String adminPass = rs.getString("adminPass");
 			int adminLevel = rs.getInt("adminLevel");
 			AdminVO admin = new AdminVO(adminNo, adminMail, adminPass, adminLevel);
@@ -149,7 +144,7 @@ public class AdminDAO {
 		}
 		
 		
-		//member생성
+		//member�깮�꽦
 		private MemberVO makeMember(ResultSet rs) throws SQLException {
 			int userNo = rs.getInt("userNo");
 			String userMail = rs.getString("userMail");
@@ -161,7 +156,7 @@ public class AdminDAO {
 			MemberVO member = new MemberVO(userNo, userMail, userPass, userLevel, gender, birthday);
 			return member;
 		}
-		//sql실행
+		//sql�떎�뻾
 		public Object st_execute(String sql) {
 
 			Connection conn = null;
@@ -169,7 +164,6 @@ public class AdminDAO {
 			ResultSet rs =null;
 			int result =0;	
 			
-			System.out.println("오라클 접속");
 			System.out.println(sql);
 			try {
 				conn = OracleDBUtil.dbConnect();
@@ -186,5 +180,7 @@ public class AdminDAO {
 			return result;
 		}
 
+	
+		
 
 }

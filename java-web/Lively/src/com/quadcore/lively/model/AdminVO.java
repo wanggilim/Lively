@@ -3,7 +3,7 @@ package com.quadcore.lively.model;
 public class AdminVO {
 	
 	private int adminNo;
-	private String adminMail;
+	private String adminEmail;
 	private String adminPass;
 	private int adminLevel;
 	
@@ -12,10 +12,10 @@ public class AdminVO {
 		super();
 	}
 	
-	public AdminVO(int adminNo, String adminMail, String adminPass, int adminLevel) {
+	public AdminVO(int adminNo, String adminEmail, String adminPass, int adminLevel) {
 		super();
 		this.adminNo = adminNo;
-		this.adminMail = adminMail;
+		this.adminEmail = adminEmail;
 		this.adminPass = adminPass;
 		this.adminLevel = adminLevel;
 	}
@@ -28,12 +28,12 @@ public class AdminVO {
 		this.adminNo = adminNo;
 	}
 
-	public String getAdminMail() {
-		return adminMail;
+	public String getAdminEmail() {
+		return adminEmail;
 	}
 
-	public void setAdminEmail(String adminMail) {
-		this.adminMail = adminMail;
+	public void setAdminEmail(String adminEmail) {
+		this.adminEmail = adminEmail;
 	}
 
 	public String getAdminPass() {
@@ -55,7 +55,7 @@ public class AdminVO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("AdminVO [adminNo=").append(adminNo).append(", adminMail=").append(adminMail)
+		builder.append("AdminVO [adminNo=").append(adminNo).append(", adminEmail=").append(adminEmail)
 				.append(", adminPass=").append(adminPass).append(", adminLevel=").append(adminLevel).append("]");
 		return builder.toString();
 	}

@@ -33,9 +33,9 @@ public class MemberService{
 	}
 
 	//멤버삭제
-	public void deleteMember(String userMail) {
+	public void deleteMember(int userNo) {
 		// TODO Auto-generated method stub
-		dao.delete(userMail);
+		dao.delete(userNo);
 	}
 
 	public int getUserAuth(String userMail, String userPass) {
@@ -52,8 +52,8 @@ public class MemberService{
 		return dao.getUserLevel(userMail);
 	}
 
-	public Object deleteUserFromUserMail(String userMail) {
-		String sql ="delete from member where usermail="+userMail;
+	public Object deleteUserFromUserMail(int userNo) {
+		String sql ="delete from member where userNo="+userNo;
 		return dao.st_execute(sql);
 	}
 

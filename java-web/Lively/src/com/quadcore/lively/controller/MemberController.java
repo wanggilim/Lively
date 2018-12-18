@@ -1,5 +1,7 @@
 package com.quadcore.lively.controller;
 
+import java.util.List;
+
 import com.quadcore.lively.model.MemberVO;
 import com.quadcore.lively.service.MemberService;
 
@@ -15,31 +17,31 @@ public class MemberController {
 			service = new  MemberService();
 		}
 		// TODO Auto-generated method stub
-		//로그인 승인
+		//濡쒓렇�씤 �듅�씤
 		public int getUserAuth(String userMail, String userPass) {
 			return service.getUserAuth(userMail, userPass);
 }
-		//가입시 기존 유뮤 확인
+		//媛��엯�떆 湲곗〈 �쑀裕� �솗�씤
 		public int getUserMail(String userMail) {
 			return service.getUserMail(userMail);
 		}
 		
-		//멤버 레벨 얻기
-		public MemberVO selectByUserLevel(int userNo) {
+		//硫ㅻ쾭 �젅踰� �뼸湲�
+		public MemberVO getUserLevel(String userMail) {
 			// TODO Auto-generated method stub
-			return service.selectByUserLevel(userNo);
+			return service.getUserLevel(userMail);
 		}
-		//멤버 삭제
-		public Object deleteUserFromUserMail(String userMail) {
-			return service.deleteUserFromUserMail(userMail);
+		//硫ㅻ쾭 �궘�젣
+		public Object deleteUserFromUserMail(int userNo) {
+			return service.deleteUserFromUserMail(userNo);
 			
 		}
-		//멤버 수정
+		//硫ㅻ쾭 �닔�젙
 		public Object updateUserFromUserMail(String userMail) {
 			return service.updateUserFromUserMail(userMail);
 			
 		}
-		//멤버 조회
+		//硫ㅻ쾭 議고쉶
 		public Object searchUserFromUserMail(String userMail) {
 			return service.searchUserFromUserMail(userMail);
 			
@@ -50,16 +52,15 @@ public class MemberController {
 		}
 		
 		/**
-		 * 회원 가입
+		 * �쉶�썝 媛��엯
 		 * @Date 2018.12.15
 		 * @author wgl
-		 * @param member::MemberVO 가입한 멤버의 정보
+		 * @param member::MemberVO 媛��엯�븳 硫ㅻ쾭�쓽 �젙蹂�
 		 */
 		public void signUp(MemberVO member) {
 			service.signUp(member);
 			
 		}
-
 	
 
 	

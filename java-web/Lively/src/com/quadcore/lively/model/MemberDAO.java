@@ -113,10 +113,10 @@ public class MemberDAO{
 	}
 
 	//멤버삭제
-	public void delete(String userMail) {
+	public void delete(int userNo) {
 		// TODO Auto-generated method stub
 		
-		String sql = "delete member where userMail=?";
+		String sql = "delete from member where userNo=?";
 		PreparedStatement st = null;
 		Connection conn = null;
 		ResultSet rs = null;
@@ -125,7 +125,7 @@ public class MemberDAO{
 			conn = OracleDBUtil.dbConnect();
 			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
-			st.setString(1, userMail);
+			st.setInt(1, userNo);
 			st.executeUpdate();
 			conn.commit();
 		}catch(SQLException e) {
