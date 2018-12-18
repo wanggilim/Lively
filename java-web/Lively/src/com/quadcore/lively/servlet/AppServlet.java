@@ -101,6 +101,7 @@ public class AppServlet extends HttpServlet {
 			// 대쉬보드 접속
 			if (word == null) {
 				System.out.println("word 가 null 입니다.");
+				response.sendRedirect(path + "/dashboard.jsp");
 			}
 			
 			// 대쉬보드 내에서 검색
