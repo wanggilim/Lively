@@ -181,7 +181,6 @@ public class MemberDAO{
 		ResultSet rs = null;
 		try {			
 			conn = OracleDBUtil.dbConnect();
-			conn.setAutoCommit(false);
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {

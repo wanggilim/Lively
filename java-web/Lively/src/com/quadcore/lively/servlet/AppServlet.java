@@ -182,7 +182,7 @@ public class AppServlet extends HttpServlet {
 				MemberVO member = uControl.getUserInfo(userMail);
 				// userLevel 세션에 저장
 				session.setAttribute("member", member);
-
+				System.out.println("로그인 완료");
 				// welcome page 전송
 				response.sendRedirect(path + "/dashboard.html");
 			} else {
@@ -196,6 +196,7 @@ public class AppServlet extends HttpServlet {
 				 * 
 				 * out.flush();
 				 */
+				System.out.println("로그인 실패");
 				response.sendRedirect(path + "/member/signIn2.html");
 			}
 
