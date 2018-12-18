@@ -39,21 +39,20 @@ public class DashboardDAO {
 			// DB 연결
 			conn = OracleDBUtil.dbConnect();
 			
-			// SQL + PreparedStatement
-			String sql = "SELECT * FROM tokentest WHERE token LIKES '%?%'";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, word);
-			rs = ps.executeQuery();
+			// SQL + Statement
+			String sql = "SELECT * FROM tokentest WHERE token LIKE '%" + word + "%'";
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
 			
 			
 			// WordVO 로 변환 후 List에 넣기
 			while (rs.next()) {
-				list.add(new WordVO (rs.getInt(0),	// stmtNo
-								rs.getInt(1), 		// tokenNo
-								rs.getString(2), 	// token
-								rs.getString(3), 	// mean
-								rs.getString(4), 	// tag
-								rs.getString(5)) 	// tokentype
+				list.add(new WordVO (rs.getInt(1),	// stmtNo
+								rs.getInt(2), 		// tokenNo
+								rs.getString(3), 	// token
+								rs.getString(4), 	// mean
+								rs.getString(5), 	// tag
+								rs.getString(6)) 	// tokentype
 						);
 			}
 			
@@ -75,31 +74,30 @@ public class DashboardDAO {
 	 * 입력 단어와 유사한 단어를 보여줄 것인가
 	 * (*만약에 정확히 입력한 단어만 나와야한다면 메서드 이름도 ..words 가 아니고 word)
 	 */
-	public List<StatementVO> searchStatements(String word) {
+	public List<StmtVO> searchStatements(String word) {
 		
-		List<StatementVO> list = new ArrayList<>(1);
+		List<StmtVO> list = new ArrayList<>(1);
 		
 		try {
 			// DB 연결
 			conn = OracleDBUtil.dbConnect();
 			
-			// SQL + PreparedStatement
-			String sql = "SELECT * FROM stmt WHERE stmt LIKES '%?%'";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, word);
-			rs = ps.executeQuery();
+			// SQL + Statement
+			String sql = "SELECT * FROM stmt WHERE token LIKE '%" + word + "%'";
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
 			
 			
 			// WordVO 로 변환 후 List에 넣기
 			while (rs.next()) {
-				list.add(new StatementVO(
-						rs.getInt(0), 		// stmtNo
-						rs.getString(1),	// stmt
-						rs.getString(2),	// stmtType
-						rs.getString(3),	// location
-						rs.getInt(4), 		// likes
-						rs.getInt(5), 		// sharing
-						rs.getInt(6)) 		// cellbNo
+				list.add(new StmtVO(
+						rs.getInt(1), 		// stmtNo
+						rs.getString(2),	// stmt
+						rs.getString(3),	// stmtType
+						rs.getString(4),	// location
+						rs.getInt(5), 		// likes
+						rs.getInt(6), 		// sharing
+						rs.getInt(7)) 		// cellbNo
 				);
 				
 			}

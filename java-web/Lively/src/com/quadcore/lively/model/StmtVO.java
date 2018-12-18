@@ -1,6 +1,6 @@
 package com.quadcore.lively.model;
 
-public class StatementVO {
+public class StmtVO {
 	private int stmtNo;			// 예문 번호
 	private String stmt;		// 예문
 	private String stmtType;	// SNS 구분자
@@ -9,11 +9,11 @@ public class StatementVO {
 	private int sharing;		// 공유 수 (Lively 서비스로부터 공유되어진 카운트)
 	private int cellbNo;		// SNS 셀럽 번호
 	
-	public StatementVO() {
+	public StmtVO() {
 		
 	}
 
-	public StatementVO(int stmtNo, String stmt, String stmtType, String location, int likes, int sharing, int cellbNo) {
+	public StmtVO(int stmtNo, String stmt, String stmtType, String location, int likes, int sharing, int cellbNo) {
 		super();
 		this.stmtNo = stmtNo;
 		this.stmt = stmt;

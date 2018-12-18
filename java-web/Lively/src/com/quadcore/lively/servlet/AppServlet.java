@@ -1,8 +1,9 @@
 package com.quadcore.lively.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +17,8 @@ import javax.servlet.http.HttpSession;
 import com.quadcore.lively.controller.DashboardController;
 import com.quadcore.lively.controller.MemberController;
 import com.quadcore.lively.model.MemberVO;
-import com.quadcore.lively.service.MemberService;
+import com.quadcore.lively.model.StmtVO;
+import com.quadcore.lively.model.WordVO;
 import com.quadcore.lively.util.DateUtil;
 
 /**
@@ -94,7 +96,7 @@ public class AppServlet extends HttpServlet {
 		 */
 		if (action.equals("/dashboard")) {
 			DashboardController controller = new DashboardController();
-			String word = request.getParameter("word");
+			String word = request.getParameter("word"); // dashboard.js 에서 넘어옴.
 			
 			// 대쉬보드 접속
 			if (word == null) {
@@ -103,9 +105,42 @@ public class AppServlet extends HttpServlet {
 			
 			// 대쉬보드 내에서 검색
 			else {
-				System.out.println(word);
+				List<WordVO> wordVOList = controller.searchWords(word);
+				List<StmtVO> stmtVOList = controller.searchStatements(word); 
+				List<String> perhapsKeywords = new ArrayList<>(1);
+				String means = ""; // 입력한 단어에 대한 의미(뜻)들
+				
+				for (WordVO wordVO : wordVOList) {
+					
+					// 사용자의 입력 오타인지 확인해주기 위한 단어 리스트 (= '이거 찾고 있나요?')
+					if (! wordVO.equals(word)) {
+						String keyword = wordVO.getToken();
+						
+						// 그 중에서 키워드가 중복되지 않는다면
+						if (! perhapsKeywords.contains(keyword)) {
+							perhapsKeywords.add(keyword);
+						}
+					}
+					
+					
+					// 오타가 아니라면
+					else {
+						String mean = wordVO.getMean();
+						
+						// 뜻이 중복되지 않는다면
+						if (!means.startsWith(mean) && !means.endsWith(mean)) {
+							means += (mean + " "); // 뜻 추가
+						}
+					
+					}
+					
+				}
+				
 				RequestDispatcher rd = request.getRequestDispatcher("dashboard_result.jsp");
-				request.setAttribute("word", word); // dashboard.js 에서 넘어옴.
+				request.setAttribute("word", word); // 검색 키워드 (dashboard.js 파라미터)
+				request.setAttribute("means", means); // 검색 키워드에 대한 단어 뜻
+				request.setAttribute("wordVOList", wordVOList); // 검색 키워드에 대한 결과 :: List<WordVO>
+				request.setAttribute("stmtVOList", stmtVOList); // 검색 키워드에 대한 결과 :: List<StmtVO>
 				rd.forward(request, response);
 			}
 		}

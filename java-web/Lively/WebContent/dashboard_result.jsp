@@ -74,11 +74,31 @@
     </nav>
   </div>
   <main class="mdl-layout__content">
+	<!-- 콘텐츠 -->
     <div class="page-content">
-    	<!-- 콘텐츠 -->
-      <div class="page-content-word">
-       <h2 id="word">airplane</h2>
-		  </div>
+    	
+    	<!-- 검색 단어 -->
+		<div class="page-content-word">
+			<div class="page-content-word-name">
+				<h2 id="word">${word }</h2>
+				<h3 id="mean">${means }</h3>
+			</div>
+			
+			<%-- <div class="page-content-word-mean">
+				<h3 id="mean">${means }</h3>
+			</div> --%>
+			
+			<div class="page-content-word-perhaps">
+			</div>
+		</div>
+		
+		<!-- SNS 표출 -->
+		<div class="page-content-word-examples">
+		</div>
+		
+		
+		
+		
     </div>
   </main>
 </div>
