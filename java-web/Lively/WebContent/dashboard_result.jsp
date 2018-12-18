@@ -82,13 +82,17 @@
 			<div class="page-content-word-name">
 				<h2 id="word">${word }</h2>
 				<h3 id="mean">${means }</h3>
+				<c:forEach var="i" items="${stmtVOList }" begin="0" end="${stmtVOList.size() }">
+					${i.getStmt() }<br>
+				</c:forEach>
 			</div>
 			
-			<%-- <div class="page-content-word-mean">
-				<h3 id="mean">${means }</h3>
-			</div> --%>
+			<br>
 			
 			<div class="page-content-word-perhaps">
+				<c:forEach var="i" items="${perhapsKeywords }" begin="0" end="${perhapsKeywords.size() }">
+					${i }<br>
+				</c:forEach>
 			</div>
 		</div>
 		

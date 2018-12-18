@@ -20,6 +20,14 @@ public class DashboardController {
 	public List<StmtVO> searchStatements(String word) {
 		return service.searchStatements(word);
 	}
+
+	public List<String> searchPerhapsWords(String word, List<WordVO> wordVOList) {
+		return service.searchPerhapsWords(word, wordVOList);
+	}
+	
+//	public String getWordMeans(String word) {
+//		return service.getWordMeans(word);
+//	}
 	
 
 }

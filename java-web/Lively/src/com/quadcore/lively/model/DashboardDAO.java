@@ -40,7 +40,7 @@ public class DashboardDAO {
 			conn = OracleDBUtil.dbConnect();
 			
 			// SQL + Statement
-			String sql = "SELECT * FROM tokentest WHERE token LIKE '%" + word + "%'";
+			String sql = "SELECT * FROM tokentest WHERE lower(token) LIKE '%" + word.toLowerCase() + "%'";
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 			
@@ -83,7 +83,7 @@ public class DashboardDAO {
 			conn = OracleDBUtil.dbConnect();
 			
 			// SQL + Statement
-			String sql = "SELECT * FROM stmt WHERE token LIKE '%" + word + "%'";
+			String sql = "SELECT * FROM stmt st JOIN tokentest tt USING (stmtno) WHERE lower(tt.token) = '" + word.toLowerCase() + "'";
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 			
