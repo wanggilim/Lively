@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+#view-source {
+	position: fixed;
+	display: block;
+	right: 0;
+	bottom: 0;
+	margin-right: 40px;
+	margin-bottom: 40px;
+	z-index: 900;
+}
+
+.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
+  padding-right: 0;
+}
+
+.mdl-layout__content {
+	display: block;
+	background-color: #555555;
+}
+
+.page-content-word {
+	display: block;
+	text-align: center;
+	align-content: center;
+	padding: 20px;
+}

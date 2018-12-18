@@ -1,8 +1,9 @@
 package com.quadcore.lively.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.quadcore.lively.controller.DashboardController;
 import com.quadcore.lively.controller.MemberController;
 import com.quadcore.lively.model.MemberVO;
-import com.quadcore.lively.service.MemberService;
+import com.quadcore.lively.model.StmtVO;
+import com.quadcore.lively.model.WordVO;
 import com.quadcore.lively.util.DateUtil;
 
 /**
@@ -82,6 +85,39 @@ public class AppServlet extends HttpServlet {
 			String userMail = request.getParameter("userMail");
 
 			control.searchUserFromUserMail(userMail);
+		}
+		
+		
+		/**
+		 * 대쉬보드
+		 * 
+		 * @author wgl
+		 * @Date 2018.12.18
+		 */
+		if (action.equals("/dashboard")) {
+			DashboardController controller = new DashboardController();
+			String word = request.getParameter("word"); // dashboard.js 에서 넘어옴.
+			
+			// 대쉬보드 접속
+			if (word == null) {
+				System.out.println("word 가 null 입니다.");
+			}
+			
+			// 대쉬보드 내에서 검색
+			else {
+				List<WordVO> wordVOList = controller.searchWords(word);
+				List<StmtVO> stmtVOList = controller.searchStatements(word);
+				List<String> perhapsKeywords = controller.searchPerhapsWords(word, wordVOList); 
+				String means = ""; // 입력한 단어에 대한 의미(뜻)들
+				
+				RequestDispatcher rd = request.getRequestDispatcher("dashboard_result.jsp");
+				request.setAttribute("word", word);		// 검색 키워드 (dashboard.js 파라미터)
+				//request.setAttribute("means", means);	// 검색 키워드에 대한 단어 뜻
+				request.setAttribute("wordVOList", wordVOList); // 검색 키워드에 대한 결과 :: List<WordVO>
+				request.setAttribute("stmtVOList", stmtVOList); // 검색 키워드에 대한 결과 :: List<StmtVO>
+				request.setAttribute("perhapsKeywords", perhapsKeywords); // 사용자의 입력 오타인지 확인해주기 위한 단어 리스트
+				rd.forward(request, response);
+			}
 		}
 
 	}
@@ -184,7 +220,7 @@ public class AppServlet extends HttpServlet {
 				session.setAttribute("member", member);
 				System.out.println("로그인 완료");
 				// welcome page 전송
-				response.sendRedirect(path + "/dashboard.html");
+				response.sendRedirect(path + "/dashboard.do");
 			} else {
 				// 일치하지 않을 경우 경고창을 띄우고 로그인2화면(error message포함)으로 보냄
 				// 크롬에서 지원하지 않음.
