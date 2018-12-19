@@ -1,102 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta charset="utf-8">
+
 <title>index•Lively</title>
-<script src="resources/js/common/jquery-3.3.1.min.js"></script>
-<script>
 
-/* 	function getAllUrlParams(url) {
-	var queryString = url.su
-	} */
-
-	$(document).ready(function() {
-		//1. 로고 클릭 (index.html로 이동)
-		$(".logo").click(function() {
-/* 			var member = "<%= Session["member"]%>";
-			if (member==null){
-				location.href="index.html";
-			}else { */
-				location.href="dashboard.html";
-			/* } */
-		});
-		//2. 로그인 클릭 (signIn.html로 이동)
-		$(".login").click(function() {
-			location.href="member/signIn.html";
-		});
-		//3. 회원가입 클릭 (signUp.html로 이동)
-		$(".signup").click(function() {
-			location.href="member/signUp.html";
-		});
-
-	});
-</script>
-
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="resources/images/android-desktop.png">
-
-<!-- Add to homescreen for Safari on iOS -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Material Design Lite">
-<link rel="apple-touch-icon-precomposed" href="resources/images/common/ios-desktop.png">
-
-
-<meta name="msapplication-TileImage"
-	content="images/touch/ms-touch-icon-144x144-precomposed.png">
-<meta name="msapplication-TileColor" content="#3372DF">
-
-<link rel="shortcut icon" href="resources/images/common/favicon.png">
-
-
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="resources/css/common/material.teal-red.min.css">
-<link rel="stylesheet" href="resources/css/common/styles.css">
-<style>
-#view-source {
-	position: fixed;
-	display: block;
-	right: 0;
-	bottom: 0;
-	margin-right: 40px;
-	margin-bottom: 40px;
-	z-index: 900;
-}
-</style>
+<link href='resources/test/application.css' rel='stylesheet'
+	type='text/css'>
 </head>
-<body>
 
-	<div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-		<div class="demo-container mdl-grid">
-			<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-			<div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
-				<div class="demo-crumbs mdl-color-text--grey-500"></div>
-				<div align="center">
-								
-					<!-- 로고 -->
-					<h1 class="logo">Lively</h1>
+<body class="index">
 
-					<!-- index 메뉴 버튼 -->
-					<div class="container">
-			<!--안정화 임시 로직 // 시작 //로그아웃	-->
-			<a href="member/signOut.do"> 로그아웃</a><br>
-			<!--안정화 임시 로직 // 끝-->
-						<div class="signup">회원가입</div>
-						<div class="login">로그인</div>
-
-						<!-- 메뉴0. 데모 이미지 -->
-						<div class="demo-form">
-							<!-- 임시 이미지 -->
-							<img alt="demo" src="resources/images/demo.jpg"><br>							
-						</div>						
-					</div><!-- class="container" 끝 -->
-				</div>
-			</div>
+	<section id="container">
+	
+		<div class="wrap-topright">
+			<a href="member/signUp.html" class="button">Sign Up</a>
+			<a href="member/signIn.do" class="button">Sign In</a>
 		</div>
-	</div>
+	
+		<section class="sample" id="headline">
+			<section class="text">
+					
+				<h1>
+					LIVELY,<br>The Active<br>Dictionary
+				</h1>
+			</section>
+		</section>
 
+	</section>
 </body>
 </html>
