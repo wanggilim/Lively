@@ -8,21 +8,21 @@ public class AdminService {
 	public AdminService() {
 		dao = new AdminDAO();
 	}
-	//�뀒�씠釉붿“�쉶
+	//테이블조회
 	public Object selectByTableName(String tableName) {
 		String sql ="select DISTINCT  * from " + tableName   ;
 		return dao.selectAll(tableName, sql);
 	}
-	//admin議고쉶
+	//admin조회
 	public Object selectByAdminNo(int adminNo) {
 		String sql ="select * from admin where adminNo ="+adminNo;
 		return dao.st_execute(sql);
 	}
-	//admin�닔�젙
+	//admin수정
 	public Object updateByAdminNo(int adminNo) {
 		return dao.st_execute("");
 	}
-	//admin�궘�젣
+	//admin삭제
 	public Object deleteByAdminNo(int adminNo) {
 		String sql ="delete from admin where AdminNo="+adminNo;
 		return dao.st_execute(sql);

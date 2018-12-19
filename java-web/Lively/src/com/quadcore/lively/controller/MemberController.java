@@ -17,31 +17,31 @@ public class MemberController {
 			service = new  MemberService();
 		}
 		// TODO Auto-generated method stub
-		//濡쒓렇�씤 �듅�씤
+		//로그인 승인
 		public int getUserAuth(String userMail, String userPass) {
 			return service.getUserAuth(userMail, userPass);
 }
-		//媛��엯�떆 湲곗〈 �쑀裕� �솗�씤
+		//가입시 기존 유뮤 확인
 		public int getUserMail(String userMail) {
 			return service.getUserMail(userMail);
 		}
 		
-		//硫ㅻ쾭 �젅踰� �뼸湲�
+		//멤버 레벨 얻기
 		public MemberVO getUserLevel(String userMail) {
 			// TODO Auto-generated method stub
 			return service.getUserLevel(userMail);
 		}
-		//硫ㅻ쾭 �궘�젣
+		//멤버 삭제
 		public Object deleteUserFromUserMail(int userNo) {
 			return service.deleteUserFromUserMail(userNo);
 			
 		}
-		//硫ㅻ쾭 �닔�젙
+		//멤버 수정
 		public Object updateUserFromUserMail(String userMail) {
 			return service.updateUserFromUserMail(userMail);
 			
 		}
-		//硫ㅻ쾭 議고쉶
+		//멤버 조회
 		public Object searchUserFromUserMail(String userMail) {
 			return service.searchUserFromUserMail(userMail);
 			
@@ -52,10 +52,10 @@ public class MemberController {
 		}
 		
 		/**
-		 * �쉶�썝 媛��엯
+		 * 회원 가입
 		 * @Date 2018.12.15
 		 * @author wgl
-		 * @param member::MemberVO 媛��엯�븳 硫ㅻ쾭�쓽 �젙蹂�
+		 * @param member::MemberVO 가입한 멤버의 정보
 		 */
 		public void signUp(MemberVO member) {
 			service.signUp(member);

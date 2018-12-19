@@ -13,7 +13,7 @@ import com.quadcore.lively.util.OracleDBUtil;
 
 public class AdminDAO {
 	
-	//�뀒�씠釉붿“�쉶
+	//테이블조회
 	public Object selectAll(String tableName, String sql) {
 		// TODO Auto-generated method stub
 		
@@ -56,7 +56,7 @@ public class AdminDAO {
 			
 	}
 	
-	//admin議고쉶
+	//admin조회
 		public AdminVO select(String adminMail) {
 			// TODO Auto-generated method stub
 		
@@ -86,7 +86,7 @@ public class AdminDAO {
 			return admin;
 		}
 		
-		//admin �닔�젙
+		//admin 수정
 		public Object updateAdmin(String sql) {
 			// TODO Auto-generated method stub
 		
@@ -109,7 +109,7 @@ public class AdminDAO {
 			return null;
 		}
 
-		//admin�궘�젣
+		//admin삭제
 		public void delete(String adminMail) {
 			// TODO Auto-generated method stub
 			
@@ -133,7 +133,7 @@ public class AdminDAO {
 			
 		}
 		
-		//admin�깮�꽦
+		//admin생성
 		private AdminVO makeAdmin(ResultSet rs) throws SQLException {
 			int adminNo = rs.getInt("adminNO");
 			String adminMail = rs.getString("adminEMail");
@@ -144,7 +144,7 @@ public class AdminDAO {
 		}
 		
 		
-		//member�깮�꽦
+		//member생성
 		private MemberVO makeMember(ResultSet rs) throws SQLException {
 			int userNo = rs.getInt("userNo");
 			String userMail = rs.getString("userMail");
@@ -156,7 +156,7 @@ public class AdminDAO {
 			MemberVO member = new MemberVO(userNo, userMail, userPass, userLevel, gender, birthday);
 			return member;
 		}
-		//sql�떎�뻾
+		//sql실행
 		public Object st_execute(String sql) {
 
 			Connection conn = null;
