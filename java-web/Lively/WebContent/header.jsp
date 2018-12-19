@@ -10,4 +10,5 @@
 <c:if test="${userMail!=null }">
 	<strong>${sessionScope.userMail}</strong>
 	<a href="${path}/member/signOut.do"> 로그아웃</a>
+	<a href="${path}/member/userUpdateInfo.jsp">내 정보 수정</a>
 </c:if>

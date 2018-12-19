@@ -21,6 +21,15 @@ public class MemberVO {
 		this.gender = gender;
 		this.birthday = birthday;
 	}
+	
+	public MemberVO(String userMail, String userPass, int userLevel, String gender, Date birthday) {
+		super();
+		this.userMail = userMail;
+		this.userPass = userPass;
+		this.userLevel = userLevel;
+		this.gender = gender;
+		this.birthday = birthday;
+	}
 
 	public MemberVO(int userNo, String userMail, String userPass, int userLevel, String gender, Date birthday) {
 		super();

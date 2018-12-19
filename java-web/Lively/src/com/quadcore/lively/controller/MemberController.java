@@ -1,5 +1,6 @@
 package com.quadcore.lively.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.quadcore.lively.model.MemberVO;
@@ -59,6 +60,22 @@ public class MemberController {
 		 */
 		public void signUp(MemberVO member) {
 			service.signUp(member);
+			
+		}
+
+		public List<MemberVO> selectByLevelMail(int userLevel, String userMail) {
+			
+			return service.selectByLevelMail(userLevel,userMail);
+		}
+		public  void updateByMemberNo(int userNo, String userMail, String userPass, int userLevel, String gender,
+				Date birthday, int setMemberLevel) {
+			MemberVO member = new MemberVO(userNo,userMail,userPass,userLevel,gender,birthday);
+			
+			service.updateByMemberNo(member,setMemberLevel);
+		}
+		// 관리자 등록
+		public void insertAdmin(MemberVO member) {
+			service.insertAdmin(member);
 			
 		}
 	

@@ -3,6 +3,8 @@ package com.quadcore.lively.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -20,7 +22,7 @@ import com.quadcore.lively.util.DateUtil;
 /**
  * Servlet implementation class AppServlet
  */
-//@WebServlet("*.do")
+@WebServlet("*.do")
 public class AppServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,13 +33,6 @@ public class AppServlet extends HttpServlet {
 	private String action = "";
 	private Map<String, Object> data;
 	
-    public AppServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-   
-		
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		path = request.getContextPath();	// /webprogramming
@@ -61,12 +56,16 @@ public class AppServlet extends HttpServlet {
 			session.invalidate();
 			response.sendRedirect(path + "/member/signIn.html");
 		}
+    	
     	// 1. 유저 계정 삭제
     	if (action.equals("/admin/userDelete")) {
     		MemberController control = new MemberController();
     		String suserNo = request.getParameter("userNo");
+    		String userPass =null;
     		int userNo = Integer.parseInt(suserNo);
-    		String userPass = request.getParameter("userPass");
+    		if( request.getParameter("userPass") != null) {
+    		userPass = request.getParameter("userPass");
+    		}
     		control.deleteUserFromUserMail(userNo);
     		
 		}
@@ -82,15 +81,57 @@ public class AppServlet extends HttpServlet {
     	// 3. 유저 정보 검색
     	if (action.equals("/admin/userInfo")) {
     		MemberController control = new MemberController();
-    		
+
     		String userMail = request.getParameter("userMail");
 
     		
     		control.searchUserFromUserMail(userMail);
 		}
-    
     	
+		
+		//4. admin 페이지 조건 검색
+		if(action.equals("/admin/adminInfo")) {
+			MemberController control = new MemberController();
+			List<MemberVO> memberList = new ArrayList<>();
+			String userMail = request.getParameter("userMail");
+			int userLevel = Integer.parseInt(request.getParameter("userLevel"));
+			System.out.println(userMail+userLevel);
+			memberList= (List<MemberVO>)control.selectByLevelMail(userLevel,userMail);
+			HttpSession session = request.getSession();
+			session.setAttribute("memberList", memberList);
+			response.sendRedirect(path+"/admin/memberRef.jsp");
+			
+		}
+		//5.관리자 페이지 업데이트
+		if(action.equals("/admin/memberUpdate")) {
+			int userNo = Integer.parseInt(request.getParameter("userNo"));
+			String userPass = request.getParameter("userPass");
+			String userMail = request.getParameter("userMail");
+			int userLevel = Integer.parseInt(request.getParameter("userLevel"));
+			String gender = request.getParameter("gender");
+			String sbirthday = request.getParameter("birthday");
+			Date birthday = DateUtil.stringToDate(sbirthday);
+			request.setAttribute("userNo", userNo);
+			request.setAttribute("userPass", userPass);
+			request.setAttribute("userMail", userMail);
+			request.setAttribute("userLevel", userLevel);
+			request.setAttribute("gender", gender);
+			request.setAttribute("birthday", birthday);
+			String page="/admin/memberUpdate.jsp";
+			if(request.getParameter("setMemberLevel") != null) {
+			int setMemberLevel =Integer.parseInt(request.getParameter("setMemberLevel"));
+			MemberController control = new MemberController();
+			control.updateByMemberNo(userNo, userMail, userPass, userLevel,gender,birthday,setMemberLevel);
+			page="/admin/admin.jsp";
+			}
+			response.sendRedirect(path+page);
+		}
+		
     }
+		
+	
+		
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("===>" + request.getParameter("userMail"));
 		
@@ -102,7 +143,7 @@ public class AppServlet extends HttpServlet {
     	request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+		System.out.println(action);
 		int result=0;
 		//메일 중복 확인
 		System.out.println(result);
@@ -117,8 +158,7 @@ public class AppServlet extends HttpServlet {
 			response.getWriter().print(result);
 			// (하단 코드에 대한 역할은 signUp.js 에서 처리하도록 수정하였음. 하단 코드는 원본코드.)
 			//response.getWriter().print(result==1?"사용할 수 없는 이메일입니다.":"사용할 수 있는 이메일입니다.");
-			//return;
-			
+			//return;	
     	}
 		
     			 
@@ -142,7 +182,6 @@ public class AppServlet extends HttpServlet {
       		 */
     	if (action.equals("/member/signUp")) {
     	
-    		System.out.println("媛��엯�븯濡� �솕�땲");
     		MemberController control = new MemberController();
     		/*String suserNo = request.getParameter("userNo");
     		int userNo = Integer.parseInt(suserNo); 자동입력*/
@@ -164,6 +203,30 @@ public class AppServlet extends HttpServlet {
     		//(이 주석은 확인 후 삭제) 추후에 index.jsp 로 넘어가거나 dashboard 화면으로 넘어갈지 결정해야함.
     		response.sendRedirect(path+"/index.jsp");
 		}
+    	// 관리자 등록
+    	if (action.equals("/member/adminInsert")) {
+        	
+    		MemberController control = new MemberController();
+    		/*String suserNo = request.getParameter("userNo");
+    		int userNo = Integer.parseInt(suserNo); 자동입력*/
+    		String userMail = request.getParameter("userMail");
+    		String userPass = request.getParameter("userPass");
+    		String suserLevel = request.getParameter("userLevel");
+    		int userLevel = Integer.parseInt(suserLevel);
+    		String gender = request.getParameter("gender");
+    		String sbirthday = request.getParameter("birthday");
+    		Date birthday = null;
+    		if (sbirthday != null && !sbirthday.equals("")) {
+    			birthday = DateUtil.stringToDate(sbirthday);
+			}
+    		MemberVO member = new MemberVO(userMail, userPass, userLevel, gender, birthday);
+    		//DB에 회원 등록
+    		control.insertAdmin(member);
+    		String page="/admin/admin.jsp";
+    		//회원가입 후 인덱스로 이동
+    		//(이 주석은 확인 후 삭제) 추후에 index.jsp 로 넘어가거나 dashboard 화면으로 넘어갈지 결정해야함.
+    		response.sendRedirect(path+page);
+		}
     	
     	// 1. 회원 로그인 (입력 후, 로그인 인증)
     	if (action.equals("/member/signIn")) {
@@ -184,10 +247,18 @@ public class AppServlet extends HttpServlet {
     			HttpSession session = request.getSession();
     			session.setAttribute("userMail", userMail);
     			MemberVO member = uControl.getUserLevel(userMail);
+    			int userLevel = member.getUserLevel();
     			session.setAttribute("userLevel", member.getUserLevel());
     			
+    			System.out.println(userLevel);
+    			if(userLevel >= 4 ) {
     			// welcome page 전송
     			response.sendRedirect(path+"/index.jsp");
+    			}
+    			else {
+    			response.sendRedirect(path+"/admin/admin.jsp");
+    			}
+    			
 			}else {
 				//일치하지 않을 경우 경고창을 띄우고 로그인화면으로 보냄
 				//크롬에서 지원하지 않음.
@@ -198,13 +269,10 @@ public class AppServlet extends HttpServlet {
 				 
 				out.flush();*/			
 				response.sendRedirect(path+"/member/signIn.html");
-			}
-    		
-    		
+			}	
 		}
     	
-    	if (action.equals("/memeber/signIn")) {
-
+      	if (action.equals("/memeber/signIn")) {
     		// 입력된 id, pass 가져오기
     		MemberController user = new MemberController();
     		
@@ -223,17 +291,17 @@ public class AppServlet extends HttpServlet {
     			
     			response.sendRedirect(path+"/member/signIn.html");
 			}
-    		
-    		
-		}
+    	}
     	
+    	if(action.equals("/member/userUpdateInfo")) {
+				MemberController uControl = new MemberController();
+				HttpSession session = request.getSession();
+				String userMail = (String)session.getAttribute("userMail");
+				MemberVO member = uControl.getUserLevel(userMail);
+				session.setAttribute("member", member);
+				
+    			response.sendRedirect(path+"/member/userUpdateInfo.jsp");
+    	}
 
-    	
-    	
-  
-
+	}
 }
-
-}
-
-

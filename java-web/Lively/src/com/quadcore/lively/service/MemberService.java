@@ -2,6 +2,8 @@ package com.quadcore.lively.service;
 
 
 
+import java.util.List;
+
 import com.quadcore.lively.model.MemberDAO;
 import com.quadcore.lively.model.MemberVO;
 
@@ -74,6 +76,22 @@ public class MemberService{
 	public MemberVO selectByUserLevel(int userNo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public List<MemberVO> selectByLevelMail(int userLevel, String userMail) {
+		// TODO Auto-generated method stub
+		return dao.selectByUserLevelMail(userLevel,userMail);
+	}
+
+	public void updateByMemberNo(MemberVO member, int setMemberLevel) {
+		dao.updateByMemberNo(member,setMemberLevel);
+		
+	}
+	//관리자 등록
+	public void insertAdmin(MemberVO member) {
+		// TODO Auto-generated method stub
+		dao.insertAdmin(member);
 	}
 
 

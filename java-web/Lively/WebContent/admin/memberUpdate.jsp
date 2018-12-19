@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>사용자 권한 수정</h1>
-<form action="memberUpdate.do" method="POST">
+<form action="memberUpdate.do" method="Get">
 사용자 번호: <input type="text" name ="userNo" value="${userNo }" readonly />
 비밀번호: <input type="text" name ="userPass" value="${userPass }" readonly />
 사용자 메일: <input type="text" name="userMail" value="${userMail }" readonly />

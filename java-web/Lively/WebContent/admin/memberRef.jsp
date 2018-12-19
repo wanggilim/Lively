@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC >
 <html>
 <head>
@@ -13,7 +13,7 @@ function memeberDelete(userNo){
 	//alert("자바스크립트 수행");
 	ret = confirm("삭제");
 	if(ret) 
-		location.href="memberDelete.do?userNo="+userNo;
+		location.href="userDelete.do?userNo="+userNo;
  }
  
 function memberUpdate(userNo, userPass, userMail, userLevel, gender, birthday){
