@@ -2,6 +2,7 @@ package com.quadcore.lively.service;
 
 
 
+import java.sql.Date;
 import java.util.List;
 
 import com.quadcore.lively.model.MemberDAO;
@@ -92,6 +93,12 @@ public class MemberService{
 	public void insertAdmin(MemberVO member) {
 		// TODO Auto-generated method stub
 		dao.insertAdmin(member);
+	}
+	//나의 정보 수정
+	public Object updateMyInfo(MemberVO member,String setUserPass, String setUserGender, Date setUserBirthday) {
+		
+		return dao.updateMyInfo(member ,setUserPass,setUserGender,setUserBirthday);
+		
 	}
 
 

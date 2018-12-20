@@ -11,7 +11,7 @@
 
 //중복 체크 Ajax
 function validateEmail(){
-	
+	 alert("cc");
 	var userMail = document.getElementById("userMail").value;
 	var patternM =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
@@ -49,7 +49,7 @@ function validateEmail(){
 
 //메일(validateEmail)과 비밀번호에 대한 유효성 확인
 function registerCheckFunction() {
-	
+	 alert("aa");
 	var userPass = document.getElementById("userPass").value;
 	var patternP = /^[A-Za-z0-9.+!@#]{8,15}$/;
 	
@@ -68,4 +68,20 @@ function registerCheckFunction() {
 	
 	return true;
 	
+}
+
+//나의 정보 수정 비밀번호 검증 
+function registerCheckUserpass(){
+	   
+    alert("bb");
+	var userPass = document.getElementById("userPass").value;
+	var patternP = /^[A-Za-z0-9.+!@#]{8,15}$/;
+	
+	if(! patternP.test(userPass) ) {
+		alert("비밀번호가 유효하지 않습니다.");
+		document.getElementById("userPass").focus();
+		return false;
+	}
+
+	return true;
 }

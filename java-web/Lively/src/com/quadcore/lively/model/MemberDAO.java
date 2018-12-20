@@ -1,14 +1,13 @@
 package com.quadcore.lively.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.quadcore.lively.util.OracleDBUtil;
 
@@ -294,7 +293,7 @@ public class MemberDAO{
 	// 관리자 페이지 권한 업데이트
 	public void updateByMemberNo(MemberVO member, int setMemberLevel) {
 		
-		String sql ="update member set userLevel="+member.getUserLevel()
+		String sql ="update member set userLevel="+setMemberLevel
 					+" where userNo="+member.getUserNo();
 		PreparedStatement st = null;
 		Connection conn = null;
@@ -344,5 +343,59 @@ public class MemberDAO{
 		}
 		
 	}
+
+	public Object updateMyInfo(
+			MemberVO member,String setUserPass, String setUserGender, Date setUserBirthday) {
+		String setSql="update member set ";
+		String sqlIf=" where userNo="+member.getUserNo();
+		String sqlSelecet = "select * from member where userNo="+member.getUserNo();
+		if(setUserPass != "") {
+			setSql += "userPass=" + "'"+setUserPass+"'";
+			if(setUserGender != ""  || setUserBirthday != null) {
+				setSql += ",";
+			}
+		}
+		
+		if(setUserGender != "") {
+			setSql += "gender=" + "'"+setUserGender+"'";
+			if(setUserBirthday != null) {
+				setSql += ",";
+			}
+		}
+		if(setUserBirthday != null) {
+			setSql += "birthday=" + "'"+setUserBirthday+"'";
+		}
+		String sql = setSql + sqlIf;
+		System.out.println(sql);
+		
+		
+		PreparedStatement st = null;
+		Connection conn = null;
+		ResultSet rs = null;
+
+		try {
+			conn = OracleDBUtil.dbConnect();
+			conn.setAutoCommit(false);
+			st = conn.prepareStatement(sql);
+			
+			st.executeUpdate();
+			conn.commit();
+			
+			st = conn.prepareStatement(sqlSelecet);
+			rs = st.executeQuery();
+			while(rs.next()) {
+				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
+			}
+			st.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			OracleDBUtil.dbDisconnect(rs, st, conn);
+		}
+		return member;
+		
+	}
+		
+		
+	}
 	
-}

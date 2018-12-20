@@ -25,6 +25,26 @@ function retrieve(){
   xhttp.send();
 
 }
+
+function memberDelete(userNo){
+	ret = confirm("삭제");
+	if(ret) 
+		location.href="userDelete.do?userNo="+userNo;
+ }
+ 
+ 
+function memberUpdate(userNo, userPass, userMail, userLevel, gender, birthday){
+	 ret = confirm("수정하시겠습니까?");
+	 if(ret)  
+		location.href="adminUpdate.do?userNo="+userNo
+					+"&userPass="+userPass
+					+"&userMail="+userMail
+					+"&userLevel="+userLevel
+					+"&gender="+gender
+					+"&birthday="+birthday;
+}
+
+
 </script>
 
 </head>

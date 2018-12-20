@@ -1,7 +1,6 @@
 package com.quadcore.lively.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import com.quadcore.lively.controller.MemberController;
 import com.quadcore.lively.model.MemberVO;
-import com.quadcore.lively.service.MemberService;
 import com.quadcore.lively.util.DateUtil;
 /**
  * Servlet implementation class AppServlet
@@ -59,6 +57,7 @@ public class AppServlet extends HttpServlet {
     	
     	// 1. 유저 계정 삭제
     	if (action.equals("/admin/userDelete")) {
+    		System.out.println("계정 삭제");
     		MemberController control = new MemberController();
     		String suserNo = request.getParameter("userNo");
     		String userPass =null;
@@ -67,25 +66,43 @@ public class AppServlet extends HttpServlet {
     		userPass = request.getParameter("userPass");
     		}
     		control.deleteUserFromUserMail(userNo);
-    		
+    		response.sendRedirect(path + "/admin/admin.jsp");
 		}
     	
     
     	// 2. 유저 정보 수정
-    	if (action.equals("/admin/userUpdate")) {
-			MemberController control = new MemberController();
-			String userMail = request.getParameter("userMail");
-    		control.updateUserFromUserMail(userMail);
-		}
+    	if (action.equals("/member/userUpdate")) {
+    		MemberVO member = new MemberVO();
+    		MemberController control = new MemberController();
+			HttpSession session = request.getSession();
+			member = (MemberVO)session.getAttribute("member");
+			System.out.println(member.toString());
+			String setUserPass = request.getParameter("setUserPass");
+			String setUserGender = request.getParameter("setUserGender");
+			String ssetUserBirthday = request.getParameter("setUserBirthday");
+			Date setUserBirthday=null;
+			if(ssetUserBirthday != "") {
+			   setUserBirthday = DateUtil.stringToDate(ssetUserBirthday);   
+			}
+			
+			member = (MemberVO)control.updateMyInfo(member, setUserPass, setUserGender,setUserBirthday);
+			System.out.println("변경된 세션: "+member.toString());
+			session.setAttribute("member", member);
+			
+			//대쉬보드로 보내야한다
+			String page ="/index.jsp";
+			response.sendRedirect(path+page);
+    	}
     	
     	// 3. 유저 정보 검색
     	if (action.equals("/admin/userInfo")) {
+    		HttpSession session = request.getSession();
     		MemberController control = new MemberController();
-
     		String userMail = request.getParameter("userMail");
-
-    		
-    		control.searchUserFromUserMail(userMail);
+    		MemberVO member = new MemberVO();
+    		member = (MemberVO)control.searchUserFromUserMail(userMail);
+    		session.setAttribute("member", member);
+			response.sendRedirect(path+"/member/userUpdateInfo");
 		}
     	
 		
@@ -99,11 +116,11 @@ public class AppServlet extends HttpServlet {
 			memberList= (List<MemberVO>)control.selectByLevelMail(userLevel,userMail);
 			HttpSession session = request.getSession();
 			session.setAttribute("memberList", memberList);
-			response.sendRedirect(path+"/admin/memberRef.jsp");
-			
+			response.sendRedirect(path+"/admin/adminRef.jsp");
 		}
-		//5.관리자 페이지 업데이트
-		if(action.equals("/admin/memberUpdate")) {
+		//5 admin.jsp 업데이트
+		if(action.equals("/admin/adminUpdate")) {
+			HttpSession session = request.getSession();
 			int userNo = Integer.parseInt(request.getParameter("userNo"));
 			String userPass = request.getParameter("userPass");
 			String userMail = request.getParameter("userMail");
@@ -111,26 +128,32 @@ public class AppServlet extends HttpServlet {
 			String gender = request.getParameter("gender");
 			String sbirthday = request.getParameter("birthday");
 			Date birthday = DateUtil.stringToDate(sbirthday);
-			request.setAttribute("userNo", userNo);
-			request.setAttribute("userPass", userPass);
-			request.setAttribute("userMail", userMail);
-			request.setAttribute("userLevel", userLevel);
-			request.setAttribute("gender", gender);
-			request.setAttribute("birthday", birthday);
-			String page="/admin/memberUpdate.jsp";
+			MemberVO member = new MemberVO(userNo,userPass,userMail,userLevel,gender,birthday);
+			session.setAttribute("member", member);
+
+			String page="/admin/adminUpdate.jsp";
+			
 			if(request.getParameter("setMemberLevel") != null) {
-			int setMemberLevel =Integer.parseInt(request.getParameter("setMemberLevel"));
-			MemberController control = new MemberController();
-			control.updateByMemberNo(userNo, userMail, userPass, userLevel,gender,birthday,setMemberLevel);
-			page="/admin/admin.jsp";
+				int setMemberLevel =Integer.parseInt(request.getParameter("setMemberLevel"));
+				MemberController control = new MemberController();
+				control.updateByMemberNo(member, setMemberLevel);
+				page="/admin/admin.jsp";
 			}
 			response.sendRedirect(path+page);
 		}
 		
+    	if(action.equals("/member/userUpdateInfo")) {
+  
+				MemberController uControl = new MemberController();
+				HttpSession session = request.getSession();
+				String userMail = (String)session.getAttribute("userMail");
+				MemberVO member = uControl.getUserLevel(userMail);
+				session.setAttribute("member", member);
+				System.out.println(member.toString());
+    			response.sendRedirect(path+"/member/userUpdateInfo.jsp");
+    	}
+		
     }
-		
-	
-		
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("===>" + request.getParameter("userMail"));
@@ -243,10 +266,10 @@ public class AppServlet extends HttpServlet {
     		
     		// 인증
     		if (authUser == 1) { // 아이디 비밀번호가 맞다면 1이 나와야함.
-    			MemberController uControl = new MemberController();
+    			MemberController control = new MemberController();
     			HttpSession session = request.getSession();
     			session.setAttribute("userMail", userMail);
-    			MemberVO member = uControl.getUserLevel(userMail);
+    			MemberVO member = control.getUserLevel(userMail);
     			int userLevel = member.getUserLevel();
     			session.setAttribute("userLevel", member.getUserLevel());
     			
@@ -293,15 +316,6 @@ public class AppServlet extends HttpServlet {
 			}
     	}
     	
-    	if(action.equals("/member/userUpdateInfo")) {
-				MemberController uControl = new MemberController();
-				HttpSession session = request.getSession();
-				String userMail = (String)session.getAttribute("userMail");
-				MemberVO member = uControl.getUserLevel(userMail);
-				session.setAttribute("member", member);
-				
-    			response.sendRedirect(path+"/member/userUpdateInfo.jsp");
-    	}
 
 	}
 }

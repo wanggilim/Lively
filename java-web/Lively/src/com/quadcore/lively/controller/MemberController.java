@@ -67,16 +67,19 @@ public class MemberController {
 			
 			return service.selectByLevelMail(userLevel,userMail);
 		}
-		public  void updateByMemberNo(int userNo, String userMail, String userPass, int userLevel, String gender,
-				Date birthday, int setMemberLevel) {
-			MemberVO member = new MemberVO(userNo,userMail,userPass,userLevel,gender,birthday);
+		public void updateByMemberNo(MemberVO member, int setMemberLevel) {
 			
-			service.updateByMemberNo(member,setMemberLevel);
+			service.updateByMemberNo(member, setMemberLevel);
 		}
 		// 관리자 등록
 		public void insertAdmin(MemberVO member) {
 			service.insertAdmin(member);
 			
+		}
+		//나의 정보 수정
+		public Object updateMyInfo(MemberVO member,String setUserPass, String setUserGender, Date setUserBirthday) {
+			
+			return service.updateMyInfo(member,setUserPass,setUserGender,setUserBirthday);
 		}
 	
 
