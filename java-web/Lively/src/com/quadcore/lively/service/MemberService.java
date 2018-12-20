@@ -2,6 +2,9 @@ package com.quadcore.lively.service;
 
 
 
+import java.sql.Date;
+import java.util.List;
+
 import com.quadcore.lively.model.MemberDAO;
 import com.quadcore.lively.model.MemberVO;
 
@@ -33,9 +36,9 @@ public class MemberService{
 	}
 
 	//멤버삭제
-	public void deleteMember(String userMail) {
+	public void deleteMember(int userNo) {
 		// TODO Auto-generated method stub
-		dao.delete(userMail);
+		dao.delete(userNo);
 	}
 
 	public int getUserAuth(String userMail, String userPass) {
@@ -53,8 +56,8 @@ public class MemberService{
 		return dao.getUserLevel(userMail);
 	}*/
 
-	public Object deleteUserFromUserMail(String userMail) {
-		String sql ="delete from member where usermail="+userMail;
+	public Object deleteUserFromUserMail(int userNo) {
+		String sql ="delete from member where userNo="+userNo;
 		return dao.st_execute(sql);
 	}
 
@@ -70,6 +73,35 @@ public class MemberService{
 		// TODO Auto-generated method stub
 		return dao.getUserMail(userMail);
 	}
+	//멤버레벌 얻기
+
+	public MemberVO selectByUserLevel(int userNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public List<MemberVO> selectByLevelMail(int userLevel, String userMail) {
+		// TODO Auto-generated method stub
+		return dao.selectByUserLevelMail(userLevel,userMail);
+	}
+
+	public void updateByMemberNo(MemberVO member, int setMemberLevel) {
+		dao.updateByMemberNo(member,setMemberLevel);
+		
+	}
+	//관리자 등록
+	public void insertAdmin(MemberVO member) {
+		// TODO Auto-generated method stub
+		dao.insertAdmin(member);
+	}
+	//나의 정보 수정
+	public Object updateMyInfo(MemberVO member,String setUserPass, String setUserGender, Date setUserBirthday) {
+		
+		return dao.updateMyInfo(member ,setUserPass,setUserGender,setUserBirthday);
+		
+	}
+
 
 	public MemberVO getUserInfo(String userMail) {
 		// TODO Auto-generated method stub

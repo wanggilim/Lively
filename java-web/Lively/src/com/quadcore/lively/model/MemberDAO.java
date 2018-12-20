@@ -1,14 +1,13 @@
 package com.quadcore.lively.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.quadcore.lively.util.OracleDBUtil;
 
@@ -69,7 +68,7 @@ public class MemberDAO{
 			st.setString(1, userMail);
 			rs= st.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
 			}
 			conn.commit();
@@ -113,10 +112,10 @@ public class MemberDAO{
 	}
 
 	//멤버삭제
-	public void delete(String userMail) {
+	public void delete(int userNo) {
 		// TODO Auto-generated method stub
 		
-		String sql = "delete member where userMail=?";
+		String sql = "delete from member where userNo=?";
 		PreparedStatement st = null;
 		Connection conn = null;
 		ResultSet rs = null;
@@ -125,7 +124,7 @@ public class MemberDAO{
 			conn = OracleDBUtil.dbConnect();
 			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
-			st.setString(1, userMail);
+			st.setInt(1, userNo);
 			st.executeUpdate();
 			conn.commit();
 		}catch(SQLException e) {
@@ -211,8 +210,7 @@ public class MemberDAO{
 		ResultSet rs =null;
 		int result =0;	
 		
-		System.out.println("오라클 접속");
-		System.out.println(sql);
+
 		try {
 			conn = OracleDBUtil.dbConnect();
 			conn.setAutoCommit(false);
@@ -242,7 +240,7 @@ public class MemberDAO{
 			st.setString(1, userMail);
 			rs = st.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
 			}
 		} catch (SQLException e) {
@@ -253,7 +251,153 @@ public class MemberDAO{
 			
 		return member;
 	}
+	//멤버레벨얻기
+
+
+	//관리자 페이지 선택
+	public List<MemberVO> selectByUserLevelMail( int userLevel, String userMail) {
+		MemberVO member = null;
+		List<MemberVO> memberList = new ArrayList<>();
+		String sql=null;
+		sql = "select * from member where 1=1";
+			if(userLevel != 0) {
+				String sqlIf =" and userLevel="+userLevel;
+				sql += sqlIf;
+			}
+			if(userMail != "") {
+				String sqlIf = " and userMail like '%"+userMail+"%'";
+				sql += sqlIf;
+			}
+			System.out.println(sql);
+		
+		PreparedStatement st = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		try {			
+			conn = OracleDBUtil.dbConnect();
+			conn.setAutoCommit(false);
+			st = conn.prepareStatement(sql);
+			rs = st.executeQuery();
+			
+			while(rs.next()) {
+				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
+				memberList.add(member);
+			}
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			OracleDBUtil.dbDisconnect(rs, st, conn);
+		}	
+		
+		return memberList;
+	}
+	// 관리자 페이지 권한 업데이트
+	public void updateByMemberNo(MemberVO member, int setMemberLevel) {
+		
+		String sql ="update member set userLevel="+setMemberLevel
+					+" where userNo="+member.getUserNo();
+		PreparedStatement st = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		try {			
+			conn = OracleDBUtil.dbConnect();
+			conn.setAutoCommit(false);
+			st = conn.prepareStatement(sql);
+			rs = st.executeQuery();
+			
+			while(rs.next()) {
+				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
+			}
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			OracleDBUtil.dbDisconnect(rs, st, conn);
+		}
+	}
+
+	public void insertAdmin(MemberVO member) {
+		
+		String sql = "insert into member(userno, usermail, userpass, userLevel, gender, birthday) values(userno.nextval,?,?,?,?,?)";
+		PreparedStatement st = null;
+		Connection conn = null;
+		ResultSet rs = null;
+	    int result =0;
+		
+		try {
+			conn = OracleDBUtil.dbConnect();
+			conn.setAutoCommit(false);
+			st = conn.prepareStatement(sql);
+		
+			st.setString(1, member.getUserMail());
+			st.setString(2, member.getUserPass());
+			st.setInt(3, member.getUserLevel());
+			st.setString(4, member.getGender());
+			st.setDate(5, member.getBirthday());
+			
+			result=st.executeUpdate();
+			conn.commit();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			OracleDBUtil.dbDisconnect(rs, st, conn);
+		}
+		
+	}
+
+	public Object updateMyInfo(
+			MemberVO member,String setUserPass, String setUserGender, Date setUserBirthday) {
+		String setSql="update member set ";
+		String sqlIf=" where userNo="+member.getUserNo();
+		String sqlSelecet = "select * from member where userNo="+member.getUserNo();
+		if(setUserPass != "") {
+			setSql += "userPass=" + "'"+setUserPass+"'";
+			if(setUserGender != ""  || setUserBirthday != null) {
+				setSql += ",";
+			}
+		}
+		
+		if(setUserGender != "") {
+			setSql += "gender=" + "'"+setUserGender+"'";
+			if(setUserBirthday != null) {
+				setSql += ",";
+			}
+		}
+		if(setUserBirthday != null) {
+			setSql += "birthday=" + "'"+setUserBirthday+"'";
+		}
+		String sql = setSql + sqlIf;
+		System.out.println(sql);
+		
+		
+		PreparedStatement st = null;
+		Connection conn = null;
+		ResultSet rs = null;
+
+		try {
+			conn = OracleDBUtil.dbConnect();
+			conn.setAutoCommit(false);
+			st = conn.prepareStatement(sql);
+			
+			st.executeUpdate();
+			conn.commit();
+			
+			st = conn.prepareStatement(sqlSelecet);
+			rs = st.executeQuery();
+			while(rs.next()) {
+				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
+			}
+			st.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			OracleDBUtil.dbDisconnect(rs, st, conn);
+		}
+		return member;
+		
+	}
+		
+		
+	}
 	
-}
-
-
