@@ -16,12 +16,14 @@ $(document).ready(function() {
 	$("#doSearch").click(function() {
 		//var $path = $(location).attr('host'); // 나중에는 바꿀 것
 		var $path = $(location).attr('pathname');
-		var $pathBranch = $path.substr(0, $path.length-5)
-		if ($pathBranch != '.jsp') {
-			$pathBranch = $path.substr(0, $path.length-4) 
+		if ($path.endsWith('.jsp')) {
+			$path = $path.substr(0, $path.length-3);
+		} else {
+			$path = $path.substr(0, $path.length-2);
 		}
-		var $newPath = $pathBranch + '.do?';
+		var $newPath = $path + 'do?';
 		var $param = 'word=' + $('.search-main').val();
+		alert($path + '\n' + $newPath);
 		
 		$(location).attr('href', $newPath+$param);
 	});

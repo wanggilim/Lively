@@ -101,7 +101,7 @@
 	
 				<!-- 마이 페이지 관련 버튼 -->
 				<img alt="account" src="resources/images/common/account_2x_w.png"
-					class="search-icon" id="doSearch">
+					class="#" id="#">
 			</div>
 		</header>
 
