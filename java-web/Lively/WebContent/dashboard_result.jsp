@@ -124,7 +124,7 @@
 						<!-- 검색 유사 단어 -->
 						<br>
 						<c:forEach var="i" items="${perhapsKeywords }">
-							<h6 id="perhaps"><a href="./dashboard.do?word=${i } ">${i }</a> </h6> 
+							<a id="perhaps" href="./dashboard.do?word=${i }">${i }</a>&nbsp;&nbsp; 
 						</c:forEach>
 						
 					</div>
