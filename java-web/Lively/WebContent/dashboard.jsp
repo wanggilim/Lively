@@ -52,10 +52,12 @@
 	<section id="container">
 
 		<section class="sample" id="headline">
+		
+		
 			<div class="logo_big">
-				<h1>Lively</h1>
+					<h1>Lively</h1>
 			</div>
-			
+				
 			<div align="center">					
 				<section class="text">
 					<!-- dashboard 검색창 -->
@@ -66,8 +68,10 @@
 						class="search-icon" id="doSearch"><br>
 				</section>
 			</div>
+		
+			
 		</section>
-		</section>
+	</section>
 
 
 </body>
