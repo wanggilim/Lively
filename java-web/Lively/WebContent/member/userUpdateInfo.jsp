@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1> 회원 정보 수정 </h1>
-<form action="userUpdate.do" method ="get" onsubmit="return userUpdateAjax();">
+<form action="userUpdate.do" method ="POST" onsubmit="return userUpdateAjax();">
 <table>
 <tr>
 <td>회원 넘버: <span id="userPass">${member.userNo }</span></td>

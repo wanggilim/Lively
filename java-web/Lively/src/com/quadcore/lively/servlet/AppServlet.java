@@ -68,14 +68,8 @@ public class AppServlet extends HttpServlet {
 
 		}
 
-		// 2. 회원 수정
-		if (action.equals("/member/userUpdate")) {
-			MemberController control = new MemberController();
-			String userMail = request.getParameter("userMail");
-			control.updateUserFromUserMail(userMail);
-		}
 
-		// 3. 회원 검색
+		// 2. 회원 검색
 		if (action.equals("/signIn/userInfo")) {
 			MemberController control = new MemberController();
 
