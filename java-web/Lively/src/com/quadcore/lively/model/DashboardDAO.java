@@ -47,12 +47,12 @@ public class DashboardDAO {
 			
 			// WordVO 로 변환 후 List에 넣기
 			while (rs.next()) {
-				list.add(new WordVO (rs.getInt(1),	// stmtNo
-								rs.getInt(2), 		// tokenNo
-								rs.getString(3), 	// token
-								rs.getString(4), 	// mean
-								rs.getString(5), 	// tag
-								rs.getString(6)) 	// tokentype
+				list.add(new WordVO (rs.getInt(1),	// tokenNo
+								rs.getString(2), 	// token
+								rs.getString(3), 	// mean
+								rs.getString(4), 	// tokenTag
+								rs.getString(5), 	// tokenType
+								rs.getInt(6)) 		// stmtNo
 						);
 			}
 			
@@ -93,13 +93,14 @@ public class DashboardDAO {
 				list.add(new StmtVO(
 						rs.getInt(1), 		// stmtNo
 						rs.getString(2),	// stmt
-						rs.getString(3),	// stmtType
-						rs.getString(4),	// location
-						rs.getInt(5), 		// likes
-						rs.getInt(6), 		// sharing
-						rs.getInt(7)) 		// cellbNo
+						rs.getLong(3),		// stmtTs
+						rs.getString(4),	// stmtType
+						rs.getString(5),	// location
+						rs.getInt(6), 		// likes
+						rs.getInt(7), 		// sharing
+						rs.getInt(8), 		// cellbNo
+						rs.getString(9)) 	// stmtURL
 				);
-				
 			}
 			
 		} catch (SQLException e) {

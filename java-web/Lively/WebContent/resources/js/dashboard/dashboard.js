@@ -16,7 +16,11 @@ $(document).ready(function() {
 	$("#doSearch").click(function() {
 		//var $path = $(location).attr('host'); // 나중에는 바꿀 것
 		var $path = $(location).attr('pathname');
-		var $newPath = $path.substr(0, $path.length-4) + '.do?';
+		var $pathBranch = $path.substr(0, $path.length-5)
+		if ($pathBranch != '.jsp') {
+			$pathBranch = $path.substr(0, $path.length-4) 
+		}
+		var $newPath = $pathBranch + '.do?';
 		var $param = 'word=' + $('.search-main').val();
 		
 		$(location).attr('href', $newPath+$param);

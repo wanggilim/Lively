@@ -1,32 +1,24 @@
 package com.quadcore.lively.model;
 
 public class WordVO {
-	private int stmtNo;			// statement number
 	private int tokenNo;		// token number
 	private String token;		// 검색한 단어
 	private String mean;		// 검색한 단어에 대한 뜻
-	private String tag;			// 형태소
-	private String tokentype;	// 신조어, 통용어, 불용어 구분
+	private String tokenTag;			// 형태소
+	private String tokenType;	// 신조어, 통용어, 불용어 구분
+	private int stmtNo;			// statement number
 	
 	public WordVO() {
 		
 	}
 
-	public WordVO(int stmtNo, int tokenNo, String token, String mean, String tag, String tokentype) {
+	public WordVO(int tokenNo, String token, String mean, String tokenTag, String tokenType, int stmtNo) {
 		super();
-		this.stmtNo = stmtNo;
 		this.tokenNo = tokenNo;
 		this.token = token;
 		this.mean = mean;
-		this.tag = tag;
-		this.tokentype = tokentype;
-	}
-
-	public int getStmtNo() {
-		return stmtNo;
-	}
-
-	public void setStmtNo(int stmtNo) {
+		this.tokenTag = tokenTag;
+		this.tokenType = tokenType;
 		this.stmtNo = stmtNo;
 	}
 
@@ -54,31 +46,37 @@ public class WordVO {
 		this.mean = mean;
 	}
 
-	public String getTag() {
-		return tag;
+	public String getTokenTag() {
+		return tokenTag;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTokenTag(String tokenTag) {
+		this.tokenTag = tokenTag;
 	}
 
-	public String getTokentype() {
-		return tokentype;
+	public String getTokenType() {
+		return tokenType;
 	}
 
-	public void setTokentype(String tokentype) {
-		this.tokentype = tokentype;
+	public void setTokenType(String tokenType) {
+		this.tokenType = tokenType;
+	}
+
+	public int getStmtNo() {
+		return stmtNo;
+	}
+
+	public void setStmtNo(int stmtNo) {
+		this.stmtNo = stmtNo;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("WordVO [stmtNo=").append(stmtNo).append(", tokenNo=").append(tokenNo).append(", token=")
-				.append(token).append(", mean=").append(mean).append(", tag=").append(tag).append(", tokentype=")
-				.append(tokentype).append("]");
+		builder.append("WordVO [tokenNo=").append(tokenNo).append(", token=").append(token).append(", mean=")
+				.append(mean).append(", tokenTag=").append(tokenTag).append(", tokenType=").append(tokenType)
+				.append(", stmtNo=").append(stmtNo).append("]");
 		return builder.toString();
 	}
-	
-	
 	
 }
