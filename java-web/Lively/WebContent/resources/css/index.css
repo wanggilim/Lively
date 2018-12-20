@@ -1,10 +1,13 @@
+@charset "UTF-8";
 
-/* ==========================================================================
-   #FONT
-   ========================================================================== */
-.font-robo {
-  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+@font-face {
+  font-family: 'Abril Fatface';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Abril Fatface'), local('AbrilFatface-Regular'), url(https://fonts.gstatic.com/s/abrilfatface/v9/zOL64pLDlL1D99S8g8PtiKchq-lmjdLh.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
+/* latin */
 @font-face {
   font-family: 'Abril Fatface';
   font-style: normal;
@@ -12,467 +15,153 @@
   src: local('Abril Fatface'), local('AbrilFatface-Regular'), url(https://fonts.gstatic.com/s/abrilfatface/v9/zOL64pLDlL1D99S8g8PtiKchq-dmjQ.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* ==========================================================================
-   #GRID
-   ========================================================================== */
-.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
 
-.row-space {
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -moz-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.col-2 {
-  width: -webkit-calc((100% - 60px) / 2);
-  width: -moz-calc((100% - 60px) / 2);
-  width: calc((100% - 60px) / 2);
-}
-
-@media (max-width: 767px) {
-  .col-2 {
-    width: 100%;
-  }
-}
-
-/* ==========================================================================
-   #BOX-SIZING
-   ========================================================================== */
-/**
- * More sensible default box-sizing:
- * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
- */
-html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-*, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
-/* ==========================================================================
-   #RESET
-   ========================================================================== */
-/**
- * A very simple reset that sits on top of Normalize.css.
- */
-body,
-h1, h2, h3, h4, h5, h6,
-blockquote, p, pre,
-dl, dd, ol, ul,
-figure,
-hr,
-fieldset, legend {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
   padding: 0;
-}
-
-/**
- * Remove trailing margins from nested lists.
- */
-li > ol,
-li > ul {
-  margin-bottom: 0;
-}
-
-/**
- * Remove default table spacing.
- */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/**
- * 1. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;`
- *    on fieldsets.
- */
-fieldset {
-  min-width: 0;
-  /* [1] */
   border: 0;
-}
+  font-size: 100%;
+  font: inherit;
+  background: #000;
+  vertical-align: baseline; }
 
-button {
-  outline: none;
-  background: none;
-  border: none;
-}
-
-/* ==========================================================================
-   #PAGE WRAPPER
-   ========================================================================== */
-.page-wrapper {
-  min-height: 100vh;
-}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
 
 body {
-  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* Clear Floated Elements
+------------------------------------------------------------------------------*/
+.clearfix:after, .sample#postnormal .text:after {
+  clear: both;
+  content: ' ';
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  visibility: hidden;
+  width: 0;
+  height: 0; }
+
+body {
+  background: #eaeaea;
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+  -webkit-text-size-adjust: 100%; }
+
+a {
+  color: inherit;
+  text-decoration: none; }
+
+footer {
+  padding: 50px;
+  text-align: center; }
+  footer p {
+    color: #555;
+    font: 400 16px/1 'open sans';
+    margin: 0 0 2em 0; }
+    footer p a {
+      color: #555;
+      font-weight: 700; }
+      footer p a:hover {
+        color: #000; }
+        
+.wrap-topright {
+    position: absolute;
+    width:50%;
+    height:0%;
+    top: 5%;
+    right: 0%; 
+    text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 400;
-}
-
-h1 {
-/*   font-size: 36px; */
-  font: 400 92px/84px Abril Fatface;
-}
-
-h2 {
-  font-size: 30px;
-}
-
-h3 {
-  font-size: 24px;
-}
-
-h4 {
-  font-size: 18px;
-}
-
-h5 {
-  font-size: 15px;
-}
-
-h6 {
-  font-size: 13px;
-}
-
-/* ==========================================================================
-   #BACKGROUND
-   ========================================================================== */
-.bg-black {
+.sample#headline {
   background: #000;
+  padding: 300px 0; }
+  .sample#headline .text {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 470px; }
+  .sample#headline h1 {
+    color: #fff;
+    font: 400 92px/84px Abril Fatface; }
+
+
+
+/* 버튼 관련 */
+a {
+    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    display: inline;
+    margin: 20px auto;
+    max-width: 100px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 10px 20px;
 }
 
-/* ==========================================================================
-   #SPACING
-   ========================================================================== */
-.p-t-100 {
-  padding-top: 100px;
+.button{
+  background:#ffffff;
+  color:#000;
+  border:none;
+  position:relative;
+  font-size:1.6em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
 }
-
-.p-t-20 {
-  padding-top: 20px;
+.button:hover{
+  background:#fff;
+  color:#424242;
 }
-
-.p-b-100 {
-  padding-bottom: 100px;
+.button:before, .button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #424242;
+  transition:400ms ease all;
 }
-
-/* ==========================================================================
-   #WRAPPER
-   ========================================================================== */
-.wrapper {
-  margin: 0 auto;
+.button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
 }
-
-.wrapper--w680 {
-  max-width: 680px;
-}
-
-/* ==========================================================================
-   #BUTTON
-   ========================================================================== */
-.btn {
-  line-height: 40px;
-  display: inline-block;
-  padding: 0 25px;
-  cursor: pointer;
-  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
-  color: #fff;
-  -webkit-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  transition: all 0.4s ease;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.btn--radius {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-
-.btn--black {
-  background: #000;
-}
-
-.btn--black:hover {
-  background: #676767;
-}
-
-span a{
-	text-decoration: none;
-	color: #000;
-}
-/* ==========================================================================
-   #DATE PICKER
-   ========================================================================== */
-td.active {
-  background-color: #2c6ed5;
-}
-
-input[type="date" i] {
-  padding: 14px;
-}
-
-.table-condensed td, .table-condensed th {
-  font-size: 14px;
-  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
-  font-weight: 400;
-}
-
-.daterangepicker td {
-  width: 40px;
-  height: 30px;
-}
-
-.daterangepicker {
-  border: none;
-  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  display: none;
-  border: 1px solid #e0e0e0;
-  margin-top: 5px;
-}
-
-.daterangepicker::after, .daterangepicker::before {
-  display: none;
-}
-
-.daterangepicker thead tr th {
-  padding: 10px 0;
-}
-
-.daterangepicker .table-condensed th select {
-  border: 1px solid #ccc;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  font-size: 14px;
-  padding: 5px;
-  outline: none;
-}
-
-/* ==========================================================================
-   #FORM
-   ========================================================================== */
-input {
-  outline: none;
-  margin: 0;
-  border: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  width: 100%;
-  font-size: 14px;
-  font-family: inherit;
-}
-
-.input-group {
-  position: relative;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #ccc;
-}
-
-.input-icon {
-  position: absolute;
-  font-size: 18px;
-  color: #ccc;
-  right: 8px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-.input--style-1 {
-  padding: 9px 0;
-  color: #666;
-}
-
-.input--style-1::-webkit-input-placeholder {
-  /* WebKit, Blink, Edge */
-  color: #555;
-}
-
-.input--style-1:-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
-  color: #555;
-  opacity: 1;
-}
-
-.input--style-1::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
-  color: #555;
-  opacity: 1;
-}
-
-.input--style-1:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #555;
-}
-
-.input--style-1:-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #555;
-}
-
-/* ==========================================================================
-   #SELECT2
-   ========================================================================== */
-.select--no-search .select2-search {
-  display: none !important;
-}
-
-.rs-select2 .select2-container {
-  width: 100% !important;
-  outline: none;
-}
-
-.rs-select2 .select2-container .select2-selection--single {
-  outline: none;
-  border: none;
-  height: 34px;
-}
-
-.rs-select2 .select2-container .select2-selection--single .select2-selection__rendered {
-  line-height: 34px;
-  padding-left: 0;
-  color: #555;
-}
-
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow {
-  height: 32px;
-  right: 4px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -moz-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -moz-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow b {
-  display: none;
-}
-
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow:after {
-  font-family: "Material-Design-Iconic-Font";
-  content: '\f2f9';
-  font-size: 18px;
-  color: #ccc;
-  -webkit-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  transition: all 0.4s ease;
-}
-
-.rs-select2 .select2-container.select2-container--open .select2-selection--single .select2-selection__arrow::after {
-  -webkit-transform: rotate(-180deg);
-  -moz-transform: rotate(-180deg);
-  -ms-transform: rotate(-180deg);
-  -o-transform: rotate(-180deg);
-  transform: rotate(-180deg);
-}
-
-.select2-container--open .select2-dropdown--below {
-  border: none;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  border: 1px solid #e0e0e0;
-  margin-top: 5px;
-  overflow: hidden;
-}
-
-/* ==========================================================================
-   #TITLE
-   ========================================================================== */
-.title {
-  margin-bottom: 37px;
-}
-
-/* ==========================================================================
-   #CARD
-   ========================================================================== */
-.card {
-  overflow: hidden;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  background: #fff;
-}
-
-.card-1 {
-  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-1 h1.card-heading {
-  padding-top: 50px;
-  align-content: center;
-}
-
-.card-1 .card-body {
-  padding: 0 90px;
-  padding-top: 55px;
-  padding-bottom: 65px;
-}
-
-@media (max-width: 767px) {
-  .card-1 .card-body {
-    padding: 0 40px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-}
-/* ==========================================================================
-   #INDEX 추가
-   ========================================================================== */
-header {
-	height: 50px;
-	background-color: black;
+.button:hover:before, .button:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }

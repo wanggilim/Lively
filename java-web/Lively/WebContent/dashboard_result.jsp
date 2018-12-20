@@ -65,7 +65,8 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="resources/css/common/material.min.css">
-<link rel="stylesheet" href="resources/css/dashboard/dashboard_result.css">
+<link rel="stylesheet"
+	href="resources/css/dashboard/dashboard_result.css">
 <style>
 #view-source {
 	position: fixed;
@@ -82,14 +83,18 @@
 	class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
+		<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+
 		<header
 			class="mdl-layout__header mdl-layout__header--scroll mdl-color--grey-900">
 
 			<div class="mdl-layout--large-screen-only mdl-layout__header-row">
-				<h3>Lively</h3>
+				<div class="logo-header">
+					<h3>Lively</h3>
+				</div>
 
 				<div class="mdl-layout-spacer"></div>
-				
+
 				<!-- 검색창1 -->
 				<span class="search-window"> <input type="text"
 					placeholder="단어 검색" class="search-main"><br>
@@ -98,10 +103,32 @@
 				<!-- 검색창1 끝 -->
 
 				<div class="mdl-layout-spacer"></div>
-	
-				<!-- 마이 페이지 관련 버튼 -->
-				<img alt="account" src="resources/images/common/account_2x_w.png"
-					class="#" id="#">
+
+				<c:if test="${userMail==null }">
+				<button class="mdl-button mdl-js-button mdl-button--raised"
+						onclick="location.href='member/signIn.do'">로그인</button>
+<%-- 					<button class="mdl-button mdl-js-button mdl-button--raised">
+						<a href="${path}/member/signIn.do" style="color: white">로그인</a>
+					</button> --%>
+				</c:if>
+				<c:if test="${userMail!=null }">
+
+
+					<!-- 관리자 관리 관련 버튼 -->
+					<c:if test="${member.getUserLevel()<=3 }">
+						<img alt="manage" src="resources/images/common/group_2x.png"
+							class="manage-icon" id="manage"> &nbsp;&nbsp;&nbsp;	
+					</c:if>
+
+					<!-- 마이 페이지 관련 버튼 -->
+					<img alt="myPage" src="resources/images/common/account_2x_w.png"
+						class="myPage-icon" id="myPage"> &nbsp;&nbsp;&nbsp;
+						<!-- 로그아웃 관련 버튼 -->
+					<button class="mdl-button mdl-js-button mdl-button--raised"
+						onclick="location.href='member/signOut.do'">로그아웃</button>
+				</c:if>
+
+
 			</div>
 		</header>
 
