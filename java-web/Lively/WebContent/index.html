@@ -1,102 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<!-- Required meta tags-->
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Colorlib Templates">
+<meta name="author" content="Colorlib">
+<meta name="keywords" content="Colorlib Templates">
+
+<!-- Title Page-->
 <title>index•Lively</title>
-<script src="resources/js/common/jquery-3.3.1.min.js"></script>
-<script>
 
-/* 	function getAllUrlParams(url) {
-	var queryString = url.su
-	} */
+<!-- Icons font CSS-->
+<link
+	href="resources/css/member/vendor/mdi-font/css/material-design-iconic-font.min.css"
+	rel="stylesheet" media="all">
+<link
+	href="resources/css/member/vendor/font-awesome-4.7/css/font-awesome.min.css"
+	rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+	rel="stylesheet">
 
-	$(document).ready(function() {
-		//1. 로고 클릭 (index.html로 이동)
-		$(".logo").click(function() {
-/* 			var member = "<%= Session["member"]%>";
-			if (member==null){
-				location.href="index.html";
-			}else { */
-				location.href="dashboard.html";
-			/* } */
-		});
-		//2. 로그인 클릭 (signIn.html로 이동)
-		$(".login").click(function() {
-			location.href="member/signIn.html";
-		});
-		//3. 회원가입 클릭 (signUp.html로 이동)
-		$(".signup").click(function() {
-			location.href="member/signUp.html";
-		});
+<!-- Vendor CSS-->
+<link href="resources/css/member/vendor/select2/select2.min.css"
+	rel="stylesheet" media="all">
+<link href="resources/css/member/vendor/datepicker/daterangepicker.css"
+	rel="stylesheet" media="all">
 
-	});
-</script>
+<!-- Main CSS-->
+<link href="resources/css/index.css" rel="stylesheet" media="all">
 
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="resources/images/android-desktop.png">
-
-<!-- Add to homescreen for Safari on iOS -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Material Design Lite">
-<link rel="apple-touch-icon-precomposed" href="resources/images/common/ios-desktop.png">
-
-
-<meta name="msapplication-TileImage"
-	content="images/touch/ms-touch-icon-144x144-precomposed.png">
-<meta name="msapplication-TileColor" content="#3372DF">
-
-<link rel="shortcut icon" href="resources/images/common/favicon.png">
-
-
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="resources/css/common/material.teal-red.min.css">
-<link rel="stylesheet" href="resources/css/common/styles.css">
-<style>
-#view-source {
-	position: fixed;
-	display: block;
-	right: 0;
-	bottom: 0;
-	margin-right: 40px;
-	margin-bottom: 40px;
-	z-index: 900;
-}
-</style>
 </head>
+
 <body>
-
-	<div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-		<div class="demo-container mdl-grid">
-			<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-			<div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
-				<div class="demo-crumbs mdl-color-text--grey-500"></div>
-				<div align="center">
-								
-					<!-- 로고 -->
-					<h1 class="logo">Lively</h1>
-
-					<!-- index 메뉴 버튼 -->
-					<div class="container">
-			<!--안정화 임시 로직 // 시작 //로그아웃	-->
-			<a href="member/signOut.do"> 로그아웃</a><br>
-			<!--안정화 임시 로직 // 끝-->
-						<div class="signup">회원가입</div>
-						<div class="login">로그인</div>
-
-						<!-- 메뉴0. 데모 이미지 -->
-						<div class="demo-form">
-							<!-- 임시 이미지 -->
-							<img alt="demo" src="resources/images/demo.jpg"><br>							
-						</div>						
-					</div><!-- class="container" 끝 -->
-				</div>
-			</div>
+	<header>
+		<div class="wrap-topright">
+			<a href="member/signUp.html" class="button">Sign Up</a> <a
+				href="member/signIn.html" class="button">Sign In</a>
+		</div>
+	</header>
+	<div class="page-wrapper bg-black p-t-100 p-b-100 font-robo">
+		<div class="wrapper wrapper--w680">
+			<section>
+				<h1 style="color: white">
+					LIVELY,<br>The Active<br>Dictionary
+				</h1>
+			</section>
 		</div>
 	</div>
 
+	<!-- Jquery JS-->
+	<script src="resources/css/member/vendor/jquery/jquery.min.js"></script>
+	<!-- Vendor JS-->
+	<script src="resources/css/member/vendor/select2/select2.min.js"></script>
+	<script src="resources/css/member/vendor/datepicker/moment.min.js"></script>
+	<script src="resources/css/member/vendor/datepicker/daterangepicker.js"></script>
+
+	<!-- Main JS-->
+	<script src="resources/js/common/global.js"></script>
+
 </body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+
 </html>
+<!-- end document-->

@@ -1,75 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>검색창•Lively</title>
-<link rel="stylesheet" href="resources/css/common/styles.css">
-<script src="resources/js/common/jquery-3.3.1.min.js"></script>
-<script src="resources/js/dashboard/dashboard.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="images/android-desktop.png">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description"
+	content="A front-end template that helps you build fast, modern mobile web apps.">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-<!-- Add to homescreen for Safari on iOS -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Material Design Lite">
-<link rel="apple-touch-icon-precomposed" href="resources/images/common/ios-desktop.png">
-
-
-<meta name="msapplication-TileImage"
-	content="resources/images/common/touch/ms-touch-icon-144x144-precomposed.png">
-<meta name="msapplication-TileColor" content="#3372DF">
-
-<link rel="shortcut icon" href="images/favicon.png">
-
+<title>main•Lively</title>
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="resources/css/common/material.teal-red.min.css">
-<link rel="stylesheet" href="resources/css/common/styles.css">
-<style>
-#view-source {
-	position: fixed;
-	display: block;
-	right: 0;
-	bottom: 0;
-	margin-right: 40px;
-	margin-bottom: 40px;
-	z-index: 900;
-}
-</style>
+<link href='resources/test/application.css' rel='stylesheet'
+	type='text/css'>
+<link rel="stylesheet" href="resources/css/common/material.min.css">
+<link rel="stylesheet" href="resources/css/common/styles.css" type="text/css">
+<script src="resources/js/common/jquery-3.3.1.min.js"></script>
+<script src="resources/js/dashboard/dashboard.js"></script>
+
+
 </head>
-<body>
-	<div
-		class="demo-mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-		<div class="demo-container mdl-grid">
-			<div
-				class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-			<div
-				class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
-				<div class="demo-crumbs mdl-color-text--grey-500"></div>
-				<div align="center">
-					<!-- 로고 -->
-					<h1 class="logo">Lively</h1>
-					<!-- 검색창 -->
-					<div class="search-container">
-						<!-- dashboard 검색창 -->
-						<span class="search-window">
-							<input type="text" placeholder="단어 검색" class="search-main"><br>
-						</span>
-						<img alt="search" src="resources/images/common/search_2x.png" class="search-icon" id="doSearch"><br>
-					</div>
-				</div>
-					<!-- class="container" 끝 -->
+
+<body class="index">
+		
+		<!-- 헤더 -->
+		<header
+			class="mdl-layout__header mdl-layout__header--scroll mdl-color--grey-900">
+
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row">
+				<h3>Lively</h3>
+
+				<div class="mdl-layout-spacer"></div>
+				
+				<!-- 검색창1 -->
+				<span class="search-window"> <input type="text"
+					placeholder="단어 검색" class="search-main"><br>
+				</span> <img alt="search" src="resources/images/common/search_2x_w.png"
+					class="search-icon" id="doSearch"><br>
+				<!-- 검색창1 끝 -->
+
+				<div class="mdl-layout-spacer"></div>
+	
+				<!-- 마이 페이지 관련 버튼 -->
+				<img alt="account" src="resources/images/common/account_2x_w.png"
+					class="search-icon" id="doSearch">
 			</div>
-		</div>
-	</div>
+		</header>
+		<!-- 헤터 끝 -->
+
+	<section id="container">
+
+		<section class="sample" id="headline">
+			<div class="logo_big">
+				<h1>Lively</h1>
+			</div>
+			
+			<div align="center">					
+				<section class="text">
+					<!-- dashboard 검색창 -->
+					<span class="search-window"> <input type="text"
+						placeholder="단어 검색" class="search-main"><br>
+					</span> 
+					<img alt="search" src="resources/images/common/search_2x_w.png"
+						class="search-icon" id="doSearch"><br>
+				</section>
+			</div>
+		</section>
+		</section>
+
 
 </body>
 </html>

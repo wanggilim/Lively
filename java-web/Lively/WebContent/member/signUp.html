@@ -1,28 +1,102 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<!-- //jquery library -->
-<script src="../resources/js/common/jquery-3.3.1.min.js"></script>
-<script src="../resources/js/member/signUp.js"></script> 
+<!-- Required meta tags-->
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Colorlib Templates">
+<meta name="author" content="Colorlib">
+<meta name="keywords" content="Colorlib Templates">
+
+<!-- Title Page-->
+<title>회원가입•Lively</title>
+
+<!-- Icons font CSS-->
+<link
+	href="../resources/css/member/vendor/mdi-font/css/material-design-iconic-font.min.css"
+	rel="stylesheet" media="all">
+<link
+	href="../resources/css/member/vendor/font-awesome-4.7/css/font-awesome.min.css"
+	rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+	rel="stylesheet">
+
+<!-- Vendor CSS-->
+<link href="../resources/css/member/vendor/select2/select2.min.css"
+	rel="stylesheet" media="all">
+<link
+	href="../resources/css/member/vendor/datepicker/daterangepicker.css"
+	rel="stylesheet" media="all">
+
+<!-- Main CSS-->
+<link href="../resources/css/member//main.css" rel="stylesheet"
+	media="all">
 </head>
+
 <body>
-<h1>회원가입</h1>
-<form name="join" action="signUp.do" method="post" onsubmit="return registerCheckFunction()">
-usermail : <input type = "text" name ="userMail" id="userMail"  placeholder="***@****.***">
-<!-- 간단 button 태트-> 일반 input type="button"으로 변경 후 정상 작동 확인 -->
-<input type="button" onclick="validateEmail();" value="중복체크"/><br>
-userpass : <input type = "password" name ="userPass" id="userPass"><br>
-최소 8문자, 최대 15문자까지 입력이 가능, 특수문자는 !, @, #, .(dot)으로 제한
-<br>
-gender : <input type = "radio" name="gender" value="M">남자 <input type = "radio" name="gender" value="F">여자<br>
-birthday : <input type = "date" name="birthday"><br>
-<input type = "reset" value="취소"><!-- .? : 한자가 있거나 없거나 아무거나   \. : 반드시 점 .:아무문자나  *영개 이상  /i: 대소문자  관계없다 /g: 대소문자 구분 3  @?:올려면 한 개만 없거나    +:한 개 이상 -:범위[]:선택-->
-<input type = "submit" value ="가입">
+	<div class="page-wrapper bg-black p-t-100 p-b-100 font-robo">
+		<div class="wrapper wrapper--w680">
+			<div class="card card-1">
+				<h1 class="card-heading" align="center">Lively</h1>
+				<div class="card-body">
+					<h3 class="title">회원가입</h3>
+					<form name="join" action="signUp.do" method="POST" onsubmit="return registerCheckFunction()">
+						<div class="input-group">
+							<input class="input--style-1" type="email" name ="userMail" id="userMail"  placeholder="이메일"
+								name="userMail" id="userMail">
+						</div>
+						<div class="input-group">
+							<input class="input--style-1" type="password" name ="userPass" id="userPass"placeholder="비밀번호"
+								name="userPass" id="userPass">
+						</div>
+						<div class="row row-space">
+							<div class="col-2">
+								<div class="input-group">
+									<input class="input--style-1 js-datepicker" type="text"
+										placeholder="생년월일" name="birthday"> <i
+										class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="input-group">
+									<div class="rs-select2 js-select-simple select--no-search">
+										<select name="gender">
+											<option disabled="disabled" selected="selected">성별</option>
+											<option>Male</option>
+											<option>Female</option>
+										</select>
+										<div class="select-dropdown"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="p-t-20">
+							<button class="btn btn--radius btn--black" type="reset">취소</button> &nbsp; &nbsp;  &nbsp; 
+							<button class="btn btn--radius btn--black" type="submit">가입</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<!-- Jquery JS-->
+	<script src="../resources/css/member/vendor/jquery/jquery.min.js"></script>
+	<!-- Vendor JS-->
+	<script src="../resources/css/member/vendor/select2/select2.min.js"></script>
+	<script src="../resources/css/member/vendor/datepicker/moment.min.js"></script>
+	<script
+		src="../resources/css/member/vendor/datepicker/daterangepicker.js"></script>
 
-</form>
+	<!-- Main JS-->
+	<script src="../resources/js/common/global.js"></script>
 
 </body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+
 </html>
+<!-- end document-->
