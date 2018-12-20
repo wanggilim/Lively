@@ -14,7 +14,6 @@ $(document).ready(function() {
 	
 	// 전송
 	$("#doSearch").click(function() {
-		//var $path = $(location).attr('host'); // 나중에는 바꿀 것
 		var $path = $(location).attr('pathname');
 		if ($path.endsWith('.jsp')) {
 			$path = $path.substr(0, $path.length-3);
@@ -27,4 +26,23 @@ $(document).ready(function() {
 		$(location).attr('href', $newPath+$param);
 	});
 	
+	$('.search-main').keyup(function(e){
+		if ((e.keyCode == '13' || e.which == '13')
+				&& $('.search-main').val() != '' && $('.search-main').val() != undefined
+				&& $('.search-main').val() != null) {
+			var $path = $(location).attr('pathname');
+			if ($path.endsWith('.jsp')) {
+				$path = $path.substr(0, $path.length-3);
+			} else {
+				$path = $path.substr(0, $path.length-2);
+			}
+			var $newPath = $path + 'do?';
+			var $param = 'word=' + $('.search-main').val();
+			
+			$(location).attr('href', $newPath+$param);
+		}
+	});
+	
 });
+
+
