@@ -23,7 +23,6 @@ $(document).ready(function() {
 		}
 		var $newPath = $path + 'do?';
 		var $param = 'word=' + $('.search-main').val();
-		alert($path + '\n' + $newPath);
 		
 		$(location).attr('href', $newPath+$param);
 	});

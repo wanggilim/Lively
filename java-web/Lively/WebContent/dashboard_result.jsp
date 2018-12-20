@@ -118,9 +118,15 @@
 						<h6 id="mean">${means }</h6>
 
 						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	시작 -->
-						Meaning: ex deserunt aute fugiat aute nulla ea sunt aliqua nisi
-						cupidatat eu.
+						Meaning
 						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	끝 -->
+						
+						<!-- 검색 유사 단어 -->
+						<br>
+						<c:forEach var="i" items="${perhapsKeywords }">
+							<h6 id="perhaps"><a href="./dashboard.do?word=${i } ">${i }</a> </h6> 
+						</c:forEach>
+						
 					</div>
 				</div>
 				<button
