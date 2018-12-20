@@ -114,13 +114,19 @@
 				class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 				<div class="mdl-card mdl-cell mdl-cell--12-col">
 					<div class="mdl-card__supporting-text">
-						<h4 id="word">${word }</h4>
+						<h2 id="word" align="center">${word }</h2>
 						<h6 id="mean">${means }</h6>
 
 						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	시작 -->
-						Meaning: ex deserunt aute fugiat aute nulla ea sunt aliqua nisi
-						cupidatat eu.
+						Meaning
 						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	끝 -->
+						
+						<!-- 검색 유사 단어 -->
+						<br><br>
+						<c:forEach var="i" items="${perhapsKeywords }">
+							<a id="perhaps" href="./dashboard.do?word=${i }">${i }</a>&nbsp;&nbsp; 
+						</c:forEach>
+						
 					</div>
 				</div>
 				<button
