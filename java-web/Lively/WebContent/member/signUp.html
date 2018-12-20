@@ -58,30 +58,29 @@
 					<h3 class="title">회원가입</h3>
 					<form name="join" action="signUp.do" method="POST" onsubmit="return registerCheckFunction();">
 						<div class="input-group">
-							<input class="input--style-1" type="email" name ="userMail" id="userMail"  placeholder="이메일"
-								name="userMail" id="userMail">
+							<input class="input--style-1" type="email" name ="userMail" id="userMail"  placeholder="이메일">
 						</div>
 						<div class="input-group">
-							<input class="input--style-1" type="password" name ="userPass" id="userPass"placeholder="비밀번호"
-								name="userPass" id="userPass">
+							<input class="input--style-1" type="password" name ="userPass" id="userPass"placeholder="비밀번호">
 						</div>
 						<div class="row row-space">
 							<div class="col-2">
 								<div class="input-group">
-									<input class="input--style-1 js-datepicker" type="text"
-										placeholder="생년월일" name="birthday"> <i
-										class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+									<input class="input--style-1 js-datepicker" type="date"
+										placeholder="생년월일" name="birthday">
+										<i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
 								</div>
 							</div>
 							<div class="col-2">
 								<div class="input-group">
 									<div class="rs-select2 js-select-simple select--no-search">
-										<select name="gender">
-											<option disabled="disabled" selected="selected">성별</option>
-											<option>Male</option>
-											<option>Female</option>
+										<div class="select2-dropdown--below">
+										성별&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="gender">
+											<option disabled="disabled">성별</option>
+											<option value="M">남성</option>
+											<option value="F">여성</option>
 										</select>
-										<div class="select-dropdown"></div>
+										</div>
 									</div>
 								</div>
 							</div>
