@@ -35,6 +35,18 @@
 <!-- Main CSS-->
 <link href="../resources/css/member//main.css" rel="stylesheet"
 	media="all">
+	
+	<!-- Jquery JS-->
+	<script src="../resources/css/member/vendor/jquery/jquery.min.js"></script>
+	<!-- Vendor JS-->
+	<script src="../resources/css/member/vendor/select2/select2.min.js"></script>
+	<script src="../resources/css/member/vendor/datepicker/moment.min.js"></script>
+	<script
+		src="../resources/css/member/vendor/datepicker/daterangepicker.js"></script>
+
+	<!-- Main JS-->
+	<script src="../resources/js/common/global.js"></script>		
+	<script src="../resources/js/member/signUp.js"></script>
 </head>
 
 <body>
@@ -44,7 +56,7 @@
 				<h1 class="card-heading" align="center">Lively</h1>
 				<div class="card-body">
 					<h3 class="title">회원가입</h3>
-					<form name="join" action="signUp.do" method="POST" onsubmit="return registerCheckFunction()">
+					<form name="join" action="signUp.do" method="POST" onsubmit="return registerCheckFunction();">
 						<div class="input-group">
 							<input class="input--style-1" type="email" name ="userMail" id="userMail"  placeholder="이메일"
 								name="userMail" id="userMail">
@@ -84,16 +96,6 @@
 		</div>
 	</div>
 
-	<!-- Jquery JS-->
-	<script src="../resources/css/member/vendor/jquery/jquery.min.js"></script>
-	<!-- Vendor JS-->
-	<script src="../resources/css/member/vendor/select2/select2.min.js"></script>
-	<script src="../resources/css/member/vendor/datepicker/moment.min.js"></script>
-	<script
-		src="../resources/css/member/vendor/datepicker/daterangepicker.js"></script>
-
-	<!-- Main JS-->
-	<script src="../resources/js/common/global.js"></script>
 
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->
