@@ -19,7 +19,7 @@
 	href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href='resources/test/application.css' rel='stylesheet'
+<link href='resources/css/dashboard/dashboard.css' rel='stylesheet'
 	type='text/css'>
 <link rel="stylesheet" href="resources/css/common/material.min.css">
 <link rel="stylesheet" href="resources/css/common/styles.css" type="text/css">
@@ -39,22 +39,15 @@
 				<h3>Lively</h3>
 
 				<div class="mdl-layout-spacer"></div>
-				
-				<!-- 검색창1 -->
-				<span class="search-window"> <input type="text"
-					placeholder="단어 검색" class="search-main"><br>
-				</span> <img alt="search" src="resources/images/common/search_2x_w.png"
-					class="search-icon" id="doSearch"><br>
-				<!-- 검색창1 끝 -->
 
 				<div class="mdl-layout-spacer"></div>
 	
 				<!-- 마이 페이지 관련 버튼 -->
 				<img alt="account" src="resources/images/common/account_2x_w.png"
-					class="search-icon" id="doSearch">
+					class="#" id="#">
 			</div>
 		</header>
-		<!-- 헤터 끝 -->
+		<!-- 헤더 끝 -->
 
 	<section id="container">
 
