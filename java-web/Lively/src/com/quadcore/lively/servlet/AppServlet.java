@@ -161,7 +161,7 @@ public class AppServlet extends HttpServlet {
 			session.setAttribute("member", member);
 
 			//대쉬보드로 보내야한다
-			String page ="/index.jsp";
+			String page ="/dashboard.jsp";
 			response.sendRedirect(path+page);
     	}
 
