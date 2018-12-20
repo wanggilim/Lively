@@ -142,6 +142,18 @@ span a{
 	vertical-align: top;
 	cursor: pointer;
 }
+.myPage-icon {
+	margin: 0; border: 0;
+	vertical-align: top;
+	cursor: pointer;
+}
+.manage-icon {
+	margin: 0; border: 0;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+
 /* .input-with-img input[type=text] {
 	padding-left: 40px;
 }

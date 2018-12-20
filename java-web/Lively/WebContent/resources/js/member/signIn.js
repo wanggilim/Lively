@@ -10,12 +10,16 @@
 
 $(document).ready(function() {
 
-	$(".card-heading").click(function() {
+/*	$(".card-heading").click(function() {
 		location.href = "../";
-	});
+	});*/
 
 	$(".signup").click(function() {
 		location.href = "signUp.html";
 	});
-
+	
+	$(".sign-logo").click(function() {
+		location.href = "../index.html";
+	});
+	 
 });
