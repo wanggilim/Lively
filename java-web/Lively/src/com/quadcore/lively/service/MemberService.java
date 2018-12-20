@@ -51,13 +51,8 @@ public class MemberService{
 		return dao.getUserMail(userMail);
 	}
 	
-	//level만 받는 건 필요 없음-> getUserInfo()로 대체
-/*	public MemberVO getUserLevel(String userMail) {
-		return dao.getUserLevel(userMail);
-	}*/
-
-	public Object deleteUserFromUserMail(int userNo) {
-		String sql ="delete from member where userNo="+userNo;
+	public Object deleteUserFromUserMail(String userMail) {
+		String sql ="delete from member where userMail='"+userMail +"'";
 		return dao.st_execute(sql);
 	}
 

@@ -119,6 +119,8 @@ public class AppServlet extends HttpServlet {
 		}
 
 	}
+	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -137,13 +139,8 @@ public class AppServlet extends HttpServlet {
     	if (action.equals("/admin/userDelete")) {
     		System.out.println("계정 삭제");
     		MemberController control = new MemberController();
-    		String suserNo = request.getParameter("userNo");
-    		String userPass =null;
-    		int userNo = Integer.parseInt(suserNo);
-    		if( request.getParameter("userPass") != null) {
-    		userPass = request.getParameter("userPass");
-    		}
-    		control.deleteUserFromUserMail(userNo);
+    		String userMail = request.getParameter("userMail");
+    		control.deleteUserFromUserMail(userMail);
     		response.sendRedirect(path + "/admin/admin.jsp");
 		}
 
@@ -196,6 +193,7 @@ public class AppServlet extends HttpServlet {
 			session.setAttribute("memberList", memberList);
 			response.sendRedirect(path+"/admin/adminRef.jsp");
 		}
+		
 		//5 admin.jsp 업데이트
 		if(action.equals("/admin/adminUpdate")) {
 			HttpSession session = request.getSession();
@@ -225,29 +223,27 @@ public class AppServlet extends HttpServlet {
 				MemberController uControl = new MemberController();
 				HttpSession session = request.getSession();
 				String userMail = (String)session.getAttribute("userMail");
-				MemberVO member = uControl.getUserLevel(userMail);
+				MemberVO member = uControl.getUserInfo(userMail);
 				session.setAttribute("member", member);
 				System.out.println(member.toString());
     			response.sendRedirect(path+"/member/userUpdateInfo.jsp");
     	}
 
-			if (action.equals("/member/userMailDuplication")) {
-				System.out.println("/member/userMailDuplication");
-				MemberController control = new MemberController();
-				// ajax로 중복 확인
-				String userMail = request.getParameter("userMail");
-				System.out.println(userMail);
-				result = control.registerCheck(userMail);
-				System.out.println(result);
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().print(result);
-				// (하단 코드에 대한 역할은 signUp.js 에서 처리하도록 수정하였음. 하단 코드는 원본코드.)
-				//response.getWriter().print(result==1?"사용할 수 없는 이메일입니다.":"사용할 수 있는 이메일입니다.");
-				//return;
-    }
+		if (action.equals("/member/userMailDuplication")) {
+			System.out.println("/member/userMailDuplication");
+			MemberController control = new MemberController();
+			// ajax로 중복 확인
+			String userMail = request.getParameter("userMail");
+			System.out.println(userMail);
+			result = control.registerCheck(userMail);
+			System.out.println(result);
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().print(result);
+			// (하단 코드에 대한 역할은 signUp.js 에서 처리하도록 수정하였음. 하단 코드는 원본코드.)
+			//response.getWriter().print(result==1?"사용할 수 없는 이메일입니다.":"사용할 수 있는 이메일입니다.");
+			//return;
+		}
 
-
-<<<<<<< HEAD
     	// 1. 회원가입
 		/**
 		 * 변경사항 체크! (\/member\/signUp)+(\/member\/userMailDuplication)
@@ -295,8 +291,6 @@ public class AppServlet extends HttpServlet {
 
 			String userMail = request.getParameter("userMail");
 			String userPass = request.getParameter("userPass");
-			int authUser = 0;
-
 			int authUser = user.getUserAuth(userMail, userPass);
 
 
@@ -305,7 +299,7 @@ public class AppServlet extends HttpServlet {
 				MemberController control = new MemberController();
 				HttpSession session = request.getSession();
 				session.setAttribute("userMail", userMail);
-				MemberVO member = control.getUserLevel(userMail);
+				MemberVO member = control.getUserInfo(userMail);
 				session.setAttribute("member", member);
 				int userLevel = member.getUserLevel();
 				if(userLevel >= 4 ) {
@@ -316,18 +310,18 @@ public class AppServlet extends HttpServlet {
 				response.sendRedirect(path+"/admin/admin.jsp");
 				}
 
-		}else {
-			//일치하지 않을 경우 경고창을 띄우고 로그인화면으로 보냄
-			//크롬에서 지원하지 않음.
-		/*	PrintWriter out = response.getWriter();
-			response.setContentType("text/html; charset=utf-8");
-
-			out.println("<script>alert('계정이 등록 되었습니다')</script>");
-
-			out.flush();*/
-			response.sendRedirect(path+"/member/signIn2.html");
+			}else {
+				//일치하지 않을 경우 경고창을 띄우고 로그인화면으로 보냄
+				//크롬에서 지원하지 않음.
+			/*	PrintWriter out = response.getWriter();
+				response.setContentType("text/html; charset=utf-8");
+	
+				out.println("<script>alert('계정이 등록 되었습니다')</script>");
+	
+				out.flush();*/
+				response.sendRedirect(path+"/member/signIn2.html");
+			}
 		}
-	}
 
 
 		// 관리자 등록
@@ -345,7 +339,7 @@ public class AppServlet extends HttpServlet {
 			Date birthday = null;
 			if (sbirthday != null && !sbirthday.equals("")) {
 				birthday = DateUtil.stringToDate(sbirthday);
-		}
+			}
 			MemberVO member = new MemberVO(userMail, userPass, userLevel, gender, birthday);
 			//DB에 회원 등록
 			control.insertAdmin(member);
@@ -353,9 +347,6 @@ public class AppServlet extends HttpServlet {
 			//회원가입 후 인덱스로 이동
 			//(이 주석은 확인 후 삭제) 추후에 index.jsp 로 넘어가거나 dashboard 화면으로 넘어갈지 결정해야함.
 			response.sendRedirect(path+page);
+		}
 	}
-
-
-
-
-	}
+}

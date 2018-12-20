@@ -27,14 +27,9 @@ public class MemberController {
 			return service.getUserMail(userMail);
 		}
 
-		//멤버 레벨 얻기
-		public MemberVO getUserLevel(String userMail) {
-			// TODO Auto-generated method stub
-			return service.getUserLevel(userMail);
-		}
 		//멤버 삭제
-		public Object deleteUserFromUserMail(int userNo) {
-			return service.deleteUserFromUserMail(userNo);
+		public Object deleteUserFromUserMail(String userMail) {
+			return service.deleteUserFromUserMail(userMail);
 
 		}
 		//멤버 수정
