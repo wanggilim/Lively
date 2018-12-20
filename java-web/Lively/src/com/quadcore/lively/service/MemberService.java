@@ -51,7 +51,7 @@ public class MemberService{
 		return dao.getUserMail(userMail);
 	}
 	
-	public Object deleteUserFromUserMail(String userMail) {
+	public int deleteUserFromUserMail(String userMail) {
 		String sql ="delete from member where userMail='"+userMail +"'";
 		return dao.st_execute(sql);
 	}

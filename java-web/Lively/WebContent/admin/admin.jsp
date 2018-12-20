@@ -21,27 +21,24 @@ function retrieve(){
       document.getElementById("here").innerHTML = this.responseText;// here라는 id를 가진 곳에 this.responseText의 결과 값을 넣어버림
     }
   };
-  xhttp.open("GET","adminInfo.do?"+param); //get방식으로 보낸다.
+  xhttp.open("POST","adminInfo.do?"+param); //get방식으로 보낸다.
   xhttp.send();
 
 }
 
-function memberDelete(userNo){
+function memberDelete(){
 	ret = confirm("삭제");
 	if(ret) 
-		location.href="userDelete.do?userNo="+userNo;
+		return true;
+	return false;	
  }
  
  
-function memberUpdate(userNo, userPass, userMail, userLevel, gender, birthday){
+function memberUpdate(){
 	 ret = confirm("수정하시겠습니까?");
 	 if(ret)  
-		location.href="adminUpdate.do?userNo="+userNo
-					+"&userPass="+userPass
-					+"&userMail="+userMail
-					+"&userLevel="+userLevel
-					+"&gender="+gender
-					+"&birthday="+birthday;
+		return true;
+return false;
 }
 
 

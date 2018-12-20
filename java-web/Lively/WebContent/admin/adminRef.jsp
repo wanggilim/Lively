@@ -29,16 +29,28 @@
 	<td>${member.userLevel}</td>
 	<td>${member.gender}</td>
 	<td>${member.birthday}</td>
-	<td><button onclick="memberDelete(${member.userNo});">Delete</button></td>
-	<td><button onclick="memberUpdate('${member.userNo}',
-										'${member.userPass}',
-										'${member.userMail}',
-										'${member.userLevel}',
-										'${member.gender}',
-										'${member.birthday}')">
-										Update
-										</button>	
-	
+	<td>
+	<form action="userDelete.do?" method="Post" onsubmit="memberDelete()">
+	<input type="hidden" name="userNo" value="${member.userNo}">
+	<input type="hidden" name="userMail" value="${member.userMail}">
+	<input type="hidden" name="userPass" value="${member.userPass}">
+	<input type="hidden" name="userLevel" value="${member.userLevel}">
+	<input type="hidden" name="gender" value="${member.gender}">
+	<input type="hidden" name="birthday" value="${member.birthday}">
+	<input type="submit" value="Delete">
+	</form>
+	</td>
+	<td>
+	<form action="adminUpdate.do" onsubmit="return memberUpdate();" method="Post">
+	<input type="hidden" name="userNo" value="${member.userNo}">
+	<input type="hidden" name="userMail" value="${member.userMail}">
+	<input type="hidden" name="userPass" value="${member.userPass}">
+	<input type="hidden" name="userLevel" value="${member.userLevel}">
+	<input type="hidden" name="gender" value="${member.gender}">
+	<input type="hidden" name="birthday" value="${member.birthday}">
+	<input type="submit" value="Update" >					
+	</form>
+	</td>
 </tr>
 </c:forEach>
 

@@ -28,7 +28,7 @@ public class MemberController {
 		}
 
 		//멤버 삭제
-		public Object deleteUserFromUserMail(String userMail) {
+		public int deleteUserFromUserMail(String userMail) {
 			return service.deleteUserFromUserMail(userMail);
 
 		}

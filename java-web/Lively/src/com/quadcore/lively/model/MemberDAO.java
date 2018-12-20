@@ -203,7 +203,7 @@ public class MemberDAO{
 	}
 	
 	//sql 실행
-	public Object st_execute(String sql) {
+	public int st_execute(String sql) {
 
 		Connection conn = null;
 		Statement st =null;
@@ -300,15 +300,14 @@ public class MemberDAO{
 		PreparedStatement st = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		try {			
+		try {
+			
 			conn = OracleDBUtil.dbConnect();
 			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
-			rs = st.executeQuery();
 			
-			while(rs.next()) {
-				member = new MemberVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getDate(6));
-			}
+			rs = st.executeQuery();
+
 			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -137,10 +137,11 @@ public class AppServlet extends HttpServlet {
 
     	// 1. 유저 계정 삭제
     	if (action.equals("/admin/userDelete")) {
-    		System.out.println("계정 삭제");
+    	
     		MemberController control = new MemberController();
     		String userMail = request.getParameter("userMail");
     		control.deleteUserFromUserMail(userMail);
+    	
     		response.sendRedirect(path + "/admin/admin.jsp");
 		}
 
@@ -155,6 +156,7 @@ public class AppServlet extends HttpServlet {
 			String setUserPass = request.getParameter("setUserPass");
 			String setUserGender = request.getParameter("setUserGender");
 			String ssetUserBirthday = request.getParameter("setUserBirthday");
+
 			Date setUserBirthday=null;
 			if(ssetUserBirthday != "") {
 			   setUserBirthday = DateUtil.stringToDate(ssetUserBirthday);
@@ -183,11 +185,12 @@ public class AppServlet extends HttpServlet {
 
 		//4. admin 페이지 조건 검색
 		if(action.equals("/admin/adminInfo")) {
+			System.out.println("adminInfo");
 			MemberController control = new MemberController();
 			List<MemberVO> memberList = new ArrayList<>();
 			String userMail = request.getParameter("userMail");
 			int userLevel = Integer.parseInt(request.getParameter("userLevel"));
-			System.out.println(userMail+userLevel);
+			
 			memberList= (List<MemberVO>)control.selectByLevelMail(userLevel,userMail);
 			HttpSession session = request.getSession();
 			session.setAttribute("memberList", memberList);
@@ -196,6 +199,7 @@ public class AppServlet extends HttpServlet {
 		
 		//5 admin.jsp 업데이트
 		if(action.equals("/admin/adminUpdate")) {
+			System.out.println("-----------------------------------");
 			HttpSession session = request.getSession();
 			int userNo = Integer.parseInt(request.getParameter("userNo"));
 			String userPass = request.getParameter("userPass");
@@ -203,16 +207,22 @@ public class AppServlet extends HttpServlet {
 			int userLevel = Integer.parseInt(request.getParameter("userLevel"));
 			String gender = request.getParameter("gender");
 			String sbirthday = request.getParameter("birthday");
-			Date birthday = DateUtil.stringToDate(sbirthday);
+			Date birthday=null;
+			if(sbirthday != "") {
+			birthday = DateUtil.stringToDate(sbirthday);
+			}
 			MemberVO member = new MemberVO(userNo,userPass,userMail,userLevel,gender,birthday);
 			session.setAttribute("member", member);
-
 			String page="/admin/adminUpdate.jsp";
-
+			
 			if(request.getParameter("setMemberLevel") != null) {
+
 				int setMemberLevel =Integer.parseInt(request.getParameter("setMemberLevel"));
+		
 				MemberController control = new MemberController();
+				System.out.println("setMemberLevel= "+request.getParameter("setMemberLevel"));
 				control.updateByMemberNo(member, setMemberLevel);
+	
 				page="/admin/admin.jsp";
 			}
 			response.sendRedirect(path+page);
