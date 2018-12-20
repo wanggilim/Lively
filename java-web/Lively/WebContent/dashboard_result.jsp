@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!--
   Material Design Lite
   Copyright 2015 Google Inc. All rights reserved.
@@ -28,8 +28,8 @@
 	content="A front-end template that helps you build fast, modern mobile web apps.">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	
-<title>detail•Lively</title>
+
+<title>result•Lively</title>
 <!-- js css 리소스  경로 -->
 <link rel="stylesheet" href="resources/css/common/styles.css">
 <script src="resources/js/common/jquery-3.3.1.min.js"></script>
@@ -64,9 +64,8 @@
 	href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet"
-	href="resources/css/common/material.min.css">
-<link rel="stylesheet" href="resources/css/dashboard/dashboard.css">
+<link rel="stylesheet" href="resources/css/common/material.min.css">
+<link rel="stylesheet" href="resources/css/dashboard/dashboard_result.css">
 <style>
 #view-source {
 	position: fixed;
@@ -84,34 +83,30 @@
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
 		<header
-			class="mdl-layout__header mdl-layout__header--scroll mdl-color--grey-300">
+			class="mdl-layout__header mdl-layout__header--scroll mdl-color--grey-900">
 
 			<div class="mdl-layout--large-screen-only mdl-layout__header-row">
 				<h3>Lively</h3>
 
 				<div class="mdl-layout-spacer"></div>
+				
 				<!-- 검색창1 -->
-				
-				<span class="search-window">
-							<input type="text" placeholder="단어 검색" class="search-main"><br>
-						</span>
-						<img alt="search" src="resources/images/common/search_2x.png" class="search-icon" id="doSearch"><br>
-				
+				<span class="search-window"> <input type="text"
+					placeholder="단어 검색" class="search-main"><br>
+				</span> <img alt="search" src="resources/images/common/search_2x_w.png"
+					class="search-icon" id="doSearch"><br>
 				<!-- 검색창1 끝 -->
 
 				<div class="mdl-layout-spacer"></div>
-
-				<!-- FAB button -->
-				<button class="mdl-button mdl-js-button mdl-button--fab">
-					<i class="material-icons">add</i>
-				</button>
+	
+				<!-- 마이 페이지 관련 버튼 -->
+				<img alt="account" src="resources/images/common/account_2x_w.png"
+					class="search-icon" id="doSearch">
 			</div>
 		</header>
 
 
-		<main class="mdl-layout__content">
-
-		<!-- 콘텐츠 -->
+		<main class="mdl-layout__content"> <!-- 콘텐츠 -->
 		<div class="mdl-layout__tab-panel is-active" id="overview">
 
 			<!--1.검색 단어+뜻 매칭 // 시작 -->
@@ -121,10 +116,10 @@
 					<div class="mdl-card__supporting-text">
 						<h4 id="word">${word }</h4>
 						<h6 id="mean">${means }</h6>
-						
+
 						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	시작 -->
 						Meaning: ex deserunt aute fugiat aute nulla ea sunt aliqua nisi
-						cupidatat eu. 
+						cupidatat eu.
 						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	끝 -->
 					</div>
 				</div>
@@ -148,35 +143,50 @@
 			<!--1.검색 단어+뜻 매칭 // 끝 -->
 
 			<!--2.검색 결과 SNS 예문 // 시작 -->
-		<c:forEach var="i" items="${stmtVOList }" begin="0" end="${stmtVOList.size() }">
-			<section
-				class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-				<div class="mdl-card mdl-cell mdl-cell--12-col">
-					<div
-						class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-						<h4 class="mdl-cell mdl-cell--12-col">${i.getCellbNo() } 셀럽이름</h4>
+			<c:forEach var="i" items="${stmtVOList }" begin="0"
+				end="${stmtVOList.size() }">
+				<section
+					class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+					<div class="mdl-card mdl-cell mdl-cell--12-col">
 						<div
-							class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
-							<div class="section__circle-container__circle mdl-color--primary"></div>
-						</div>
-						<div
-							class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-							<h5>#계정아이디 |위치:${i.getLocation() }</h5>
-							${i.getStmt() }
+							class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+							<h4 class="mdl-cell mdl-cell--12-col">${i.getCellbNo() }
+								셀럽이름</h4>
+							<div
+								class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+								<div
+									class="section__circle-container__circle mdl-color--primary"></div>
+							</div>
+							<div
+								class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+								<h5>#계정아이디 |위치:${i.getLocation() }</h5>
+								${i.getStmt() }
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- 포스트 내, 옵션 버튼 (사용 x) -->
-			<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn2" data-upgraded=",MaterialButton,MaterialRipple">
-              <i class="material-icons">more_vert</i>
-            <span class="mdl-button__ripple-container"><span class="mdl-ripple is-animating" style="width: 92.4876px; height: 92.4876px; transform: translate(-50%, -50%) translate(14px, 13px);"></span></span></button>
-            <div class="mdl-menu__container is-upgraded" style="right: 7.98828px; top: 41px; width: 123.984px; height: 159.941px;"><div class="mdl-menu__outline mdl-menu--bottom-right" style="width: 123.984px; height: 159.941px;"></div><ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn2" data-upgraded=",MaterialMenu" style="clip: rect(0px, 123.984px, 0px, 123.984px);">
-              <li class="mdl-menu__item" tabindex="-1" style="">예문 저장</li>
-              <li class="mdl-menu__item" disabled="" tabindex="-1" style="">신고</li>
-            </ul></div> 
+					<!-- 포스트 내, 옵션 버튼 (사용 x) -->
+					<button
+						class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+						id="btn2" data-upgraded=",MaterialButton,MaterialRipple">
+						<i class="material-icons">more_vert</i> <span
+							class="mdl-button__ripple-container"><span
+							class="mdl-ripple is-animating"
+							style="width: 92.4876px; height: 92.4876px; transform: translate(-50%, -50%) translate(14px, 13px);"></span></span>
+					</button>
+					<div class="mdl-menu__container is-upgraded"
+						style="right: 7.98828px; top: 41px; width: 123.984px; height: 159.941px;">
+						<div class="mdl-menu__outline mdl-menu--bottom-right"
+							style="width: 123.984px; height: 159.941px;"></div>
+						<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn2"
+							data-upgraded=",MaterialMenu"
+							style="clip: rect(0px, 123.984px, 0px, 123.984px);">
+							<li class="mdl-menu__item" tabindex="-1" style="">예문 저장</li>
+							<li class="mdl-menu__item" disabled="" tabindex="-1" style="">신고</li>
+						</ul>
+					</div>
 
-			</section>
-		</c:forEach>
+				</section>
+			</c:forEach>
 			<!--2.검색 결과 SNS 예문 // 끝 -->
 
 

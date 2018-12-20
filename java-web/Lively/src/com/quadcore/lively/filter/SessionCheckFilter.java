@@ -104,8 +104,8 @@ public class SessionCheckFilter implements Filter {
 			// whiteList O && member X - dashboard.html로 보내기
 			if (member != null) {
 //				if (!uri.startsWith("/Lively/dashboard")) {
-					res.sendRedirect("/Lively/dashboard.html");
-					System.out.println("세션에 member 정보가 있어, 강제로 dashboard.html 이동");
+					res.sendRedirect("/Lively/dashboard.do");
+					System.out.println("세션에 member 정보가 있어, 강제로 dashboard 이동");
 //				}
 
 			}
