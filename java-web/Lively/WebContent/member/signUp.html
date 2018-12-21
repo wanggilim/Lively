@@ -36,20 +36,11 @@
 <link href="../resources/css/member/main.css" rel="stylesheet"
 	media="all">
 	
-	<!-- Jquery JS-->
-	<script src="../resources/css/member/vendor/jquery/jquery.min.js"></script>
-	<!-- Vendor JS-->
-	<script src="../resources/css/member/vendor/select2/select2.min.js"></script>
-	<script src="../resources/css/member/vendor/datepicker/moment.min.js"></script>
-	<script
-		src="../resources/css/member/vendor/datepicker/daterangepicker.js"></script>
 
-	<!-- Main JS-->
-	<script src="../resources/js/common/global.js"></script>		
-	<script src="../resources/js/member/signUp.js"></script>
 </head>
 
 <body>
+
 	<div class="page-wrapper bg-black p-t-100 p-b-100 font-robo">
 		<div class="wrapper wrapper--w680">
 			<div class="card card-1">
@@ -63,24 +54,25 @@
 						<div class="input-group">
 							<input class="input--style-1" type="password" name ="userPass" id="userPass"placeholder="비밀번호">
 						</div>
+						<h6 style="color: red">비밀번호 : 8~15자 입력 가능하고, 특수문자는 !, @, #, .(dot)만 사용 가능합니다.</h6>
+						<br><br>
 						<div class="row row-space">
 							<div class="col-2">
 								<div class="input-group">
-									<input class="input--style-1 js-datepicker" type="date"
-										placeholder="생년월일" name="birthday">
+									<input class="input--style-1 js-datepicker" type="text"
+										placeholder="생년월일" name="birthday" readonly>
 										<i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
 								</div>
 							</div>
 							<div class="col-2">
 								<div class="input-group">
 									<div class="rs-select2 js-select-simple select--no-search">
-										<div class="select2-dropdown--below">
-										성별&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="gender">
-											<option disabled="disabled">성별</option>
+										<select name="gender">
+											<option disabled="disabled" selected>성별</option>
 											<option value="M">남성</option>
 											<option value="F">여성</option>
 										</select>
-										</div>
+										<div class="select-dropdown"></div>
 									</div>
 								</div>
 							</div>
@@ -94,6 +86,18 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Jquery JS-->
+	<script src="../resources/css/member/vendor/jquery/jquery.min.js"></script>
+	<!-- Vendor JS-->
+	<script src="../resources/css/member/vendor/select2/select2.min.js"></script>
+	<script src="../resources/css/member/vendor/datepicker/moment.min.js"></script>
+	<script
+		src="../resources/css/member/vendor/datepicker/daterangepicker.js"></script>
+
+	<!-- Main JS-->
+	<script src="../resources/js/member/signUp.js"></script>
+	<script src="../resources/js/common/global.js"></script>		
 
 
 </body>
