@@ -7,7 +7,9 @@
 <title>관리자 등록</title>
 <!-- //jquery library -->
 <script src="../js/jquery-3.3.1.min.js"></script>
-<script src="js/signUp.js"></script> 
+<script src="js/signUp.js"></script>
+<link rel="stylesheet" href="resources/css/common/styles.css"
+	type="text/css"> 
 </head>
 <body>
 
@@ -20,6 +22,7 @@ gender : <input type = "radio" name="gender" value="M">남자 <input type = "rad
 birthday : <input type = "date" name="birthday"><br>
 <input type="submit" value="등록">
 </form>
+<button onclick="history.go(-1)">이전 화면으로 돌아가기</button>
 
 <!-- <form action="../member/signUp.do" >
 관리자 이메일   :<input type="text" name="adminEmail" ><br>

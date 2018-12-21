@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin Page</title>
+<link rel="stylesheet" href="resources/css/common/styles.css"
+	type="text/css">
 <script>
 
 //전체검색 ajax
@@ -47,7 +49,7 @@ return false;
 </head>
 <body>
 <h1> 관리자 페이지 </h1>
-<button><a href="adminInsert.jsp">관리자 등록</a></button>
+<button onclick="location.href='adminInsert.jsp'">관리자 등록</button>
 
 <p>
 메일: 
@@ -72,6 +74,9 @@ return false;
 <div id="emailList"></div>
 
 <div id="here"></div>
+
+<p>
+<button onclick="location.href='../dashboard.do'">Dashboard로 돌아가기</button>
 
 </body>
 </html>
