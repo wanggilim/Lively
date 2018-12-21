@@ -1,4 +1,4 @@
-package com.quadcore.lively.twitter.helper;
+package com.quadcore.lively.twitter.util;
 
 import com.quadcore.lively.twitter.config.TwitterConfiguration;
 

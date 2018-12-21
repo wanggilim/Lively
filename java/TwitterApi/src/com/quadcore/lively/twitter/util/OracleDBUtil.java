@@ -35,7 +35,8 @@ public class OracleDBUtil {
 	public static Connection dbConnect() {
 		Connection conn = null;
 		
-		String url = "jdbc:oracle:thin:@192.168.22.126:1522:xe";
+		//String url = "jdbc:oracle:thin:@192.168.22.126:1522:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "lively";
 		String pw = "1234";
 		
