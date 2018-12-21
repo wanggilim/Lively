@@ -39,8 +39,6 @@ public class SessionCheckFilter implements Filter {
 		whiteList.add("/Lively/member/signIn.html");
 		whiteList.add("/Lively/member/signIn2.html");
 		whiteList.add("/Lively/member/signUp.html");
-		whiteList.add("/Lively/member/signIn.do");
-		whiteList.add("/Lively/member/signIn2.do");
 		whiteList.add("/Lively/member/signUp.do");
 
 		// 다른 폴더("/resource/")(경로)에 있는 파일을 갖다쓸 경우 ex.이미지 파일
@@ -86,8 +84,8 @@ public class SessionCheckFilter implements Filter {
 				if (member == null) {
 //					if (!uri.startsWith("/Lively/index")) {
 						res = (HttpServletResponse) response;
-						res.sendRedirect("/Lively/index.html");
-						System.out.println("세션에 member 정보가 없어, 강제로 index.html 이동");
+						res.sendRedirect("/Lively/dashboard.do");
+						System.out.println("세션에 member 정보가 없어, 강제로 dashboard.do 이동");
 						return;
 //					}
 				}
