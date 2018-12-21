@@ -49,9 +49,11 @@ return false;
 <h1> 관리자 페이지 </h1>
 <button><a href="adminInsert.jsp">관리자 등록</a></button>
 
+<p>
 메일: 
 <input type="text" name="userMail" id="userMail"/>
 
+<p>
 등급: <select name="userLevel" id="userLevel">
 	<option value="0">모든 등급</option>
 	<option value="1">1</option>

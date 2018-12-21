@@ -315,13 +315,8 @@ public class AppServlet extends HttpServlet {
 				MemberVO member = control.getUserInfo(userMail);
 				session.setAttribute("member", member);
 				int userLevel = member.getUserLevel();
-				if(userLevel >= 4 ) {
 				// welcome page 전송
 				response.sendRedirect(path+"/dashboard.do");
-				}
-				else {
-				response.sendRedirect(path+"/admin/admin.jsp");
-				}
 
 			}else {
 				//일치하지 않을 경우 경고창을 띄우고 로그인화면으로 보냄
