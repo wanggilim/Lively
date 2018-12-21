@@ -8,18 +8,31 @@
 <title>나의 정보 수정</title>
 <!-- //jquery library -->
 <script src="../js/jquery-3.3.1.min.js"></script>
-<script src="/Lively/member/js/signUp.js"></script>
+<script src="../resources/js/member/signUp.js"></script>
 <link rel="stylesheet" href="../resources/css/member/main.css">
+<script>
+  	function userUpdate(index){
+  		var setUserPass = document.getElementById('setUserPass').value;
+  		if(index == 1){
+  			if(registerCheckUserpass(setUserPass)){
+  			document.join.action='userUpdate.do';
+  			}
+  		}else if(index == 2){
+  			document.join.action='userWithdrawal.do';
+  		}
+  		 document.myForm.submit();
+  	}
+</script>
 </head>
-<body>
 
+<body>
 	<div class="page-wrapper bg-black p-t-100 p-b-100 font-robo">
 		<div class="wrapper wrapper--w680">
 			<div class="card card-1">
 				<div class="sign-logo"><h1 class="card-heading" align="center">Lively</h1></div>
 				<div class="card-body">
 					<h3 class="title">회원 정보 수정</h3>
-					<form name="join" action="userUpdate.do" method="POST" onsubmit="return return userUpdateAjax();">
+					<form name="join" method="POST">
 						<div class="input-group" style="display:none;">
 							회원 넘버 <input class="input--style-1" type="text" name ="userNo" id="userNo" readonly>${member.userNo }
 						</div>
@@ -71,14 +84,16 @@
 							</div>
 						</div>
 						<div class="p-t-20">
-							<button class="btn btn--radius btn--black" type="reset">다시쓰기</button> &nbsp; &nbsp;  &nbsp;
-							<button class="btn btn--radius btn--black" type="submit">등록</button>
+              <input type="button" value="다시쓰기" class="btn btn--radius btn--black" type="reset"/>&nbsp; &nbsp;  &nbsp;
+              <input type="button" value="변경" class="btn btn--radius btn--black" onClick="userUpdate('1');"/>&nbsp; &nbsp;  &nbsp;
+							<input type="button" value="탈퇴" class="btn btn--radius btn--black" onclick="userUpdate('2');"/>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 </body>
 </html>

@@ -70,13 +70,9 @@ function registerCheckFunction() {
 }
 
 //나의 정보 수정 비밀번호 검증 
-function registerCheckUserpass(){
-	   
-  
-	var userPass = document.getElementById("userPass").value;
+function registerCheckUserpass(userpass){
 	var patternP = /^[A-Za-z0-9.+!@#]{8,15}$/;
-	
-	if(! patternP.test(userPass) ) {
+	if(! patternP.test(userpass) ) {
 		alert("비밀번호가 유효하지 않습니다.");
 		document.getElementById("userPass").focus();
 		return false;
