@@ -6,13 +6,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나의 정보 수정</title>
-<!-- //jquery library -->
-<script src="../js/jquery-3.3.1.min.js"></script>
-<script src="/Lively/member/js/signUp.js"></script> 
+<script src="../resources/js/member/signUp.js"></script>
+<script>
+	function userUpdate(index){
+		var setUserPass = document.getElementById('setUserPass').value;
+		if(index == 1){
+			if(registerCheckUserpass(setUserPass)){
+			document.myForm.action='userUpdate.do';
+			}
+		}else if(index == 2){
+			document.myForm.action='userWithdrawal.do';
+		}
+		 document.myForm.submit();
+	}
+</script>
 </head>
+
 <body>
 <h1> 회원 정보 수정 </h1>
-<form action="userUpdate.do" method ="POST" onsubmit="return userUpdateAjax();">
+<form name="myForm" method ="POST">
 <table>
 <tr>
 <td>회원 넘버: <span id="userPass">${member.userNo }</span></td>
@@ -24,7 +36,7 @@
 <td>회원 비번: ${member.userPass }</td> 
 </tr>
 <tr>
-<td>변경할 비밀번호:<input type="password" id="" name="setUserPass" value=""></td>
+<td>변경할 비밀번호:<input type="password" id="setUserPass" name="setUserPass" value=""></td>
 </tr>
 <tr>
 <td>회원 성별: ${member.gender }</td>
@@ -47,9 +59,11 @@
 	<option value="yes">연결</option>
 	<option value="no">연결해제</option>
 </select>
-<input type="submit" value="등록" >
+<input type="submit" value="변경" onClick="userUpdate('1');" >
 <input type="reset" value="초기화">
+<input type="submit" value="탈퇴" onClick="userUpdate('2');" >
 </form>
+
 
 </body>
 </html>

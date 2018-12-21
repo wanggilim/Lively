@@ -131,15 +131,13 @@ public class AppServlet extends HttpServlet {
 
     	// 1. 유저 계정 삭제
     	if (action.equals("/admin/userDelete")) {
-    	
     		MemberController control = new MemberController();
     		String userMail = request.getParameter("userMail");
     		control.deleteUserFromUserMail(userMail);
-    	
     		response.sendRedirect(path + "/admin/admin.jsp");
 		}
 
-
+    	
     	// 2. 유저 정보 수정
     	if (action.equals("/member/userUpdate")) {
     		MemberVO member = new MemberVO();
@@ -164,6 +162,18 @@ public class AppServlet extends HttpServlet {
 			String page ="/dashboard.jsp";
 			response.sendRedirect(path+page);
     	}
+    	
+    	// 2. 탈퇴
+    	if(action.equals("/member/userWithdrawal")) {
+    		MemberVO member = new MemberVO();
+    		HttpSession session = request.getSession();
+    		MemberController control = new MemberController();
+    		member = (MemberVO)session.getAttribute("member");
+    		control.deleteUserFromUserMail(member.getUserMail());
+    		session.invalidate();
+    		response.sendRedirect(path+"/index.html");
+    	}
+    	
 
     	// 3. 유저 정보 검색
     	if (action.equals("/admin/userInfo")) {
@@ -232,7 +242,7 @@ public class AppServlet extends HttpServlet {
 				System.out.println(member.toString());
     			response.sendRedirect(path+"/member/userUpdateInfo.jsp");
     	}
-
+   
 		if (action.equals("/member/userMailDuplication")) {
 			System.out.println("/member/userMailDuplication");
 			MemberController control = new MemberController();
