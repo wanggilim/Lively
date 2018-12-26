@@ -214,7 +214,7 @@ public class AppServlet extends HttpServlet {
 			if(sbirthday != "") {
 			birthday = DateUtil.stringToDate(sbirthday);
 			}
-			MemberVO member = new MemberVO(userNo,userPass,userMail,userLevel,gender,birthday);
+			MemberVO member = new MemberVO(userNo,userMail,userPass,userLevel,gender,birthday);
 			session.setAttribute("member", member);
 			String page="/admin/adminUpdate.jsp";
 			
