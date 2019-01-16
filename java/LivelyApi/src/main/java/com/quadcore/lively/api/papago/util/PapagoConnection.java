@@ -20,9 +20,13 @@ import org.apache.http.util.EntityUtils;
 import com.quadcore.lively.api.papago.config.PapagoConfiguration;
 
 public class PapagoConnection {
+	
+	private String papagoId;
+	private String papagoPass;
 
-	public PapagoConnection() {
-		
+	public PapagoConnection(String papagoId, String papagoPass) {
+		this.papagoId = papagoId;
+		this.papagoPass = papagoPass;
 	}
 	
 	public String[] getJson(String[] args) throws IOException {
@@ -49,8 +53,8 @@ public class PapagoConnection {
         
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
-        con.setRequestProperty("X-Naver-Client-Id", PapagoConfiguration.getClientId());
-        con.setRequestProperty("X-Naver-Client-Secret", PapagoConfiguration.getClientSecret());
+        con.setRequestProperty("X-Naver-Client-Id", papagoId);
+        con.setRequestProperty("X-Naver-Client-Secret", papagoPass);
         
         // post request
         String postParams = "source=en&target=ko&text=" + textEnglish;
@@ -116,8 +120,8 @@ public class PapagoConnection {
 		//agent 정보 설정
 		get.setHeader("User-Agent", "curl/7.49.1");
 		get.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-		get.addHeader("X-Naver-Client-Id", PapagoConfiguration.getClientId());
-		get.addHeader("X-Naver-Client-Secret", PapagoConfiguration.getClientSecret());
+		get.addHeader("X-Naver-Client-Id", papagoId);
+		get.addHeader("X-Naver-Client-Secret", papagoPass);
 		
 		
         //get 요청

@@ -17,7 +17,6 @@ public class PapagoService {
 	private String[] translatedTexts;
 
 	public PapagoService() {
-		translator = new PapagoTextTranslator();
 		fileDAO = new PapagoFileDAO();
 	}
 	
@@ -48,9 +47,10 @@ public class PapagoService {
 
 	
 	
-	private String[] translate(String filePath) {
+	private String[] translate(String papagoId, String papagoPass, String filePath) {
 		
 		try {
+			translator = new PapagoTextTranslator(papagoId, papagoPass);
 			translatedTexts = translator.translateEK(getFilteredTexts(filePath));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -64,10 +64,13 @@ public class PapagoService {
 		return fileDAO.saveAllSentencesToFile(directory, name, extensions, translatedTexts);
 	}
 	
-	/******************************************************/
+	/*******************************************************/
 	
-	public int translateAndSave(String directory, String name, String extensions) {
+	public int translateAndSave(
+			String papagoId, String papagoPass,
+			String directory, String name, String extensions) {
 		FileReaderWriter readerWriter = new FileReaderWriter();
+		
 		String[] loadedPaths = readerWriter.loadTsvPathsFromDirectory(directory);
 		String[] translatedTexts = null;
 		
@@ -75,7 +78,7 @@ public class PapagoService {
 		
 		// 번역
 		for (String path : loadedPaths) {
-			translatedTexts = translate(path);
+			translatedTexts = translate(papagoId, papagoPass, path);
 		}
 		
 		// 저장

@@ -15,8 +15,8 @@ import twitter4j.TwitterException;
 
 public class TwitterApiMain {
 	
-	public TwitterApiMain() {
-		main(null);
+	public TwitterApiMain(String screenName) {
+		main(new String[] {screenName});
 	}
 	
 	public static void main(String[] args) {
@@ -34,7 +34,7 @@ public class TwitterApiMain {
 //		}; // 검색할 트윗 스크린네임/계정명
 		
 		String[] namesToSearch = new String[] {
-				"realDonaldTrump"
+				args[0]
 		}; // 검색할 트윗 스크린네임/계정명
 		
 		

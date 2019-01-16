@@ -11,12 +11,16 @@ public class LivelyApiController {
 		service = new PapagoService();
 	}
 	
-	public void crawl() {
-		new TwitterApiMain();
+	public void crawl(String screenName) {
+		new TwitterApiMain(screenName);
 	}
 	
-	public int translateAndSave(String directory, String name, String extensions) {
-		return service.translateAndSave(directory, name, extensions);
+	public int translateAndSave(
+			String papagoId, String papagoPass,
+			String directory, String name, String extensions) {
+		return service.translateAndSave(
+				papagoId, papagoPass,
+				directory, name, extensions);
 	}
 	
 }

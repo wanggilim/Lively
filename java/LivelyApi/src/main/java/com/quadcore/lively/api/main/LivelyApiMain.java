@@ -1,5 +1,7 @@
 package com.quadcore.lively.api.main;
 
+import java.io.IOException;
+
 import com.quadcore.lively.api.controller.LivelyApiController;
 import com.quadcore.lively.api.twitter.main.TwitterApiMain;
 
@@ -11,6 +13,7 @@ public class LivelyApiMain {
 		menu = new LivelyApiMenu();
 
 		int swValue;
+		String strValue;
 
 		System.out.println(menu.showMainMenu());
 		swValue = Keyin.inInt("> ");
@@ -18,15 +21,30 @@ public class LivelyApiMain {
 		switch (swValue) {
 		case 1:
 			menu.clrscr();
-			LivelyApiController controller = new LivelyApiController();
+			System.out.println(menu.twitterInputMessage());
+			strValue = Keyin.inString("> ");
 			
+			String[] inputs = strValue.split(" ");
+			// 프로그램 종료
+			if (inputs[0].equals("0")) {
+				break;
+			}
+			
+			String screenName = inputs[0];
+			String papagoId = inputs[1];
+			String papagoPass = inputs[2];
+			
+			
+			
+			
+			LivelyApiController controller = new LivelyApiController();
 			// 수집
 			System.out.println(menu.twitterCrawlMessage());
-			controller.crawl();
+			controller.crawl(screenName);
 			
 			// 번역 + 저장
 			System.out.println(menu.twitterTSMessage());
-			controller.translateAndSave("./LivelyApiLogs/", "LivelyTwitter", "txt");
+			controller.translateAndSave(papagoId, papagoPass, "./LivelyApiLogs/", screenName, "txt");
 			break;
 		case 2:
 			menu.clrscr();
@@ -83,6 +101,14 @@ class Keyin {
 		}
 		return s;
 	}
+	
+	public static String inString(String prompt) {
+		while (true) {
+			inputFlush();
+			printPrompt(prompt);
+			return inString().trim();
+		}
+	}
 
 	public static int inInt(String prompt) {
 		while (true) {
@@ -97,5 +123,6 @@ class Keyin {
 			}
 		}
 	}
-
+	
+	
 }

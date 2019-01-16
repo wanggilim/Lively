@@ -9,8 +9,8 @@ public class PapagoTextTranslator {
 
 	private PapagoConnection conn;
 	
-	public PapagoTextTranslator() {
-		conn = new PapagoConnection();
+	public PapagoTextTranslator(String papagoId, String papagoPass) {
+		conn = new PapagoConnection(papagoId, papagoPass);
 	}
 	
 	public String[] translateEK(String[] englishTexts) throws IOException {

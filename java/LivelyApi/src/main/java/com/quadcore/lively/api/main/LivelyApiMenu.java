@@ -21,19 +21,26 @@ public class LivelyApiMenu {
 		
 		sb.append("========================\n")
 		.append("Lively Api\n")
-		.append("1) 트위터 데이터 수집 + 파파고 해석 시작\n"
-//				+ "예제 8계정\n" + 
-//				"(버락 오바마, 트럼프, 힐러리 클린턴,\n" + 
-//				"BBC, CNN, 아리랑, 코리아헤럴드, UN)\n")
-				+ "예제 1계정 (트럼프)\n")
+		.append("1) 트위터 데이터 수집 + 파파고 해석 시작\n")
 		.append("2) 종료하기\n")
 		.append("========================");
 		
 		return sb.toString();
 	}
 	
+	public String twitterInputMessage() {
+		sb = new StringBuffer();
+		
+		sb.append("\n")
+		.append("트위터 스크린네임(대소문자 구분)과 파파고 클라이언트 아이디와 비밀번호를 입력해주세요.\n")
+		.append("*** ex) realDonaldTrump I1D2 P3W4\n")
+		.append("0) 종료하기\n");
+		
+		return sb.toString();
+	}
+	
 	public String twitterCrawlMessage() {
-		return "트위터 문장 수집을 시작합니다.";
+		return "\n트위터 문장 수집을 시작합니다.";
 	}
 	
 	public String twitterTSMessage() {

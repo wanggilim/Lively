@@ -18,14 +18,14 @@ public class PapagoApiMain {
 	}
 
 	public static void main(String[] args) {
-		try {
-			PapagoConnection conn = new PapagoConnection();
-			
-			System.out.println(conn.getJson(args));
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			PapagoConnection conn = new PapagoConnection();
+//			
+//			System.out.println(conn.getJson(args));
+//			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }
