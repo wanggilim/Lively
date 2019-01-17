@@ -5,9 +5,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class FileReaderWriter {
@@ -140,7 +141,9 @@ public class FileReaderWriter {
 	public int saveToFile(String filePathAndName, String extensions, String[] befores, String[] afters) {
 		int result = 0;
 		
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePathAndName + "." + extensions, true));) {
+		try(BufferedWriter bw = new BufferedWriter(
+				new OutputStreamWriter(
+						new FileOutputStream(new File(filePathAndName + "." + extensions)), "UTF-8"));) {
 			
 			for (String text : afters) {
 				bw.write(text+"\n");
@@ -159,7 +162,9 @@ public class FileReaderWriter {
 	public int saveAllSentencesToFile(String directory, String name, String extensions, String[] translatedTexts) {
 		int result = 0;
 		
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(directory + name + "." + extensions, true));) {
+		try(BufferedWriter bw = new BufferedWriter(
+				new OutputStreamWriter(
+						new FileOutputStream(new File(directory + name + "." + extensions)), "UTF-8"));) {
 			
 			for (String text : translatedTexts) {
 				bw.write(text+"\n");

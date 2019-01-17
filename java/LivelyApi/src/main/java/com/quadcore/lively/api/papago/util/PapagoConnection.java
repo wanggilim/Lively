@@ -70,7 +70,7 @@ public class PapagoConnection {
         StringBuffer response = new StringBuffer();
         String inputLine;
         if(responseCode == 200) { // 정상 호출
-        	try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+        	try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"))) {
         		while ((inputLine = br.readLine()) != null) {
         			response.append(inputLine);
         		}
@@ -91,7 +91,7 @@ public class PapagoConnection {
         	 * }
         	 * 
         	 */
-        	try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getErrorStream()))) {
+        	try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getErrorStream(), "UTF-8"))) {
         		while ((inputLine = br.readLine()) != null) {
         			response.append(inputLine);
         		}
