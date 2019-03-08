@@ -1,4 +1,4 @@
-package com.quadcore.lively.api.papago.util;
+package com.quadcore.lively.api.papago.controller;
 
 import java.util.ArrayList;
 import java.util.Set;

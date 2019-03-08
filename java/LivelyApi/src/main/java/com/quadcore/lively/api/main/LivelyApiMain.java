@@ -1,16 +1,14 @@
 package com.quadcore.lively.api.main;
 
-import java.io.IOException;
-
-import com.quadcore.lively.api.controller.LivelyApiController;
-import com.quadcore.lively.api.twitter.main.TwitterApiMain;
+import com.quadcore.lively.api.controller.PapagoController;
+import com.quadcore.lively.api.controller.TwitterController;
 
 public class LivelyApiMain {
 
-	private static LivelyApiMenu menu;
-
 	public static void main(String[] args) {
-		menu = new LivelyApiMenu();
+		LivelyApiMenu menu = new LivelyApiMenu();
+		TwitterController twitter = new TwitterController();
+		PapagoController papago = new PapagoController();
 
 		int swValue;
 		String strValue;
@@ -21,41 +19,41 @@ public class LivelyApiMain {
 		switch (swValue) {
 		case 1:
 			menu.clrscr();
-			System.out.println(menu.twitterInputMessage());
+			System.out.println(menu.twitterMenuMessage());
 			strValue = Keyin.inString("> ");
 			
 			String[] inputs = strValue.split(" ");
-			// 프로그램 종료
-			if (inputs[0].equals("0")) {
+			
+			if (inputs[0].equals("1")) {
+				// 트위터 타겟 추출
+				System.out.println(menu.twitterTargetMessage());
+				twitter.targetCrawl();
+			} else if (inputs[0].equals("2")) {
+				// 트위터 무작위 추출
+				System.out.println(menu.twitterRandomMessage());
+				twitter.randomCrawl();
+			} else if (inputs[0].equals("0")) {
+				// 프로그램 종료
 				break;
+			} else {
+				System.out.println(menu.wrongInputMessage());
 			}
 			
-			String screenName = inputs[0];
-			String papagoId = inputs[1];
-			String papagoPass = inputs[2];
+			//
+//			String screenName = inputs[0];
+//			String papagoId = inputs[1];
+//			String papagoPass = inputs[2];
 			
-			
-			
-			
-			LivelyApiController controller = new LivelyApiController();
-			// 수집
-			System.out.println(menu.twitterCrawlMessage());
-			controller.crawl(screenName);
-			
-			// 번역 + 저장
-			System.out.println(menu.twitterTSMessage());
-			controller.translateAndSave(papagoId, papagoPass, "./LivelyApiLogs/", screenName, "txt");
-			break;
 		case 2:
 			menu.clrscr();
 			break;
 		default:
 			menu.clrscr();
-			System.out.println("잘못 입력했습니다.");
+			menu.wrongInputMessage();
 			break;
 		}
 		
-		System.out.println("프로그램을 종료합니다.");
+		menu.exitMessage();
 	}
 }
 

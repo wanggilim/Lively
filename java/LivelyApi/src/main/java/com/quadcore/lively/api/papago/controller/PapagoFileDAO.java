@@ -1,4 +1,4 @@
-package com.quadcore.lively.api.dao;
+package com.quadcore.lively.api.papago.controller;
 
 import com.quadcore.lively.api.util.FileReaderWriter;
 

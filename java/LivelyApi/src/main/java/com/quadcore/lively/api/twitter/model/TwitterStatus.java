@@ -1,108 +1,108 @@
 package com.quadcore.lively.api.twitter.model;
 
+import java.util.List;
+import java.util.Map;
 
 public class TwitterStatus {
-	private String screenName;				// Twitter Screen Name 또는 URL로 표기되는 계정아이디
-	private String name;					// Twitter로 등록된 Name 또는 실제 이름
-	private String stmt;					// Twitter mention
-	private long stmtTs;					// mention created timestamp
-	private String stmtURL;					// mention URL
-	private final String stmtType = "t";	// SNS 구분자 (DB에서 char 처리)
-	private String location;				// SNS 멘션 작성 위치
-	private String language;				// Twitter mention 언어
-	private int cellebNo;					// Twitter 글 올린 사람의 번호 (celleb 테이블)
-	private String userProfileURL;			// Twitter User Profile URL
 	
-	public TwitterStatus() {
-		
+	private String screenName = "";			// screenName
+	private long statusId = 0;				// Twitter 네트워크 상 Status Id
+	private long createdAt = 0;				// Status 작성일시
+	private String language = "";			// Status의 언어
+	private String text = "";				// raw text
+	private long retweetCount = 0;			// retweetcount
+	private long length = 0;				// sentence의 글자 길이
+	private long bytes = 0;					// sentence의 바이트 수
+	private Map<String, Long> wordcounts;	// word, count 쌍으로 이루어진 Map
+	private List<String> hashtags;			// HashTag
+	private Map<String, String> mentions;	// mentions
+	private TwitterGeoLoc geoloc;			// geolocation
+	private long favoriteCount = 0;			// favoriteCount
+	
+	public TwitterStatus(String screenName, long statusId, String language, String text, long favoriteCount,
+			long retweetCount, long createdAt, long length, long bytes, Map<String, Long> wordcounts,
+			List<String> hashtags, Map<String, String> mentions, TwitterGeoLoc geoloc) {
+		super();
+		this.screenName = screenName;
+		this.statusId = statusId;
+		this.language = language;
+		this.text = text;
+		this.favoriteCount = favoriteCount;
+		this.retweetCount = retweetCount;
+		this.createdAt = createdAt;
+		this.length = length;
+		this.bytes = bytes;
+		this.wordcounts = wordcounts;
+		this.hashtags = hashtags;
+		this.mentions = mentions;
+		this.geoloc = geoloc;
 	}
+
 
 	public String getScreenName() {
 		return screenName;
 	}
 
-	public void setScreenName(String screenName) {
-		this.screenName = screenName;
+
+	public long getStatusId() {
+		return statusId;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getStmt() {
-		return stmt;
-	}
-
-	public void setStmt(String stmt) {
-		this.stmt = stmt;
-	}
-
-	public long getStmtTs() {
-		return stmtTs;
-	}
-
-	public void setStmtTs(long stmtTs) {
-		this.stmtTs = stmtTs;
-	}
-
-	public String getStmtURL() {
-		return stmtURL;
-	}
-
-	public void setStmtURL(String stmtURL) {
-		this.stmtURL = stmtURL;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
 
 	public String getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(String language) {
-		this.language = language;
+
+	public String getText() {
+		return text;
 	}
 
-	public int getCellebNo() {
-		return cellebNo;
+
+	public long getRetweetCount() {
+		return retweetCount;
 	}
 
-	public void setCellebNo(int cellebNo) {
-		this.cellebNo = cellebNo;
+
+	public long getCreatedAt() {
+		return createdAt;
 	}
 
-	public String getUserProfileURL() {
-		return userProfileURL;
+
+	public long getLength() {
+		return length;
 	}
 
-	public void setUserProfileURL(String userProfileURL) {
-		this.userProfileURL = userProfileURL;
+
+	public long getBytes() {
+		return bytes;
 	}
 
-	public String getStmtType() {
-		return stmtType;
+
+	public Map<String, Long> getWordcounts() {
+		return wordcounts;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("TwitterStatus [screenName=").append(screenName).append(", name=").append(name).append(", stmt=")
-				.append(stmt).append(", stmtTs=").append(stmtTs).append(", stmtURL=").append(stmtURL)
-				.append(", stmtType=").append(stmtType).append(", location=").append(location).append(", language=")
-				.append(language).append(", userProfileURL=").append(userProfileURL).append("]");
-		return builder.toString();
+
+	public List<String> getHashtags() {
+		return hashtags;
 	}
 
+	public Map<String, String> getMentions() {
+		return mentions;
+	}
+
+	public TwitterGeoLoc getGeoloc() {
+		return geoloc;
+	}
+
+
+	public long getFavoriteCount() {
+		return favoriteCount;
+	}
 	
-
+	
+	
+	
+	
 }
