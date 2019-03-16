@@ -91,6 +91,10 @@ local.properties
 .loadpath
 .recommenders
 
+### Tomcat ###
+Servers/Tomcat v9.0 Server at localhost-config/*
+Servers/*
+
 # External tool builders
 .externalToolBuilders/
 
