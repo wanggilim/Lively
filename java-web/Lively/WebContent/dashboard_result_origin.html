@@ -67,9 +67,6 @@
 <link rel="stylesheet" href="resources/css/common/material.min.css">
 <link rel="stylesheet"
 	href="resources/css/dashboard/dashboard_result.css">
-
-<link href='resources/css/dashboard/album.css' rel='stylesheet'
-	type='text/css'>
 <style>
 #view-source {
 	position: fixed;
@@ -98,12 +95,19 @@
 
 				<div class="mdl-layout-spacer"></div>
 
+				<!-- 검색창1 -->
+				<span class="search-window"> <input type="text"
+					placeholder="단어 검색" class="search-main"><br>
+				</span> <img alt="search" src="resources/images/common/search_2x_w.png"
+					class="search-icon" id="doSearch"><br>
+				<!-- 검색창1 끝 -->
+
 				<div class="mdl-layout-spacer"></div>
 
 				<c:if test="${userMail==null }">
-					<button class="mdl-button mdl-js-button bg-white"
+				<button class="mdl-button mdl-js-button mdl-button--raised"
 						onclick="location.href='member/signIn.do'">로그인</button>
-					<%-- 					<button class="mdl-button mdl-js-button mdl-button--raised">
+<%-- 					<button class="mdl-button mdl-js-button mdl-button--raised">
 						<a href="${path}/member/signIn.do" style="color: white">로그인</a>
 					</button> --%>
 				</c:if>
@@ -120,8 +124,7 @@
 					<img alt="myPage" src="resources/images/common/account_2x_w.png"
 						class="myPage-icon" id="myPage"> &nbsp;&nbsp;&nbsp;
 						<!-- 로그아웃 관련 버튼 -->
-					<button
-						class="mdl-button mdl-js-button mdl-button--raised bg-white"
+					<button class="mdl-button mdl-js-button mdl-button--raised"
 						onclick="location.href='member/signOut.do'">로그아웃</button>
 				</c:if>
 
@@ -137,68 +140,89 @@
 			<section
 				class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 				<div class="mdl-card mdl-cell mdl-cell--12-col">
-					<div class="col-12 searchBar">
-						<!-- 검색창1 -->
-						<span class="search-window"> <input type="text"
-							placeholder="단어 검색" class="search-main"><br>
-						</span> <img alt="search" src="resources/images/common/search_2x.png"
-							class="search-icon" id="doSearch"><br>
-						<!-- 검색창1 끝 -->
-					</div>
 					<div class="mdl-card__supporting-text">
+						<h2 id="word" align="center">${word }</h2>
+						<h6 id="mean">${means }</h6>
+
+						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	시작 -->
+						Meaning
+						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	끝 -->
+						
+						<!-- 검색 유사 단어 -->
+						<br><br>
 						<c:forEach var="i" items="${perhapsKeywords }">
 							<a id="perhaps" href="./dashboard.do?word=${i }">${i }</a>&nbsp;&nbsp; 
 						</c:forEach>
-						<br />
-						<br />
-						<h2 id="word" align="center">${word }</h2>
-						<%-- <h6 id="mean">${means }</h6> --%>
-
-						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	시작 -->
-						<!-- 단어 뜻 들어 오는 것 보고 없앨것(의미 없음! 지울 예정)	끝 -->
-
-						<!-- 검색 유사 단어 -->
-
+						
 					</div>
+				</div>
+				<button
+					class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+					id="btn3" data-upgraded=",MaterialButton,MaterialRipple">
+					<i class="material-icons">more_vert</i> <span
+						class="mdl-button__ripple-container"><span
+						class="mdl-ripple"></span></span>
+				</button>
+				<div class="mdl-menu__container is-upgraded">
+					<div class="mdl-menu__outline mdl-menu--bottom-right"></div>
+					<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn3"
+						data-upgraded=",MaterialMenu">
+						<li class="mdl-menu__item" tabindex="-1">신고</li>
+						<li class="mdl-menu__item" disabled="" tabindex="-1">수정</li>
+					</ul>
 				</div>
 			</section>
 
 			<!--1.검색 단어+뜻 매칭 // 끝 -->
 
 			<!--2.검색 결과 SNS 예문 // 시작 -->
-			<section
-				class="section--center mdl-grid mdl-grid--no-spacing">
-				<div class="container2 album py-5 bg-light">
-					<div class="row">
-						<c:forEach var="i" items="${stmtVOList }" begin="0"
-							end="${stmtVOList.size() }">
-							<div class="col-md-4">
-								<div class="card mb-5 box-shadow">
-									<img class="card-img-top" src="resources/images/common/thumbnail.svg"
-										alt="Card image cap">
-									<div class="card-body">
-										<p class="card-text">
-										<h5>${i.getCellbNo() } 셀럽이름#계정아이디</h5>
-										<h5>위치:${i.getLocation() }</h5>
-										${i.getStmt() }
-										<br/><br/><br/>
-										<div class="d-flex justify-content-between align-items-center">
-											<div class="btn2-group">
-												<button type="button"
-													class="btn2 btn2-sm btn2-outline-secondary">View</button>
-												<button type="button"
-													class="btn2 btn2-sm btn2-outline-secondary">Edit</button>
-											</div>
-											<small class="text-muted">9 mins</small>
-										</div>
-									</div>
-								</div>
+			<c:forEach var="i" items="${stmtVOList }" begin="0"
+				end="${stmtVOList.size() }">
+				<section
+					class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+					<div class="mdl-card mdl-cell mdl-cell--12-col">
+						<div
+							class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+							<h4 class="mdl-cell mdl-cell--12-col">${i.getCellbNo() }
+								셀럽이름</h4>
+							<div
+								class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+								<div
+									class="section__circle-container__circle mdl-color--primary"></div>
 							</div>
-						</c:forEach>
+							<div
+								class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+								<h5>#계정아이디 |위치:${i.getLocation() }</h5>
+								${i.getStmt() }
+							</div>
+						</div>
 					</div>
-				</div>
-			</section>
+					<!-- 포스트 내, 옵션 버튼 (사용 x) -->
+					<button
+						class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+						id="btn2" data-upgraded=",MaterialButton,MaterialRipple">
+						<i class="material-icons">more_vert</i> <span
+							class="mdl-button__ripple-container"><span
+							class="mdl-ripple is-animating"
+							style="width: 92.4876px; height: 92.4876px; transform: translate(-50%, -50%) translate(14px, 13px);"></span></span>
+					</button>
+					<div class="mdl-menu__container is-upgraded"
+						style="right: 7.98828px; top: 41px; width: 123.984px; height: 159.941px;">
+						<div class="mdl-menu__outline mdl-menu--bottom-right"
+							style="width: 123.984px; height: 159.941px;"></div>
+						<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn2"
+							data-upgraded=",MaterialMenu"
+							style="clip: rect(0px, 123.984px, 0px, 123.984px);">
+							<li class="mdl-menu__item" tabindex="-1" style="">예문 저장</li>
+							<li class="mdl-menu__item" disabled="" tabindex="-1" style="">신고</li>
+						</ul>
+					</div>
+
+				</section>
+			</c:forEach>
 			<!--2.검색 결과 SNS 예문 // 끝 -->
+
+
 		</div>
 		<footer class="mdl-mega-footer">
 			<div class="mdl-mega-footer--middle-section">

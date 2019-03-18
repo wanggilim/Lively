@@ -88,12 +88,14 @@ html, body {
 }
 .mdl-demo .mdl-card .mdl-card__supporting-text {
   margin: 40px;
+  margin-top: 20px;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   padding: 0;
   color: inherit;
   width: calc(100% - 80px);
+  text-align: center;
 }
 .mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
   margin-top: 0;

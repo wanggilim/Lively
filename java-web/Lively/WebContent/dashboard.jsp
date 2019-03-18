@@ -60,7 +60,7 @@
 				<img alt="myPage" src="resources/images/common/account_2x_w.png"
 					class="myPage-icon" id="myPage"> &nbsp;&nbsp;&nbsp;
 						<!-- 로그아웃 관련 버튼 -->
-				<button class="mdl-button mdl-js-button mdl-button--raised" onclick="location.href='member/signOut.do'">
+				<button class="mdl-button mdl-js-button mdl-button--raised bg-white" onclick="location.href='member/signOut.do'">
 				로그아웃
 				</button>
 			</c:if>
