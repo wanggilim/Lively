@@ -10,13 +10,14 @@ public class StmtVO {
 	private int sharing;		// 공유 수 (Lively 서비스로부터 공유되어진 카운트)
 	private int cellbNo;		// SNS 셀럽 번호
 	private String stmtURL;		// 예문 생성 URL
+	private String profileURL;	// 프로필 URL (2019.03.18 추가)
 	
 	public StmtVO() {
 		
 	}
 
 	public StmtVO(int stmtNo, String stmt, long stmtTs, String stmtType, String location, int likes, int sharing,
-			int cellbNo, String stmtURL) {
+			int cellbNo, String stmtURL, String profileURL) {
 		super();
 		this.stmtNo = stmtNo;
 		this.stmt = stmt;
@@ -27,6 +28,7 @@ public class StmtVO {
 		this.sharing = sharing;
 		this.cellbNo = cellbNo;
 		this.stmtURL = stmtURL;
+		this.profileURL = profileURL;
 	}
 
 	public int getStmtNo() {
@@ -101,13 +103,23 @@ public class StmtVO {
 		this.stmtURL = stmtURL;
 	}
 
+	public String getProfileURL() {
+		return profileURL;
+	}
+
+	public void setProfileURL(String profileURL) {
+		this.profileURL = profileURL;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("StmtVO [stmtNo=").append(stmtNo).append(", stmt=").append(stmt).append(", stmtTs=")
 				.append(stmtTs).append(", stmtType=").append(stmtType).append(", location=").append(location)
 				.append(", likes=").append(likes).append(", sharing=").append(sharing).append(", cellbNo=")
-				.append(cellbNo).append(", stmtURL=").append(stmtURL).append("]");
+				.append(cellbNo).append(", stmtURL=").append(stmtURL).append(", profileURL=").append(profileURL)
+				.append("]");
 		return builder.toString();
 	}
+	
 }

@@ -73,6 +73,10 @@ public class DashboardDAO {
 	 * 정확히 입력한 단어만 나와야하는 것인가,
 	 * 입력 단어와 유사한 단어를 보여줄 것인가
 	 * (*만약에 정확히 입력한 단어만 나와야한다면 메서드 이름도 ..words 가 아니고 word)
+	 * 
+	 * (2019.03.18 추가)
+	 * profileURL 추가
+	 * 
 	 */
 	public List<StmtVO> searchStatements(String word) {
 		
@@ -83,6 +87,10 @@ public class DashboardDAO {
 			conn = OracleDBUtil.dbConnect();
 			
 			// SQL + Statement
+			/**
+			 * TODO
+			 * 테이블 추가시 join 하여 profileURL도 가져오기
+			 */
 			String sql = "SELECT * FROM stmt st JOIN tokentest tt USING (stmtno) WHERE lower(tt.token) = '" + word.toLowerCase() + "'";
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
@@ -99,7 +107,8 @@ public class DashboardDAO {
 						rs.getInt(6), 		// likes
 						rs.getInt(7), 		// sharing
 						rs.getInt(8), 		// cellbNo
-						rs.getString(9)) 	// stmtURL
+						rs.getString(9), 	// stmtURL
+						rs.getString(10))	// profileURL
 				);
 			}
 			
