@@ -12,7 +12,7 @@ public class OracleDBUtil {
 	//DB연결
 	public static Connection dbConnect() {
 		Connection conn = null;//잘못되면 null
-		String url ="jdbc:oracle:thin:@192.168.22.126:1522:xe"; // data source explorer에서 connection url에서 복사
+		String url ="jdbc:oracle:thin:@192.168.22.188:1522:xe"; // data source explorer에서 connection url에서 복사
 		String user="lively", password="1234";
 		
 		try {
