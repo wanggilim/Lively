@@ -82,7 +82,7 @@ public class AppServlet extends HttpServlet {
 		 * 대쉬보드
 		 *
 		 * @author wgl
-		 * @Date 2018.12.18
+		 * @Date 2018.12.18, 2019.03.18
 		 */
 		if (action.equals("/dashboard")) {
 			DashboardController controller = new DashboardController();
