@@ -1,6 +1,9 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!--
   Material Design Lite
@@ -170,26 +173,28 @@
 				class="section--center mdl-grid mdl-grid--no-spacing">
 				<div class="container2 album py-5 bg-light">
 					<div class="row">
-						<c:forEach var="i" items="${stmtVOList }" begin="0"
-							end="${stmtVOList.size() }">
+						<c:forEach var="i" items="${stmtVOList }">
 							<div class="col-md-4">
 								<div class="card mb-5 box-shadow">
-									<img class="card-img-top" src="resources/images/common/thumbnail.svg"
-										alt="Card image cap">
+									<img class="card-img-top" src="${i.profileURL }"
+										alt="Card image cap" width="150" style="margin-left:auto;margin-right:auto;">
 									<div class="card-body">
 										<p class="card-text">
-										<h5>${i.getCellbNo() } 셀럽이름#계정아이디</h5>
-										<h5>위치:${i.getLocation() }</h5>
-										${i.getStmt() }
+										<h5>${i.screenName }</h5>
+										<h5>위치:${i.location }</h5>
+										${i.stmt }
 										<br/><br/><br/>
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="btn2-group">
 												<button type="button"
-													class="btn2 btn2-sm btn2-outline-secondary">View</button>
-												<button type="button"
-													class="btn2 btn2-sm btn2-outline-secondary">Edit</button>
+													class="btn2 btn2-sm btn2-outline-secondary"
+													onclick="location.href='${i.stmtURL }'">View</button>
 											</div>
-											<small class="text-muted">9 mins</small>
+											<small class="text-muted">
+												<jsp:useBean id="myDate" class="java.util.Date"/>
+												<c:set target="${myDate}" property="time" value="${i.stmtTs }"/>
+												<fmt:formatDate value="${myDate}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+											</small>
 										</div>
 									</div>
 								</div>
@@ -201,60 +206,7 @@
 			<!--2.검색 결과 SNS 예문 // 끝 -->
 		</div>
 		<footer class="mdl-mega-footer">
-			<div class="mdl-mega-footer--middle-section">
-				<div class="mdl-mega-footer--drop-down-section">
-					<input class="mdl-mega-footer--heading-checkbox" type="checkbox"
-						checked>
-					<h1 class="mdl-mega-footer--heading">Features</h1>
-					<ul class="mdl-mega-footer--link-list">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Terms</a></li>
-						<li><a href="#">Partners</a></li>
-						<li><a href="#">Updates</a></li>
-					</ul>
-				</div>
-				<div class="mdl-mega-footer--drop-down-section">
-					<input class="mdl-mega-footer--heading-checkbox" type="checkbox"
-						checked>
-					<h1 class="mdl-mega-footer--heading">Details</h1>
-					<ul class="mdl-mega-footer--link-list">
-						<li><a href="#">Spec</a></li>
-						<li><a href="#">Tools</a></li>
-						<li><a href="#">Resources</a></li>
-					</ul>
-				</div>
-				<div class="mdl-mega-footer--drop-down-section">
-					<input class="mdl-mega-footer--heading-checkbox" type="checkbox"
-						checked>
-					<h1 class="mdl-mega-footer--heading">Technology</h1>
-					<ul class="mdl-mega-footer--link-list">
-						<li><a href="#">How it works</a></li>
-						<li><a href="#">Patterns</a></li>
-						<li><a href="#">Usage</a></li>
-						<li><a href="#">Products</a></li>
-						<li><a href="#">Contracts</a></li>
-					</ul>
-				</div>
-				<div class="mdl-mega-footer--drop-down-section">
-					<input class="mdl-mega-footer--heading-checkbox" type="checkbox"
-						checked>
-					<h1 class="mdl-mega-footer--heading">FAQ</h1>
-					<ul class="mdl-mega-footer--link-list">
-						<li><a href="#">Questions</a></li>
-						<li><a href="#">Answers</a></li>
-						<li><a href="#">Contact us</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="mdl-mega-footer--bottom-section">
-				<div class="mdl-logo">More Information</div>
-				<ul class="mdl-mega-footer--link-list">
-					<li><a href="https://developers.google.com/web/starter-kit/">Web
-							Starter Kit</a></li>
-					<li><a href="#">Help</a></li>
-					<li><a href="#">Privacy and Terms</a></li>
-				</ul>
-			</div>
+			
 		</footer> </main>
 	</div>
 </body>

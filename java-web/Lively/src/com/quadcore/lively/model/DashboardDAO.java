@@ -87,28 +87,30 @@ public class DashboardDAO {
 			conn = OracleDBUtil.dbConnect();
 			
 			// SQL + Statement
-			/**
-			 * TODO
-			 * 테이블 추가시 join 하여 profileURL도 가져오기
-			 */
-			String sql = "SELECT * FROM stmt st JOIN tokentest tt USING (stmtno) WHERE lower(tt.token) = '" + word.toLowerCase() + "'";
+			StringBuffer sb = new StringBuffer();
+			sb.append("SELECT * FROM")
+			.append(" stmt st JOIN tokentest tt USING (stmtno) ")
+			.append(" JOIN profile p ON substr(st.stmturl, 21, instr(substr(st.stmturl, 21), '/')-1) = substr(p.accounts,2)")
+			.append(" WHERE lower(tt.token) = '").append(word.toLowerCase()).append("'");
+			String sql = sb.toString();
+			
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
-			
 			
 			// WordVO 로 변환 후 List에 넣기
 			while (rs.next()) {
 				list.add(new StmtVO(
-						rs.getInt(1), 		// stmtNo
-						rs.getString(2),	// stmt
-						rs.getLong(3),		// stmtTs
-						rs.getString(4),	// stmtType
-						rs.getString(5),	// location
-						rs.getInt(6), 		// likes
-						rs.getInt(7), 		// sharing
-						rs.getInt(8), 		// cellbNo
-						rs.getString(9), 	// stmtURL
-						rs.getString(10))	// profileURL
+						rs.getInt("STMTNO"), 		// stmtNo
+						rs.getString("STMT"),	// stmt
+						rs.getLong("STMTTS"),		// stmtTs
+						rs.getString("STMTTYPE"),	// stmtType
+						rs.getString("LOCATION"),	// location
+						rs.getInt("LIKES"), 		// likes
+						rs.getInt("SHARING"), 		// sharing
+						rs.getInt("CELLEBNO"), 		// cellbNo
+						rs.getString("STMTURL"), 	// stmtURL
+						rs.getString("ACCOUNTS"),	// screenName
+						rs.getString("IMAGE"))	// profileURL
 				);
 			}
 			

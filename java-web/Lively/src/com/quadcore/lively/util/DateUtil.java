@@ -21,4 +21,17 @@ public class DateUtil {
 		
 		return d2;
 	}
+	
+	public static java.util.Date longToDate(long ts) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date date = new java.util.Date(ts);
+		java.util.Date result = null;
+		try {
+			result = sdf.parse(date.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
