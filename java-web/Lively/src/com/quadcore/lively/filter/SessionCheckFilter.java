@@ -34,15 +34,22 @@ public class SessionCheckFilter implements Filter {
 		// whiteList : session 연결 X 페이지들 모음
 		whiteList = new ArrayList<String>(1);
 		// "/member/signIn" 인지 "/member/signIn.do"인지 체크!!
-		whiteList.add("/Lively/");
-		whiteList.add("/Lively/index.html");
-		whiteList.add("/Lively/member/signIn.html");
-		whiteList.add("/Lively/member/signIn2.html");
-		whiteList.add("/Lively/member/signUp.html");
-		whiteList.add("/Lively/member/signUp.do");
+		whiteList.add("/");
+		whiteList.add("Lively/");
+		whiteList.add("/index.html");
+		whiteList.add("Lively/index.html");
+		whiteList.add("/member/signIn.html");
+		whiteList.add("Lively/member/signIn.html");
+		whiteList.add("/member/signIn2.html");
+		whiteList.add("Lively/member/signIn2.html");
+		whiteList.add("/member/signUp.html");
+		whiteList.add("Lively/member/signUp.html");
+		whiteList.add("/member/signUp.do");
+		whiteList.add("Lively/member/signUp.do");
 
 		// 다른 폴더("/resource/")(경로)에 있는 파일을 갖다쓸 경우 ex.이미지 파일
 		staticResourceList = new ArrayList<String>();
+		staticResourceList.add("resources/");
 		staticResourceList.add("/resources/");
 	}
 
@@ -84,7 +91,7 @@ public class SessionCheckFilter implements Filter {
 				if (member == null) {
 //					if (!uri.startsWith("/Lively/index")) {
 						res = (HttpServletResponse) response;
-						res.sendRedirect("/Lively/dashboard.do");
+						res.sendRedirect("/dashboard.do");
 						System.out.println("세션에 member 정보가 없어, 강제로 dashboard.do 이동");
 						return;
 //					}
@@ -102,7 +109,7 @@ public class SessionCheckFilter implements Filter {
 			// whiteList O && member X - dashboard.html로 보내기
 			if (member != null) {
 //				if (!uri.startsWith("/Lively/dashboard")) {
-					res.sendRedirect("/Lively/dashboard.do");
+					res.sendRedirect("/dashboard.do");
 					System.out.println("세션에 member 정보가 있어, 강제로 dashboard 이동");
 //				}
 
